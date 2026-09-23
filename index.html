@@ -32,7 +32,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:4px solid var(--gold);outline-offset:3px;border-radius:12px}
 h1,h2,h3{font-family:var(--display);line-height:1.25;text-wrap:balance;margin:0}
 p{margin:0}
-.wrap{max-width:1080px;margin:0 auto;padding-block:20px;padding-inline:18px;min-height:100%}
+.wrap{max-width:1080px;margin:0 auto;padding-block:20px 110px;padding-inline:18px;min-height:100%}
 .narrow{max-width:760px}
 .center{text-align:center}
 .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
@@ -133,12 +133,219 @@ textarea,input[type=text],select{width:100%;font:inherit;padding:12px 14px;borde
 .mcard.sel{border-color:var(--gold);background:var(--gold-soft)}
 .mcard.paired{border-color:var(--ok);background:var(--ok-soft);opacity:.75}
 .mcard.bad{border-color:var(--bad);background:var(--bad-soft);animation:shake .3s}
+/* ——— محطات الرحلة ——— */
+.journey{position:relative;padding:10px 0}
+.journey::before{content:"";position:absolute;top:30px;bottom:30px;inset-inline-start:37px;width:6px;border-radius:3px;background:repeating-linear-gradient(180deg,var(--line) 0 10px,transparent 10px 20px)}
+.station{display:grid;grid-template-columns:76px 1fr;gap:14px;align-items:start;position:relative;padding-block:10px}
+.station:nth-child(even) .stcard{margin-inline-start:26px}
+.ring{width:76px;height:76px;position:relative;flex:none}
+.ring svg{transform:rotate(-90deg);width:100%;height:100%}
+.ring .pct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:1.05em;font-variant-numeric:tabular-nums}
+.ring .ic{position:absolute;inset-inline-end:-6px;bottom:-6px;background:var(--card);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:1.1em;box-shadow:var(--shadow);border:1px solid var(--line)}
+.stcard{background:var(--card);border:1px solid var(--line);border-radius:20px 6px 20px 20px;padding:14px 16px;box-shadow:var(--shadow);position:relative;transition:transform .14s}
+.stcard::before{content:"";position:absolute;top:26px;inset-inline-start:-11px;border:6px solid transparent;border-inline-end-color:var(--card)}
+.stcard .num{position:absolute;top:-10px;inset-inline-end:14px;background:var(--ink);color:var(--bg);border-radius:8px;padding:1px 9px;font-family:var(--display);font-weight:800;font-size:.8em}
+.stcard h4{margin:0;font-family:var(--display);font-size:1.15em}
+.stcard .d{color:var(--muted);font-size:.9em}
+.stcard input[type=range]{width:100%;accent-color:var(--teal);margin-top:8px}
+.stage{display:inline-block;border-radius:999px;padding:2px 10px;font-size:.78em;font-weight:800}
+.journey.compact .station{grid-template-columns:64px 1fr}.journey.compact .ring{width:64px;height:64px}.journey.compact::before{inset-inline-start:31px}
+/* ——— صندوق الملفات ——— */
+.dropzone{border:3px dashed var(--teal);background:var(--teal-soft);border-radius:24px;padding:26px;text-align:center;cursor:pointer;transition:transform .12s}
+.dropzone:hover{transform:scale(1.01)}
+.dropzone.over{background:var(--gold-soft);border-color:var(--gold)}
+.files{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
+.file{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow)}
+.file .thumb{height:120px;background:var(--card2);display:flex;align-items:center;justify-content:center;font-size:3em;overflow:hidden}
+.file .thumb img{width:100%;height:100%;object-fit:cover}
+.file .meta{padding:10px 12px;display:flex;flex-direction:column;gap:4px;font-size:.88em}
+.file .meta b{word-break:break-word}
+.folder{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,var(--gold-soft),var(--card));border:1px solid var(--line);border-radius:22px;padding:16px 18px}
+.folder .tab{width:64px;height:54px;border-radius:10px 22px 10px 10px;background:var(--gold);position:relative;flex:none;display:flex;align-items:center;justify-content:center;font-size:1.6em}
+.badgecard{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:12px;text-align:center;display:flex;flex-direction:column;gap:4px;align-items:center}
+.badgecard .e{font-size:2.4em;line-height:1}
+.badgecard.on{border-color:var(--gold);background:var(--gold-soft)}
+.approve{background:var(--ok-soft);border:2px solid var(--ok);border-radius:16px;padding:10px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+@media (max-width:520px){.station:nth-child(even) .stcard{margin-inline-start:0}}
+/* ——— مبادرة المحطات الصحية ——— */
+.init-hero{border-radius:28px;padding:26px 22px;background:linear-gradient(135deg,var(--rose-soft),var(--card) 55%,var(--gold-soft));border:1px solid var(--line);position:relative;overflow:hidden}
+.init-hero::after{content:"♥";position:absolute;inset-inline-start:-10px;bottom:-40px;font-size:11em;color:var(--rose);opacity:.08;line-height:1}
+.init-hero h2{font-size:clamp(1.5em,3.6vw,2.2em);color:var(--rose)}
+.init-hero .slg{display:inline-block;background:var(--card);border:2px dashed var(--rose);border-radius:999px;padding:6px 18px;font-family:var(--display);font-weight:800;margin-top:8px}
+.infolist{display:grid;gap:8px}
+.infolist div{display:grid;grid-template-columns:44px 150px 1fr;gap:10px;align-items:start;background:var(--card);border-radius:14px;padding:10px 12px;border:1px solid var(--line)}
+.infolist .k{font-weight:800;color:var(--rose)}
+.infolist .i{width:40px;height:40px;border-radius:12px;background:var(--rose-soft);display:flex;align-items:center;justify-content:center;font-size:1.3em}
+.initrail{position:relative;display:grid;gap:12px}
+.st-card{display:grid;grid-template-columns:92px 1fr 220px;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:14px 16px;align-items:center;position:relative;overflow:hidden}
+.st-card::before{content:"";position:absolute;inset-inline-start:0;top:0;bottom:0;width:8px;background:var(--st,var(--line))}
+.st-card .month{text-align:center;background:var(--rose-soft);border-radius:16px;padding:8px 4px;font-family:var(--display);font-weight:800;line-height:1.2}
+.st-card .month b{display:block;font-size:1.6em;color:var(--rose)}
+.st-card .month span{font-size:.85em}
+.st-card h4{margin:0;font-family:var(--display);font-size:1.15em}
+.st-card .l{font-size:.9em;margin-top:4px}
+.st-card .l b{color:var(--rose)}
+.st-prog{display:flex;flex-direction:column;gap:6px;align-items:stretch}
+.st-prog input[type=range]{width:100%;accent-color:var(--rose)}
+.st-prog select{padding:8px 10px;border-radius:10px}
+.st-done{text-align:center;padding:8px;border-radius:14px;background:var(--ok-soft);color:var(--ok);font-weight:800}
+.quote{font-family:"Baloo Bhaijaan 2",var(--display);font-size:1.5em;color:var(--rose);text-align:center;padding:10px}
+@media (max-width:760px){.st-card{grid-template-columns:76px 1fr}.st-prog{grid-column:1/-1}.infolist div{grid-template-columns:40px 1fr}.infolist .k{grid-column:2}.infolist .v{grid-column:2}}
+/* ——— ورود متناثرة وأضواء ——— */
+#petals{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+#lights{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+#lights i{position:absolute;width:46vmax;height:46vmax;border-radius:50%;filter:blur(70px);opacity:.45;animation:drift 14s ease-in-out infinite alternate;mix-blend-mode:multiply}
+#lights i:nth-child(1){background:#FFD1DC;top:-15%;inset-inline-start:-10%}
+#lights i:nth-child(2){background:#CDEFE9;bottom:-20%;inset-inline-end:-10%;animation-delay:-4s}
+#lights i:nth-child(3){background:#FFE7B3;top:30%;inset-inline-end:20%;animation-delay:-8s;width:30vmax;height:30vmax}
+#lights i:nth-child(4){background:#E3D7FF;bottom:10%;inset-inline-start:25%;animation-delay:-11s;width:28vmax;height:28vmax}
+@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(6vw,-5vh) scale(1.15)}}
+:root[data-theme="dark"] #lights i{mix-blend-mode:screen;opacity:.18}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) #lights i{mix-blend-mode:screen;opacity:.18}}
+.wrap{position:relative;z-index:3}
+.hero-text h1{background:linear-gradient(90deg,var(--teal),var(--rose),var(--gold),var(--teal));background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 8s linear infinite}
+@keyframes shine{to{background-position:300% 0}}
+.hero .glow{position:absolute;inset:auto 0 0 0;height:40%;background:linear-gradient(180deg,transparent,rgba(255,255,255,.35));pointer-events:none}
+.tile.stu-tile{overflow:visible;transition:transform .2s,box-shadow .2s}
+.tile.stu-tile:hover,.tile.stu-tile:focus-visible{transform:translateY(-6px) scale(1.04);box-shadow:0 0 0 6px var(--gold-soft),0 24px 40px -20px var(--rose)}
+.tile.stu-tile .hi{position:absolute;top:-14px;inset-inline-end:-6px;background:var(--gold);color:#3A2600;border-radius:999px;padding:4px 12px;font-family:var(--display);font-weight:800;opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;white-space:nowrap}
+.tile.stu-tile:hover .hi,.tile.stu-tile:focus-visible .hi{opacity:1;transform:none}
+.welcome-btn{position:absolute;top:14px;inset-inline-start:14px;z-index:2}
+/* ——— الجدول المصوّر ——— */
+.dayrail{display:flex;gap:6px;overflow-x:auto;padding:6px 2px 10px;scrollbar-width:thin}
+.dayrail button{flex:none;width:92px;border-radius:18px;padding:10px 6px;background:var(--card);border:2px solid var(--line);display:flex;flex-direction:column;align-items:center;gap:4px;font-weight:800;font-size:.85em;opacity:.6}
+.dayrail button .e{font-size:2em;line-height:1}
+.dayrail button.past{opacity:.45;background:var(--ok-soft);border-color:transparent}
+.dayrail button.now{opacity:1;border-color:var(--gold);background:var(--gold-soft);transform:scale(1.08);box-shadow:0 10px 24px -14px var(--gold)}
+.dayrail .nowlbl{font-size:.72em;background:var(--gold);color:#3A2600;border-radius:999px;padding:1px 8px;margin-bottom:2px}
+.dayrail button{position:relative}
+/* ——— ركن الهدوء ——— */
+.calmbtn{position:fixed;bottom:calc(18px + env(safe-area-inset-bottom,0px));inset-inline-start:18px;z-index:40;width:68px;height:68px;border-radius:50%;background:var(--lav);color:#fff;font-size:2em;box-shadow:0 14px 30px -10px var(--lav);animation:calmpulse 3s ease-in-out infinite}
+@keyframes calmpulse{0%,100%{box-shadow:0 0 0 0 rgba(169,139,221,.6)}50%{box-shadow:0 0 0 16px rgba(169,139,221,0)}}
+.calm{position:fixed;inset:0;z-index:90;background:radial-gradient(circle at 50% 40%,#2B2540,#151222);color:#F3EEFF;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;padding:20px}
+.breath{width:min(60vw,260px);height:min(60vw,260px);border-radius:50%;background:radial-gradient(circle,#C9B8F2,#7F63C7);box-shadow:0 0 80px 20px rgba(169,139,221,.45);animation:breath 8s ease-in-out infinite;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:1.6em;font-weight:800;color:#2B2540}
+@keyframes breath{0%,100%{transform:scale(.62)}50%{transform:scale(1)}}
+.calm h2{color:#F3EEFF;font-size:2em}.calm .btn.ghost{background:rgba(255,255,255,.14);color:#fff}
+/* ——— المسح التلقائي ——— */
+.scan-hi{outline:6px solid var(--gold)!important;outline-offset:4px;box-shadow:0 0 0 12px var(--gold-soft)!important;transform:scale(1.04);z-index:5;position:relative}
+/* ——— لوحة التواصل ——— */
+.sentence{min-height:84px;background:var(--card);border:3px dashed var(--teal);border-radius:24px;display:flex;align-items:center;gap:10px;padding:10px 16px;flex-wrap:wrap;font-family:var(--display);font-size:1.5em;font-weight:800}
+.sentence .w{background:var(--teal-soft);border-radius:14px;padding:4px 14px;display:inline-flex;gap:8px;align-items:center}
+.commpages{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.commpages button{border-radius:16px;padding:10px 14px;font-weight:800;background:var(--card2);display:flex;gap:6px;align-items:center;font-size:1.05em}
+.commpages button.on{background:var(--teal);color:#fff}
+.tile img.ph{width:84px;height:84px;object-fit:cover;border-radius:50%;border:3px solid var(--card)}
+/* ——— القارئ المنطوق ——— */
+.reader{position:fixed;inset:0;z-index:85;background:var(--bg);display:flex;flex-direction:column;padding:20px;gap:14px}
+.reader .txt{flex:1;overflow:auto;font-family:var(--display);font-size:clamp(1.6em,4vw,2.6em);line-height:2;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:10px}
+.reader .txt span{padding:4px 12px;border-radius:14px;opacity:.45;transition:all .3s}
+.reader .txt span.on{opacity:1;background:var(--gold-soft);color:var(--gold-ink);transform:scale(1.03)}
+/* ——— خط واضح ——— */
+:root[data-clear="1"] body{letter-spacing:.04em;word-spacing:.18em;line-height:1.95}
+:root[data-clear="1"] .opt,:root[data-clear="1"] .tile .t,:root[data-clear="1"] .picto .lbl{letter-spacing:.05em}
+:root[data-focus="1"] #petals,:root[data-focus="1"] #lights,:root[data-focus="1"] .hero .glow{display:none!important}
+:root[data-focus="1"] *{animation:none!important;transition:none!important}
+:root[data-focus="1"] .hero-text h1{background:none;color:var(--teal);-webkit-text-fill-color:currentColor}
+/* ——— جدول التعزيز ——— */
+.rewardbar{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.rewardbar .st{width:34px;height:34px;border-radius:50%;background:var(--card2);display:flex;align-items:center;justify-content:center;font-size:1.1em;filter:grayscale(1);opacity:.4}
+.rewardbar .st.on{filter:none;opacity:1;background:var(--gold-soft);transform:scale(1.1)}
+.rewardbar .goal{width:60px;height:60px;border-radius:20px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:2em;box-shadow:0 10px 20px -10px var(--gold)}
+/* ——— خريطة حرارية ABC ——— */
+.heat{display:grid;grid-template-columns:70px repeat(7,1fr);gap:4px;font-size:.8em}
+.heat div{border-radius:8px;padding:6px 2px;text-align:center;background:var(--card2)}
+.heat .h{font-weight:800}
+/* ——— طباعة ——— */
+.iepgrid{display:grid;gap:10px}
+.iep-goal{display:grid;grid-template-columns:1fr 150px 130px 130px auto;gap:8px;align-items:center}
+@media (max-width:760px){.iep-goal{grid-template-columns:1fr 1fr}}
+.overlay{position:fixed;inset:0;background:rgba(20,30,35,.72);z-index:80;display:flex;align-items:center;justify-content:center;padding:16px}
+.ovbox{background:var(--card);border-radius:24px;padding:16px;max-width:900px;width:100%;max-height:92vh;overflow:auto;box-shadow:var(--shadow)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .footer{margin-top:30px;text-align:center;color:var(--muted);font-size:.85em}
 .toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));inset-inline-start:50%;transform:translateX(50%);background:var(--ink);color:var(--bg);padding:12px 22px;border-radius:999px;font-weight:800;z-index:60;box-shadow:var(--shadow);animation:fade .3s}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ——— مشروع صُنّاع الأثر: ثلاثي الأبعاد وحركة ——— */
+.stage{perspective:1000px;display:flex;justify-content:center}
+.tilt{transform-style:preserve-3d;transition:transform .25s ease;will-change:transform;display:block}
+.art{width:100%;height:auto;display:block;filter:drop-shadow(0 12px 10px rgba(20,50,50,.18));overflow:visible}
+.hero3d{width:min(280px,72vw);margin:auto;cursor:pointer;border-radius:30px}
+.stepart{width:min(300px,76vw);margin:auto;cursor:pointer}
+.float{animation:float 4.5s ease-in-out infinite;transform-style:preserve-3d}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.sway{animation:sway 7s ease-in-out infinite;transform-style:preserve-3d}
+@keyframes sway{0%,100%{transform:rotateY(-18deg)}50%{transform:rotateY(18deg)}}
+.flyin{animation:flyin .75s cubic-bezier(.2,1.3,.4,1)}
+@keyframes flyin{from{transform:translateY(-70px) scale(.35) rotateY(180deg);opacity:0}to{transform:none;opacity:1}}
+.flame{transform-box:fill-box;transform-origin:50% 100%;animation:flame .55s ease-in-out infinite alternate}
+@keyframes flame{from{transform:scale(1,1)}to{transform:scale(.88,1.14) translateX(.6px)}}
+.aroma{animation:aroma 2.4s ease-in-out infinite}
+@keyframes aroma{0%,100%{opacity:.35;transform:translateY(0)}50%{opacity:.9;transform:translateY(-3px)}}
+.toolcard{position:relative;height:230px;perspective:900px;background:none;border:0;padding:0;width:100%;text-align:center}
+.toolcard .in{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .75s cubic-bezier(.2,.8,.2,1)}
+.toolcard.flip .in{transform:rotateY(180deg)}
+.toolcard .f,.toolcard .b{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:22px;border:2px solid var(--line);background:var(--card);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:12px;box-shadow:var(--shadow)}
+.toolcard .b{transform:rotateY(180deg);background:var(--teal-soft);border-color:var(--teal)}
+.toolcard.said .f{border-color:var(--teal)}
+.toolcard:hover .f{border-color:var(--gold)}
+.toolcard .f svg{width:118px;height:118px}
+.toolcard .lbl{font-family:var(--display);font-weight:800;font-size:1.1em;line-height:1.3}
+.toolcard .spk{font-size:.86em;color:var(--muted)}
+.toolcard .b .mini{line-height:1.5}
+.part{min-height:190px;border-width:3px}
+.part.hint{animation:hint 1s ease-in-out infinite;border-color:var(--gold)}
+@keyframes hint{0%,100%{box-shadow:0 0 0 0 rgba(240,174,51,.9);transform:scale(1)}50%{box-shadow:0 0 0 14px rgba(240,174,51,0);transform:scale(1.05)}}
+.part.bad{border-color:var(--bad);background:var(--bad-soft);animation:shake .34s}
+.craft3d{min-height:280px;padding-top:44px}
+.craft3d .t{font-size:1.25em}
+.burst{position:fixed;z-index:70;pointer-events:none;width:0;height:0}
+.burst i{position:absolute;font-size:18px;font-style:normal;animation:burst .85s ease-out forwards}
+@keyframes burst{from{transform:translate(0,0) scale(.5);opacity:1}to{transform:translate(var(--dx),var(--dy)) scale(1.35);opacity:0}}
+.swatchbtn{display:flex;flex-direction:column;align-items:center;gap:6px;font-weight:800;font-family:var(--display);padding:6px}
+.swatch{width:70px;height:70px;border-radius:50%;border:4px solid var(--card);box-shadow:0 0 0 2px var(--line),0 8px 16px -8px rgba(0,0,0,.35);display:inline-flex;align-items:center;justify-content:center;font-size:1.8em;transition:transform .15s,box-shadow .15s;position:relative}
+.swatchbtn.on .swatch{transform:scale(1.15);box-shadow:0 0 0 4px var(--teal),0 8px 16px -8px rgba(0,0,0,.35)}
+.swck{position:absolute;inset-inline-end:-6px;bottom:-6px;background:var(--teal);color:#fff;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:.7em;font-style:normal;font-weight:900}
+.checkt{background:var(--card);border:3px solid var(--line);border-radius:20px;padding:12px 14px;display:flex;align-items:center;gap:12px;width:100%;text-align:start;transition:transform .12s,border-color .12s,background .12s;min-height:96px}
+.checkt:hover{border-color:var(--gold)}
+.checkt.on{border-color:var(--ok);background:var(--ok-soft)}
+.checkt .num{width:34px;height:34px;border-radius:50%;background:var(--teal);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:900;flex:none;font-family:var(--display)}
+.checkt.on .num{background:var(--ok)}
+.checkt .ico{width:70px;flex:none}
+.checkt .t{flex:1;font-family:var(--display);font-weight:800;font-size:1.1em;line-height:1.35}
+.checkt .ck{width:40px;height:40px;border-radius:12px;border:3px solid var(--line);display:inline-flex;align-items:center;justify-content:center;font-weight:900;font-size:1.3em;color:var(--ok);flex:none;background:var(--card)}
+.checkt.on .ck{border-color:var(--ok)}
+.thumb{width:64px;height:64px;object-fit:cover;border-radius:14px;border:2px solid var(--line);flex:none}
+.photo{max-width:280px;width:100%;border-radius:20px;margin-top:14px;border:4px solid var(--card);box-shadow:var(--shadow)}
+#print{display:none}
+@media print{body>*{display:none!important}#print{display:block!important;direction:rtl;font-family:"IBM Plex Sans Arabic",system-ui,sans-serif;color:#000;padding:20px}#print h1{font-size:26px;margin:10px 0}#print h2{font-size:20px;margin:14px 0 6px}#print ol{list-style:none;padding:0;margin:0}#print li{display:flex;align-items:center;gap:14px;padding:8px 0;border-bottom:1px dashed #bbb;font-size:18px;break-inside:avoid}#print .box{width:30px;height:30px;border:2.5px solid #000;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-weight:900;flex:none}#print .ico{width:64px;flex:none}#print .sig{margin-top:18px;font-size:14px;color:#333}#print .art{filter:none}#print .row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}}
+
 @media (max-width:520px){.opt{font-size:1.15em;min-height:80px;padding:16px}.btn.big{font-size:1.25em}.hero-text{padding:20px 16px}}
 </style>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<radialGradient id="gPink" cx="35%" cy="30%"><stop offset="0" stop-color="#FFD5E0"/><stop offset="1" stop-color="#E4788F"/></radialGradient>
+<radialGradient id="gWhite" cx="35%" cy="30%"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#DDD6CA"/></radialGradient>
+<radialGradient id="gYellow" cx="35%" cy="30%"><stop offset="0" stop-color="#FFF1B8"/><stop offset="1" stop-color="#F0AE33"/></radialGradient>
+<radialGradient id="gPurple" cx="35%" cy="30%"><stop offset="0" stop-color="#EBDCFF"/><stop offset="1" stop-color="#A98BDD"/></radialGradient>
+<radialGradient id="gRed" cx="35%" cy="30%"><stop offset="0" stop-color="#FFB3B3"/><stop offset="1" stop-color="#D6455D"/></radialGradient>
+<radialGradient id="gPeach" cx="35%" cy="30%"><stop offset="0" stop-color="#FFE3D0"/><stop offset="1" stop-color="#F2A07B"/></radialGradient>
+<linearGradient id="gGreen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7ED49A"/><stop offset="1" stop-color="#2E7D4F"/></linearGradient>
+<linearGradient id="gMetal" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F4F6F8"/><stop offset=".5" stop-color="#B8C2CC"/><stop offset="1" stop-color="#E9EDF1"/></linearGradient>
+<linearGradient id="gGlass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".9"/><stop offset=".5" stop-color="#DCEBF5" stop-opacity=".45"/><stop offset="1" stop-color="#FFFFFF" stop-opacity=".85"/></linearGradient>
+<linearGradient id="gWax" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF7EA"/><stop offset="1" stop-color="#EEDCBC"/></linearGradient>
+<linearGradient id="gWaxPink" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE4EC"/><stop offset="1" stop-color="#F2B5C7"/></linearGradient>
+<linearGradient id="gWaxLav" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EFE6FF"/><stop offset="1" stop-color="#C7B3EA"/></linearGradient>
+<linearGradient id="gWaxYellow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF6D6"/><stop offset="1" stop-color="#F5D889"/></linearGradient>
+<linearGradient id="gWaxMint" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E6FAF0"/><stop offset="1" stop-color="#A9E3C4"/></linearGradient>
+<linearGradient id="gKraft" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E8CFAE"/><stop offset="1" stop-color="#C89B6A"/></linearGradient>
+<linearGradient id="gPinkPaper" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE4EC"/><stop offset="1" stop-color="#F5B7C8"/></linearGradient>
+<linearGradient id="gBluePaper" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E3F0FF"/><stop offset="1" stop-color="#A9C9F0"/></linearGradient>
+<linearGradient id="gAmber" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F7C56B"/><stop offset="1" stop-color="#B7791F"/></linearGradient>
+<linearGradient id="gWood" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C99A6B"/><stop offset="1" stop-color="#8B5E34"/></linearGradient>
+<radialGradient id="gFlame" cx="50%" cy="70%"><stop offset="0" stop-color="#FFF6B0"/><stop offset=".5" stop-color="#FFB22B" stop-opacity=".6"/><stop offset="1" stop-color="#FF7800" stop-opacity="0"/></radialGradient>
+</defs></svg>
+<div id="print"></div>
+<canvas id="petals" aria-hidden="true"></canvas><div id="lights" aria-hidden="true" hidden><i></i><i></i><i></i><i></i></div>
 <div id="app" class="wrap"></div>
 <div id="toast"></div>
 <script>
@@ -148,13 +355,43 @@ const STUDENTS=[
  {id:2,name:"ريناد معجم",short:"ريناد",avatar:"🦋",tint:"var(--sky-soft)",ring:"var(--sky)"},
  {id:3,name:"رهف شريفي",short:"رهف",avatar:"🌷",tint:"var(--lav-soft)",ring:"var(--lav)"},
 ];
-const TEACHERS=[{id:"t1",name:"نسيم عكام"},{id:"t2",name:"فوزية عريجي"}];
+const TEACHERS=[{id:"t1",name:"نسيم عكام"}];
+const ACTIVITY_LEAD={id:"a1",name:"عائشة خبراني"};
+const DEPUTY={id:"d1",name:"رضية صباغ"};
 const PARENTS=[{id:"pa1",name:"عبده خرمي",childId:1},{id:"pa2",name:"منصور معجم",childId:2},{id:"pa3",name:"حسن شريفي",childId:3}];
 const COUNSELOR={id:"c1",name:"هناء آل قاسم"};
 const HEALTH={id:"h1",name:"الرائدة الصحية"};
 const PRINCIPAL={id:"pr1",name:"عفاف صباغ"};
-const ROLE_AR={student:"الطالبة",teacher:"المعلمة",parent:"ولي الأمر",counselor:"المرشدة الطلابية",health:"الرائدة الصحية",principal:"المديرة"};
-const ROLE_ICON={student:"🎒",teacher:"👩‍🏫",parent:"👪",counselor:"💬",health:"🩺",principal:"🏫"};
+const ROLE_AR={student:"الطالبة",teacher:"المعلمة",parent:"ولي الأمر",counselor:"المرشدة الطلابية",health:"الرائدة الصحية",activity:"رائدة النشاط",deputy:"وكيلة الشؤون التعليمية",principal:"المديرة"};
+const ROLE_ICON={student:"🎒",teacher:"👩‍🏫",parent:"👪",counselor:"💬",health:"🩺",activity:"🎨",deputy:"📋",principal:"🏫"};
+
+/* ——— محطات خطة المتابعة ——— */
+const PLAN_TEMPLATE=[
+ {id:"quran",t:"القرآن والدراسات الإسلامية",d:"إتمام دروس الوحدة الأولى التسعة",ic:"📖",c:"var(--lav)"},
+ {id:"comm",t:"التواصل والتعبير",d:"تعبّر عن حاجاتها ومشاعرها بالصور والكلمات",ic:"🗣️",c:"var(--rose)"},
+ {id:"care",t:"العناية الشخصية",d:"غسل اليدين والأسنان وترتيب الملابس باستقلالية",ic:"🧼",c:"var(--sky)"},
+ {id:"emotion",t:"الحِلم وضبط الانفعال",d:"تهدأ عند الغضب وتطلب المساعدة بدل الانفعال",ic:"🕊️",c:"var(--ok)"},
+ {id:"social",t:"التعاون والمشاركة",d:"تشارك زميلاتها في الأنشطة الجماعية",ic:"🤝",c:"var(--gold)"},
+ {id:"health",t:"الصحة والغذاء",d:"تختار طعامًا صحيًا وتشرب الماء بانتظام",ic:"🍎",c:"var(--teal)"},
+ {id:"activity",t:"المواهب والأنشطة",d:"تشارك في مبادرات المدرسة وتُنجز عملًا يدويًا",ic:"🎨",c:"var(--rose)"},
+ {id:"home",t:"الاستقلالية في المنزل",d:"تؤدّي روتينها اليومي في البيت بمساعدة أقلّ",ic:"🏠",c:"var(--gold)"},
+];
+const ACTIVITY_BADGES=[{e:"🌸",t:"نجمة المشاركة"},{e:"🎨",t:"فنّانة مبدعة"},{e:"🕯️",t:"صانعة الأثر"},{e:"🩺",t:"سفيرة الصحة"},{e:"🤝",t:"روح الفريق"},{e:"🎤",t:"شجاعة التعبير"}];
+/* ——— مبادرة المحطات الصحية الذكية (خطة المعلمة) ——— */
+const INIT={name:"مبادرة المحطات الصحية الذكية",slogan:"محطات صغيرة .. تصنع فرقًا كبيرًا",motto:"صحتنا بدايتنا لحياة أجمل",closing:"خطوة .. محطة .. أثر دائم",
+ info:[["📄","اسم المبادرة","مبادرة المحطات الصحية الذكية"],["📅","المدة","سنة دراسية كاملة للعام ١٤٤٨هـ"],["⏰","التنفيذ","محطة صحية واحدة كل شهر (٧ محطات خلال العام الدراسي)"],["👩‍🎓","الفئة المستهدفة","طالبات المدرسة"],["🗓️","أيام التنفيذ","يُحدَّد لكل محطة موعد مناسب خلال الشهر"],["📍","مجال التطبيق","التوعية الصحية + تنمية المهارات الحياتية"],["🎯","الهدف العام","تعزيز الوعي الصحي لدى الطالبات وتمكينهن من تبنّي أنماط حياة صحية وسليمة، من خلال محطات تعليمية تفاعلية مبتكرة تُنفَّذ على مدار العام الدراسي."]],
+ about:["مبادرة المحطات الصحية الذكية هي مبادرة تربوية تعليمية تهدف إلى تعزيز الوعي الصحي بين طالبات المدرسة من خلال إنشاء محطات صحية ذكية تتيح لهن اكتساب مهارات حياتية ومهنية عبر أنشطة عملية وإبداعية في مجالي الصحة والوقاية والعناية بالنفس.","تأتي المبادرة إيمانًا بأهمية بناء جيل واعٍ قادر على تبنّي أنماط حياة صحية وسليمة، من خلال بيئة تعليمية محفّزة وآمنة تسهم في تنمية قدرات الطالبات وصقل مواهبهن.","كما تسعى المبادرة إلى دمج المعرفة بالتطبيق، من خلال تقديم محتوى صحي موثوق وتجارب تفاعلية وورش عمل متنوعة، بما يسهم في تعزيز الثقة بالنفس، وتنمية روح التعاون والمسؤولية لدى الطالبات.","وتعدّ المبادرة خطوة نحو تمكين الطالبات من أن يصبحن عنصرًا فاعلًا في نشر ثقافة الصحة داخل المدرسة وخارجها، من خلال إنتاج أعمال إبداعية ومشاركات مجتمعية تترك أثرًا إيجابيًا ومستدامًا."],
+ stations:[
+  {n:1,month:"سبتمبر",t:"محطة التعريف بالمبادرة",ic:"👥",act:"التعريف بالمبادرة وأهدافها وأهمية الصحة في حياتنا، مع تطبيق تعريفي تفاعلي.",out:"رفع الوعي بالمبادرة واستقطاب المشاركات."},
+  {n:2,month:"أكتوبر",t:"محطة التغذية السليمة",ic:"🍎",act:"أنشطة تفاعلية عن الغذاء الصحي وقراءة البطاقة الغذائية.",out:"اختيار وجبات صحية وتطبيق عادات غذائية سليمة."},
+  {n:3,month:"نوفمبر",t:"محطة النشاط البدني",ic:"🏃‍♀️",act:"تحديات رياضية وألعاب حركية لتشجيع الحركة اليومية.",out:"زيادة ممارسة النشاط البدني بشكل منتظم."},
+  {n:4,month:"ديسمبر",t:"محطة الصحة النفسية",ic:"🧠",act:"أنشطة عن إدارة المشاعر، تقنيات الاسترخاء وبناء الثقة بالنفس.",out:"تحسين الصحة النفسية وتعزيز الإيجابية."},
+  {n:5,month:"يناير",t:"محطة النظافة الشخصية",ic:"🧼",act:"تطبيقات عملية حول النظافة الشخصية وأثرها على الصحة.",out:"الالتزام بالعادات الصحية والوقاية من الأمراض."},
+  {n:6,month:"فبراير",t:"محطة الوقاية والتطعيمات",ic:"💉",act:"التعريف بأهمية التطعيمات والوقاية من الأمراض المعدية.",out:"زيادة الوعي بالتطعيمات والوقاية الصحية."},
+  {n:7,month:"مارس",t:"محطة البيئة المدرسية الصحية",ic:"🌱",act:"أنشطة حول نظافة البيئة المدرسية وترشيد استخدام الموارد.",out:"مساهمة فاعلة في بيئة مدرسية صحية وآمنة."}],
+ closingText:["وفي ختام رحلتنا في مبادرة المحطات الصحية الذكية.. نحمد الله الذي منحنا العون والتميز لإتمام هذا العمل، والذي كان ثمرة تعاون وجهود مخلصة من طالباتنا ومعلماتنا وشركائنا في المجتمع المدرسي.","لقد شكّلت هذه المبادرة تجربة تعليمية وتوعوية فريدة، جمعت بين المعرفة والممارسة، وأسهمت في تعزيز الوعي الصحي وبناء عادات سليمة لدى طالباتنا، بطريقة مبتكرة وممتعة.","نسأل الله أن يستمر أثر هذه المحطات في حياتهن، وأن تكون بداية لمجتمع مدرسي أكثر صحة ووعيًا، مقدّمًا جيلًا واعيًا قادرًا على العناية بنفسه ومستقبله."]};
+const INIT_STATUS={todo:["لم تبدأ","var(--card2)","var(--muted)"],progress:["قيد التنفيذ","var(--gold-soft)","var(--gold-ink)"],done:["منجزة ✓","var(--ok-soft)","var(--ok)"]};
+const FILE_CATS=["تقرير متابعة","خطة تربوية فردية","ورقة عمل","تقرير صحي","شهادة تقدير","أخرى"];
 
 const MOODS=[{e:"😊",t:"سعيدة",c:"var(--gold-soft)"},{e:"😴",t:"متعبة",c:"var(--lav-soft)"},{e:"😢",t:"حزينة",c:"var(--sky-soft)"},{e:"😠",t:"غاضبة",c:"var(--bad-soft)"}];
 const ACTIVITIES=[
@@ -163,6 +400,24 @@ const ACTIVITIES=[
  {id:3,title:"ترتيب السرير",emoji:"🛏️",say:"رتّبي سريركِ ونظّمي الوسادة والغطاء."},
  {id:4,title:"ترتيب الملابس",emoji:"👕",say:"اطوي ملابسكِ وضعيها في مكانها."},
 ];
+/* ——— الجدول المصوّر لليوم ——— */
+const DAY_SCHEDULE=[{e:"🚌",t:"الوصول",h:6.5},{e:"🇸🇦",t:"الطابور",h:7},{e:"📖",t:"الدرس الأول",h:7.5},{e:"✏️",t:"الدرس الثاني",h:8.5},{e:"🍎",t:"الفسحة",h:9.5},{e:"🧼",t:"مهارات حياتية",h:10.2},{e:"🎨",t:"نشاط",h:11.2},{e:"🕌",t:"الصلاة",h:12},{e:"🏠",t:"العودة للبيت",h:12.7}];
+/* ——— لوحة التواصل الموسّعة ——— */
+const COMM_PAGES={
+ need:{t:"أحتاج",e:"🙋‍♀️",starter:"أريد",items:[{e:"💧",t:"ماء"},{e:"🚻",t:"الحمّام"},{e:"🍎",t:"طعامًا"},{e:"🛋️",t:"استراحة"},{e:"🤝",t:"مساعدة"},{e:"🧸",t:"أن ألعب"},{e:"🎧",t:"هدوءًا"},{e:"🏠",t:"أمي"},{e:"🩹",t:"دواءً"}]},
+ feel:{t:"أشعر",e:"💗",starter:"أنا",items:[{e:"😊",t:"سعيدة"},{e:"😢",t:"حزينة"},{e:"😨",t:"خائفة"},{e:"😠",t:"غاضبة"},{e:"😴",t:"متعبة"},{e:"🤕",t:"أشعر بألم"},{e:"🥶",t:"أشعر بالبرد"},{e:"🥵",t:"أشعر بالحرّ"},{e:"❤️",t:"أحبكم"}]},
+ people:{t:"أشخاص وأماكن",e:"🏫",starter:"أريد أن أذهب إلى",items:[{e:"👩‍🏫",t:"المعلمة",k:"teacher"},{e:"🩺",t:"الرائدة الصحية",k:"health"},{e:"💬",t:"المرشدة",k:"counselor"},{e:"👭",t:"صديقتي",k:"friend"},{e:"🏫",t:"الفصل"},{e:"🌳",t:"الساحة"},{e:"🍽️",t:"المقصف"},{e:"🕌",t:"المصلّى"},{e:"📚",t:"المكتبة"}]},
+ answer:{t:"إجابات",e:"✅",starter:"",items:[{e:"✅",t:"نعم"},{e:"❌",t:"لا"},{e:"🤷‍♀️",t:"لا أعرف"},{e:"🔁",t:"مرة أخرى"},{e:"⏳",t:"انتظري"},{e:"👍",t:"جاهزة"},{e:"🙏",t:"شكرًا"},{e:"👋",t:"مع السلامة"},{e:"😔",t:"آسفة"}]}};
+/* ——— تدريب المهارات بالصور ——— */
+const SKILL_STEPS={1:[{e:"🪥",t:"أضعُ المعجونَ على الفرشاة"},{e:"😁",t:"أفرّكُ أسناني من الأعلى والأسفل"},{e:"💦",t:"أغسلُ فمي بالماء"},{e:"✨",t:"أسناني نظيفةٌ ولامعة!"}],
+ 2:[{e:"🚰",t:"أفتحُ الماءَ وأبلّلُ يديّ"},{e:"🧼",t:"أضعُ الصابونَ وأفرّكُ عشرين ثانية"},{e:"💧",t:"أشطفُ يديّ جيدًا"},{e:"🧻",t:"أجفّفُ يديّ بالمنشفة"}],
+ 3:[{e:"🛏️",t:"أرفعُ الغطاءَ وأنفضُه"},{e:"🧺",t:"أفرشُ الغطاءَ وأمدُّه"},{e:"🛋️",t:"أضعُ الوسادةَ في مكانها"},{e:"🌟",t:"سريري مرتّبٌ وجميل!"}],
+ 4:[{e:"👕",t:"أفردُ القميصَ على السرير"},{e:"🫱",t:"أطوي الجانبين إلى الوسط"},{e:"📦",t:"أطويه نصفين"},{e:"🗄️",t:"أضعُه في الدولاب"}]};
+/* ——— جدول التعزيز ——— */
+const REWARDS=[{e:"📱",t:"وقت آيباد"},{e:"⭐",t:"ملصق لامع"},{e:"🧩",t:"لعبة"},{e:"🎨",t:"وقت رسم"},{e:"👭",t:"وقت مع صديقتي"},{e:"🍪",t:"وجبة مفضّلة"}];
+const REWARD_TARGET=8;
+/* ——— سجلّ السلوك ABC ——— */
+const ABC={a:["انتقال بين نشاطين","طلب مهمة صعبة","انتظار طويل","ضجيج عالٍ","رفض طلبها","تغيير مفاجئ","جوع أو تعب","لا سبب واضح"],b:["صراخ","بكاء","انسحاب/صمت","رفض المشاركة","ضرب/دفع","رمي الأدوات","حركة زائدة","تكرار كلمات"],c:["تهدئة بالحديث","ركن الهدوء","تجاهل مخطّط","إعادة توجيه","تعزيز البديل","إبعاد المثير","إخبار الأسرة"],p:["الفصل","الساحة","المقصف","الممر","المصلّى","الحافلة"]};
 const COMM=[
  {e:"💧",t:"أريد ماء"},{e:"🚻",t:"أريد الحمّام"},{e:"🛋️",t:"أريد استراحة"},{e:"🤝",t:"أريد مساعدة"},{e:"🤕",t:"أشعر بألم"},
  {e:"😊",t:"أنا سعيدة"},{e:"😢",t:"أنا حزينة"},{e:"😨",t:"أنا خائفة"},{e:"✅",t:"نعم"},{e:"❌",t:"لا"},{e:"🍎",t:"أنا جائعة"},{e:"❤️",t:"أحبكم"},
@@ -226,6 +481,22 @@ const LESSONS=[
   mcq:[{q:"كلمةُ (تداعبنا) تعني:",opts:[{t:"تمازحنا",e:"😄",ok:true},{t:"تغضب علينا",e:"😠"}]},{q:"في المزاحِ أقول:",opts:[{t:"الكذب",e:"🤥"},{t:"الحق",e:"✅",ok:true}]},{q:"من آدابِ المزاح:",opts:[{t:"اجتناب السخرية",e:"🚫😏",ok:true},{t:"الاستهزاء بالناس",e:"😏"}]}],
   tf:[{s:"من آدابِ المزاحِ أن تكونَ صادقةً في مزاحك.",ans:true},{s:"في المزاحِ أكذبُ من أجلِ إضحاكِ الناس.",ans:false},{s:"أقتدي بالنبيِّ ﷺ في مزاحِه فلا أقولُ إلا حقًّا.",ans:true},{s:"في المزاحِ تجوزُ السخريةُ والاستهزاءُ بالناس.",ans:false}],
   match:[["تداعبنا","تمازحنا"],["من آداب المزاح","الصدق"],["نهى النبي ﷺ عن","الكذب لإضحاك الناس"],["اجتناب السخرية","يُعدّ من آداب المزاح"]]},
+ {id:"dahr",n:8,title:"سبّ الدهر",icon:"⏳",accent:"var(--sky)",soft:"var(--sky-soft)",
+  intro:"الدهرُ هو الزمان. وسبُّ الدهرِ هو شتمُه وعيبُه أو لعنُه، وحكمُه حرام؛ لأنَّ الدهرَ خلقٌ مُسخَّرٌ منقادٌ لأمرِ الله، والذي يُصرِّفُ الأمورَ هو اللهُ عزَّ وجلّ.",
+  hadith:"قال رسولُ الله ﷺ: «لا يَسُبَّ أَحَدُكُمُ الدَّهْرَ، فَإِنَّ اللهَ هُوَ الدَّهْرُ»",
+  pictos:[{e:"⏳",t:"الدهر",s:"الدهرُ هو الزمان."},{e:"🚫🗣️",t:"سبّ الدهر",s:"سبُّ الدهر هو شتمُه وعيبُه أو لعنُه، وهو حرام."},{e:"☁️",t:"وصف الطقس",s:"قولُ: هذه أيامٌ باردة، ليس من سبِّ الدهر."},{e:"🤲",t:"الله يُصرّف",s:"اللهُ هو الذي يُصرِّفُ الأمور، والدهرُ ليس له من الأمرِ شيء."},{e:"🌙",t:"خلقٌ مُسخَّر",s:"الدهرُ خلقٌ مُسخَّرٌ منقادٌ لأمرِ الله."},{e:"😌",t:"أرضى بقضاء الله",s:"أرضى بقضاءِ اللهِ وقدرِه ولا أعترضُ عليه."}],
+  facts:[{e:"⏳",t:"الدهر = الزمان"},{e:"🚫",t:"سبّه حرام"}],
+  mcq:[{q:"(الدهر) هو:",opts:[{t:"الزمان",e:"⏳",ok:true},{t:"المكان",e:"📍"}]},{q:"المرادُ بسبِّ الدهر:",opts:[{t:"شتمه وعيبه",e:"🚫🗣️",ok:true},{t:"مدحه والثناء عليه",e:"👏"}]},{q:"حكمُ سبِّ الدهر:",opts:[{t:"حرام",e:"🚫",ok:true},{t:"مستحب",e:"✅"}]}],
+  tf:[{s:"قولُكِ «هذه أيامٌ باردة» يُعدُّ سبًّا للدهر.",ans:false},{s:"الدهرُ خلقٌ مُسخَّرٌ ومنقادٌ لأمرِ الله، فليس مستحقًّا للسبّ.",ans:true},{s:"حكمُ سبِّ الدهر: يجوزُ سبُّ الدهر.",ans:false},{s:"من أمثلةِ سبِّ الدهر قولُ: «الزمنُ غدّار».",ans:true}],
+  match:[["الدهر هو","الزمان"],["حكم سبّ الدهر","حرام"],["من سبّ الدهر قول","الزمن غدّار"],["ليس من سبّ الدهر قول","ما أشدّ الحرَّ اليوم"]]},
+ {id:"dayf",n:9,title:"إكرام الضيف",icon:"🏠",accent:"var(--gold)",soft:"var(--gold-soft)",
+  intro:"الضيفُ هو زائرُ البيتِ وليس صاحبَه، والمُضيفُ هو صاحبُ البيت. وإكرامُ الضيفِ واجبٌ يومًا وليلة، ومستحبٌّ ثلاثةَ أيام. ومن إكرامِه: الترحيبُ به بابتسامة، وتقديمُ الطعامِ في الوقتِ المناسب، وإظهارُ السرورِ بوجوده.",
+  hadith:"قال رسولُ الله ﷺ: «مَنْ كَانَ يُؤْمِنُ بِاللهِ وَالْيَوْمِ الآخِرِ فَلْيُكْرِمْ ضَيْفَهُ»",
+  pictos:[{e:"🚶‍♂️🏠",t:"الضيف",s:"الضيفُ هو زائرُ البيتِ وليس صاحبَه."},{e:"🧑‍🦱🔑",t:"المُضيف",s:"المُضيفُ هو صاحبُ البيتِ الذي يستقبلُ الضيف."},{e:"😊🤝",t:"الترحيب",s:"أُرحِّبُ بالضيفِ بابتسامةٍ وحسنِ استقبال."},{e:"🍽️",t:"تقديم الطعام",s:"أُقدِّمُ الطعامَ للضيفِ في الوقتِ المناسب."},{e:"🌙☀️",t:"يوم وليلة",s:"إكرامُ الضيفِ واجبٌ يومًا وليلة."},{e:"3️⃣",t:"ثلاثة أيام",s:"إكرامُ الضيفِ ثلاثةَ أيامٍ مستحبّ."}],
+  facts:[{e:"✅",t:"واجب يومًا وليلة"},{e:"💛",t:"مستحب ٣ أيام"}],
+  mcq:[{q:"مَن يسكنُ البيت؟",opts:[{t:"المُضيف",e:"🔑",ok:true},{t:"الضيف",e:"🚶‍♂️"}]},{q:"حكمُ إكرامِ الضيفِ يومًا وليلة:",opts:[{t:"واجب",e:"✅",ok:true},{t:"غير واجب",e:"❌"}]},{q:"حكمُ إكرامِ الضيفِ ثلاثةَ أيام:",opts:[{t:"مستحب",e:"💛",ok:true},{t:"واجب",e:"✅"}]}],
+  tf:[{s:"الضيفُ هو زائرُ البيتِ وليس صاحبَه.",ans:true},{s:"الحقُّ الواجبُ لإكرامِ الضيف: يومٌ وليلة.",ans:true},{s:"من إكرامِ الضيف: الترحيبُ به والابتسامةُ وحسنُ الاستقبال.",ans:true},{s:"أتركُ الضيفَ دونَ طعامٍ حتى يطلبَه.",ans:false}],
+  match:[["الضيف","زائر البيت"],["المُضيف","صاحب البيت"],["إكرام الضيف يومًا وليلة","واجب"],["قال ﷺ: فليُكرم","ضيفَه"]]},
 ];
 
 /* ——— نشرات الرائدة الصحية ——— */
@@ -243,7 +514,7 @@ const NOTE_CATS=["سلوكي","اجتماعي","انفعالي","أكاديمي"
 const SEED=()=>({
  stars:{1:9,2:6,3:3},
  lessons:{1:{ghashiyah:{score:9,max:9},sawm:{score:7,max:9}},2:{ghashiyah:{score:8,max:9}},3:{}},
- ratings:{1:{ghashiyah:{stars:5,by:"نسيم عكام",t:"قرأت بخشوع وأجابت بثقة"},sawm:{stars:4,by:"نسيم عكام",t:"تحتاج تكرار مفهوم بداية الصوم"}},2:{ghashiyah:{stars:4,by:"فوزية عريجي",t:"ممتازة في التعرّف على اسم السورة"}},3:{}},
+ ratings:{1:{ghashiyah:{stars:5,by:"نسيم عكام",t:"قرأت بخشوع وأجابت بثقة"},sawm:{stars:4,by:"نسيم عكام",t:"تحتاج تكرار مفهوم بداية الصوم"}},2:{ghashiyah:{stars:4,by:"نسيم عكام",t:"ممتازة في التعرّف على اسم السورة"}},3:{}},
  notes:{1:[{cat:"اجتماعي",t:"تتفاعل جيدًا مع زميلاتها",by:"هناء آل قاسم",role:"المرشدة الطلابية",d:"٢٠٢٦/٩/١٤"}],2:[{cat:"انفعالي",t:"تحتاج تهدئة عند التغيير المفاجئ",by:"هناء آل قاسم",role:"المرشدة الطلابية",d:"٢٠٢٦/٩/١٤"}],3:[]},
  health:{1:[{cat:"نظافة",t:"غسل اليدين قبل الطعام — تقدّم ملحوظ",d:"٢٠٢٦/٩/١٥"}],2:[{cat:"غذاء",t:"تشجيعها على شرب الماء بانتظام",d:"٢٠٢٦/٩/١٥"}],3:[{cat:"نوم",t:"النوم مبكرًا يحسّن تركيزها صباحًا",d:"٢٠٢٦/٩/١٥"}]},
  goals:{1:[{t:"إتمام دروس الوحدة الأولى",d:"أكاديمي"},{t:"تنظيف الأسنان يوميًا",d:"مهارة حياتية"}],2:[{t:"ترتيب السرير",d:"مهارة حياتية"}],3:[{t:"غسل اليدين قبل الأكل",d:"صحي"}]},
@@ -254,7 +525,22 @@ const SEED=()=>({
  moods:{1:[{t:"سعيدة",e:"😊",d:"٢٠٢٦/٩/١٧"}],2:[],3:[]},
  home:{1:{1:"alone",2:"help"},2:{},3:{}},
  bulletins:SEED_BULLETINS,
+ plan:{1:{quran:{pct:70,note:"أنهت درسين وتتقدّم بثبات"},comm:{pct:60,note:"تستخدم لوحة التواصل يوميًا"},care:{pct:80,note:""},emotion:{pct:55,note:"تحسّن واضح بعد ركن الهدوء"},social:{pct:65,note:""},health:{pct:50,note:""},activity:{pct:40,note:""},home:{pct:60,note:""}},
+       2:{quran:{pct:40,note:""},comm:{pct:35,note:""},care:{pct:50,note:""},emotion:{pct:30,note:"تحتاج تهيئة قبل التغيير"},social:{pct:45,note:""},health:{pct:55,note:""},activity:{pct:60,note:"تحب الأشغال اليدوية"},home:{pct:40,note:""}},
+       3:{quran:{pct:15,note:"بدأت هذا الأسبوع"},comm:{pct:25,note:""},care:{pct:35,note:""},emotion:{pct:40,note:""},social:{pct:30,note:""},health:{pct:45,note:""},activity:{pct:20,note:""},home:{pct:30,note:""}}},
+ planApproved:{1:{by:"رضية صباغ",d:"٢٠٢٦/٩/١٦"},2:null,3:null},
+ files:{1:[],2:[],3:[]},
+ activities:{1:[{t:"مبادرة المحطات الصحية الذكية — محطة غسل اليدين",badge:"🩺 سفيرة الصحة",d:"٢٠٢٦/٩/١٥",by:"عائشة خبراني"}],2:[{t:"ورشة تنسيق الزهور",badge:"🎨 فنّانة مبدعة",d:"٢٠٢٦/٩/١٤",by:"عائشة خبراني"}],3:[]},
+ calm:{1:[{d:"٢٠٢٦/٩/٢٠",h:9},{d:"٢٠٢٦/٩/٢١",h:11}],2:[],3:[]},
+ people:{},
+ reward:{},
+ dayStars:{},
+ abc:{2:[{a:"تغيير مفاجئ",b:"بكاء",c:"ركن الهدوء",p:"الفصل",h:9,dow:0,d:"٢٠٢٦/٩/٢٠",by:"هناء آل قاسم"},{a:"ضجيج عالٍ",b:"انسحاب/صمت",c:"إبعاد المثير",p:"المقصف",h:10,dow:1,d:"٢٠٢٦/٩/٢١",by:"هناء آل قاسم"}],1:[],3:[]},
+ iep:{1:{strengths:"تحب القراءة المصوّرة، تتفاعل بالصوت، ذاكرة بصرية جيدة",needs:"دعم في التعبير اللفظي، تهيئة قبل التغيير",long:[{t:"تُعبّر عن حاجاتها بجملة من كلمتين في ٤ من ٥ مواقف",st:"comm",by:"المعلمة",due:"نهاية الفصل"}],short:[{t:"تستخدم لوحة التواصل لطلب الماء والحمّام يوميًا",st:"comm",by:"المعلمة",due:"٤ أسابيع"},{t:"تُنهي درسي الغاشية والصوم بنسبة ٨٠٪",st:"quran",by:"المعلمة",due:"٦ أسابيع"}]}},
+ initiative:{1:{status:"done",pct:100,note:"نُفّذ التطبيق التعريفي التفاعلي وحضرت جميع الطالبات",d:"٢٠٢٦/٩/١٠"},2:{status:"progress",pct:35,note:"جُهّزت البطاقات الغذائية المصوّرة",d:""}},
+ directives:[{t:"تُراجع خطط المتابعة نهاية كل شهر، ويُرفق تقرير التقدّم في ملف الطالبة.",by:"رضية صباغ",d:"٢٠٢٦/٩/١٤"}],
  principalEval:{1:{stars:5,t:"نموذج للمثابرة"},2:{stars:4,t:""},3:{stars:3,t:"نحتاج خطة دعم إضافية"}},
+ craft:{},
 });
 </script>
 <script>
@@ -267,6 +553,7 @@ try{const t=localStorage.getItem(KEY+":ui");if(t){const u=JSON.parse(t);if(u.fs)
 const UI={fs:1,hc:false,sound:true};
 try{const t=localStorage.getItem(KEY+":ui");if(t)Object.assign(UI,JSON.parse(t));}catch(e){}
 const saveUI=()=>{try{localStorage.setItem(KEY+":ui",JSON.stringify(UI));}catch(e){}};
+if(UI.clear)document.documentElement.setAttribute("data-clear","1");if(UI.focus)document.documentElement.setAttribute("data-focus","1");
 
 const today=()=>new Date().toLocaleDateString("ar-SA-u-nu-arab",{year:"numeric",month:"numeric",day:"numeric"});
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -277,17 +564,72 @@ const progressOf=sid=>{const done=DB.lessons[sid]||{};let got=0,tot=0;LESSONS.fo
 const lessonsDone=sid=>Object.keys(DB.lessons[sid]||{}).length;
 
 let voices=[];const loadVoices=()=>{try{voices=speechSynthesis.getVoices();}catch(e){}};
-try{loadVoices();speechSynthesis.onvoiceschanged=loadVoices;}catch(e){}
-const speak=t=>{if(!UI.sound)return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="ar-SA";u.rate=.85;const v=voices.find(v=>/^ar/i.test(v.lang));if(v)u.voice=v;speechSynthesis.speak(u);}catch(e){}};
+try{loadVoices();speechSynthesis.onvoiceschanged=()=>{loadVoices();if(["landing","role"].includes(S.screen))render();};}catch(e){}
+const arVoices=()=>voices.filter(v=>/^ar/i.test(v.lang)||/arab|عرب/i.test(v.name));
+const voiceScore=v=>{const n=(v.name||"").toLowerCase();let s=0;if(/natural|neural|online|premium|enhanced|wavenet/.test(n))s+=40;if(/google/.test(n))s+=30;if(/microsoft/.test(n))s+=25;if(/zariyah|salma|amina|hoda|laila|layla|hala|noura|aisha|زارية|سلمى|أمينة|هدى|ليلى|نورا|female|أنثى/.test(n))s+=20;if(/hamed|naayf|omar|ali|male/.test(n))s-=5;if(/ar[-_]sa/i.test(v.lang))s+=15;if(v.localService===false)s+=5;return s;};
+const bestVoice=()=>{const list=arVoices();if(!list.length)return null;if(UI.voice){const f=list.find(v=>v.name===UI.voice);if(f)return f;}return list.slice().sort((a,b)=>voiceScore(b)-voiceScore(a))[0];};
+const normSpeech=t=>String(t).replace(/ﷺ/g," صلى الله عليه وسلم ").replace(/﴿|﴾|«|»|"/g," ").replace(/٪|%/g," بالمئة ").replace(/\.\.+/g,"، ").replace(/[—–]/g,"، ").replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}\u{20E3}]/gu," ").replace(/\s+/g," ").trim();
+const speak=(t,{rate=.8}={})=>{if(!UI.sound)return;try{speechSynthesis.cancel();const txt=normSpeech(t);if(!txt)return;const parts=txt.split(/(?<=[.؟!،:])\s+/).filter(Boolean);parts.forEach((pt,i)=>{const u=new SpeechSynthesisUtterance(pt);u.lang="ar-SA";u.rate=rate;u.pitch=1.05;u.volume=1;const v=bestVoice();if(v)u.voice=v;speechSynthesis.speak(u);});}catch(e){}};
 let actx=null;
 const tone=(kind="ok")=>{if(!UI.sound)return;try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();const c=actx;const seq=kind==="ok"?[659,784,988]:kind==="win"?[523,659,784,1047]:kind==="tap"?[740]:[220,180];
  seq.forEach((f,i)=>{const o=c.createOscillator(),g=c.createGain();o.type=kind==="bad"?"triangle":"sine";o.frequency.value=f;o.connect(g);g.connect(c.destination);const t=c.currentTime+i*.09;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.22,t+.02);g.gain.exponentialRampToValueAtTime(.001,t+.45);o.start(t);o.stop(t+.5);});}catch(e){}};
 const confetti=()=>{if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;const box=document.createElement("div");box.className="confetti";const cols=["#F0AE33","#0F6E66","#E4788F","#6FAAE3","#A98BDD","#2E9E5B"];for(let i=0;i<60;i++){const s=document.createElement("i");s.style.left=Math.random()*100+"%";s.style.background=cols[i%cols.length];s.style.animationDelay=(Math.random()*.6)+"s";s.style.transform=`rotate(${Math.random()*360}deg)`;box.appendChild(s);}document.body.appendChild(box);setTimeout(()=>box.remove(),2600);};
 let toastT;const toast=t=>{const el=document.getElementById("toast");el.innerHTML=`<div class="toast">${esc(t)}</div>`;clearTimeout(toastT);toastT=setTimeout(()=>el.innerHTML="",2200);};
 
+/* ====================== الورود المتناثرة ====================== */
+const Petals=(()=>{const cv=document.getElementById("petals");const ctx=cv.getContext("2d");let ps=[],raf=null,on=false,dpr=1;const EM=["🌸","🌷","🌹","💮","🌺","✨"];
+ const fit=()=>{dpr=Math.min(2,window.devicePixelRatio||1);cv.width=innerWidth*dpr;cv.height=innerHeight*dpr;};
+ const mk=(y)=>({x:Math.random()*innerWidth,y:y??-40,vy:.6+Math.random()*1.1,vx:(Math.random()-.5)*.5,r:Math.random()*Math.PI*2,vr:(Math.random()-.5)*.03,s:18+Math.random()*20,e:EM[Math.floor(Math.random()*EM.length)],sw:Math.random()*Math.PI*2,a:.55+Math.random()*.45});
+ const tick=()=>{ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,innerWidth,innerHeight);ps.forEach(p=>{p.sw+=.02;p.x+=p.vx+Math.sin(p.sw)*.6;p.y+=p.vy;p.r+=p.vr;if(p.y>innerHeight+40){Object.assign(p,mk(-40));}ctx.save();ctx.globalAlpha=p.a;ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.font=p.s+"px serif";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(p.e,0,0);ctx.restore();});raf=requestAnimationFrame(tick);};
+ const start=(n=28)=>{if(matchMedia("(prefers-reduced-motion: reduce)").matches||UI.focus)return;fit();if(!on){ps=Array.from({length:n},()=>mk(Math.random()*innerHeight));on=true;tick();}};
+ const stop=()=>{on=false;if(raf)cancelAnimationFrame(raf);raf=null;ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,innerWidth,innerHeight);ps=[];};
+ const shower=(x,y,n=14)=>{if(!on)return;for(let i=0;i<n;i++){const p=mk(y);p.x=x+(Math.random()-.5)*160;p.vy=1.2+Math.random()*2;p.s=22+Math.random()*18;ps.push(p);}setTimeout(()=>{ps.splice(28);},2500);};
+ addEventListener("resize",fit);return {start,stop,shower};})();
+const chime=()=>{if(!UI.sound)return;try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();const c=actx;[523.25,659.25,783.99,1046.5,1318.5].forEach((f,i)=>{const o=c.createOscillator(),g=c.createGain();o.type="sine";o.frequency.value=f;o.connect(g);g.connect(c.destination);const t=c.currentTime+i*.14;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.16,t+.03);g.gain.exponentialRampToValueAtTime(.001,t+1.4);o.start(t);o.stop(t+1.45);});}catch(e){}};
+let welcomed=false;const welcome=()=>{if(welcomed)return;welcomed=true;chime();setTimeout(()=>speak("أهلًا وسهلًا بكنّ في أجنحة الأمل. قدراتٌ مختلفة، وأحلامٌ بلا حدود"),500);Petals.shower(innerWidth/2,-20,30);};
+document.addEventListener("pointerdown",()=>{if(S.screen==="landing")welcome();},{once:false});
+const lastHi={};const greetStudent=(id,el)=>{const s=stu(id);const now=Date.now();if(lastHi[id]&&now-lastHi[id]<2500)return;lastHi[id]=now;speak(`أهلًا وسهلًا بكِ يا ${s.short}، اشتقنا إليكِ`);tone("tap");const r=el.getBoundingClientRect();Petals.shower(r.left+r.width/2,r.top,16);burst&&typeof burst==="function"&&burst(el);};
+
+/* ====================== أدوات ذوي الإعاقة الفكرية ====================== */
+const dayKey=()=>new Date().toISOString().slice(0,10);
+const nowH=()=>{const d=new Date();return d.getHours()+d.getMinutes()/60;};
+const scheduleNow=()=>{const h=nowH();let idx=-1;DAY_SCHEDULE.forEach((x,i)=>{if(h>=x.h)idx=i;});return idx;};
+const DaySchedule=()=>{const now=scheduleNow();return `<div class="card" style="padding:12px 14px;margin-bottom:14px;overflow:visible"><div class="row between"><b>📅 يومي اليوم <button class="speak" data-act="say" data-say="هذا جدولُ يومي. المسي الصورة لتسمعي">🔊</button></b><span class="muted mini">المسي كل صورة لتسمعيها</span></div>
+ <div class="dayrail" style="margin-top:10px">${DAY_SCHEDULE.map((x,i)=>`<button class="${i<now?"past":i===now?"now":""}" data-act="say" data-say="${i<now?"انتهى: ":i===now?"الآن: ":"بعد ذلك: "}${x.t}">${i===now?`<span class="nowlbl">أنا هنا الآن 👇</span>`:""}<span class="e">${x.e}</span>${x.t}${i<now?"<span style='color:var(--ok)'>✓</span>":""}</button>`).join("")}</div></div>`;};
+/* ركن الهدوء */
+let calmT=null,calmOsc=null;
+const calmOpen=()=>{const ov=document.createElement("div");ov.className="calm";ov.id="calm";ov.innerHTML=`<h2>ركن الهدوء 🕊️</h2><p style="font-size:1.2em;opacity:.85">تنفّسي معي… شهيق ٤ ثوانٍ، زفير ٤ ثوانٍ</p><div class="breath" id="breath">شهيق</div><p id="calmcount" style="font-size:1.3em;font-family:var(--display)">٤</p><div class="row" style="justify-content:center"><button class="btn ghost" data-act="say" data-say="أنا هادئة. أتنفّس بعمق. كل شيء بخير.">🔊 «أنا هادئة»</button><button class="btn ghost" data-act="say" data-say="${esc(LESSONS[0].intro)}">📖 عن سورة الغاشية</button></div><button class="btn gold big" data-act="calmclose" style="max-width:360px">أنا أفضل الآن 😊</button>`;document.body.appendChild(ov);
+ let ph=0,cnt=4;const b=ov.querySelector("#breath"),c=ov.querySelector("#calmcount");speak("خذي نفسًا عميقًا. شهيق");
+ calmT=setInterval(()=>{cnt--;if(cnt<=0){cnt=4;ph=1-ph;b.textContent=ph?"زفير":"شهيق";if(UI.sound)speak(ph?"زفير":"شهيق",{rate:.7});}c.textContent=["٠","١","٢","٣","٤"][cnt]||cnt;},1000);
+ try{if(UI.sound){actx=actx||new (window.AudioContext||window.webkitAudioContext)();const o=actx.createOscillator(),g=actx.createGain();o.type="sine";o.frequency.value=174;o.connect(g);g.connect(actx.destination);g.gain.value=.05;o.start();calmOsc={o,g};}}catch(e){}
+ if(S.me){push(DB.calm,S.me.id,{d:today(),h:new Date().getHours()});}};
+const calmClose=()=>{clearInterval(calmT);try{calmOsc&&calmOsc.g.gain.exponentialRampToValueAtTime(.0001,actx.currentTime+.6);setTimeout(()=>calmOsc&&calmOsc.o.stop(),700);}catch(e){}calmOsc=null;const el=document.getElementById("calm");if(el)el.remove();speak("أحسنتِ. أنتِ هادئة الآن");tone("ok");};
+/* المسح التلقائي */
+let scanT=null,scanI=-1,scanEls=[];
+const scanStop=()=>{clearInterval(scanT);scanT=null;scanEls.forEach(e=>e.classList.remove("scan-hi"));scanEls=[];scanI=-1;};
+const scanStart=()=>{scanStop();if(!UI.scan||!S.me)return;scanEls=[...document.querySelectorAll("#app [data-act]:not(.iconbtn):not(.speak):not(.a11y button):not(.dayrail button)")].filter(e=>!e.disabled&&e.offsetParent);if(!scanEls.length)return;const step=()=>{scanEls.forEach(e=>e.classList.remove("scan-hi"));scanI=(scanI+1)%scanEls.length;const el=scanEls[scanI];el.classList.add("scan-hi");el.scrollIntoView({block:"nearest",behavior:"smooth"});const lbl=(el.dataset.say||el.textContent||"").trim().slice(0,40);if(UI.sound)speak(lbl,{rate:1});};step();scanT=setInterval(step,UI.scanMs||2500);};
+const scanSelect=()=>{if(!scanT||scanI<0)return false;const el=scanEls[scanI];tone("tap");el.click();return true;};
+document.addEventListener("keydown",e=>{if(UI.scan&&(e.code==="Space"||e.code==="Enter")&&!e.target.matches("input,textarea,select")){if(scanSelect())e.preventDefault();}});
+document.addEventListener("pointerdown",e=>{if(UI.scan&&scanT&&!e.target.closest("[data-act],input,select,textarea,.a11y")){scanSelect();}},true);
+/* إزالة التشكيل */
+const stripTashkeel=root=>{const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){if(/[\u064B-\u0652\u0670]/.test(n.nodeValue))n.nodeValue=n.nodeValue.replace(/[\u064B-\u0652\u0670]/g,"");}};
+/* التعزيز */
+const rewardOf=sid=>{const r=DB.reward[sid];if(r&&r.date===dayKey())return r;return null;};
+const dayStarsOf=sid=>{const d=DB.dayStars[sid];return d&&d.date===dayKey()?d.n:0;};
+const RewardBar=(sid)=>{const r=rewardOf(sid);if(!r)return "";const n=dayStarsOf(sid),got=n>=REWARD_TARGET;return `<div class="card" style="padding:12px 14px;margin-bottom:14px;background:${got?"var(--ok-soft)":"var(--card)"}"><div class="row between"><b>🎁 مكافأتي اليوم: ${r.e} ${r.t} <button class="speak" data-act="say" data-say="مكافأتكِ اليوم ${r.t}. جمعتِ ${n} من ${REWARD_TARGET} نجوم">🔊</button></b>${got?`<span class="badge" style="background:var(--ok);color:#fff">🎉 حصلتِ عليها!</span>`:`<span class="muted mini">${n} من ${REWARD_TARGET} ⭐</span>`}</div>
+ <div class="rewardbar" style="margin-top:8px">${Array.from({length:REWARD_TARGET},(_,i)=>`<span class="st ${i<n?"on":""}">⭐</span>`).join("")}<span style="flex:1"></span><span class="goal">${r.e}</span></div>${r.home?`<div class="mini muted" style="margin-top:6px">🏠 مكافأة المنزل: ${esc(r.home)}</div>`:""}</div>`;};
+/* القارئ المنطوق */
+let readerQ=[],readerI=0,readerRate=.75;
+const readerOpen=(sentences,title)=>{readerQ=sentences.map(normSpeech).filter(Boolean);readerI=0;const ov=document.createElement("div");ov.className="reader";ov.id="reader";ov.innerHTML=`<div class="row between"><b style="font-family:var(--display);font-size:1.3em">📖 ${esc(title)}</b><button class="iconbtn" data-act="readerclose">✕</button></div><div class="txt" id="rtxt">${readerQ.map((t,i)=>`<span id="rs-${i}">${esc(t)}</span>`).join("")}</div><div class="row" style="justify-content:center"><button class="btn ghost" data-act="readerprev">◀ السابقة</button><button class="btn gold" data-act="readerrepeat">🔁 أعيدي</button><button class="btn line" data-act="readerslow">🐢 أبطأ</button><button class="btn primary" data-act="readernext">التالية ▶</button></div>`;document.body.appendChild(ov);readerSay();};
+const readerSay=()=>{if(!document.getElementById("reader"))return;document.querySelectorAll("#rtxt span").forEach(x=>x.classList.remove("on"));const el=document.getElementById("rs-"+readerI);if(!el)return;el.classList.add("on");el.scrollIntoView({block:"center",behavior:"smooth"});try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(readerQ[readerI]);u.lang="ar-SA";u.rate=readerRate;u.pitch=1.05;const v=bestVoice();if(v)u.voice=v;u.onend=()=>{if(document.getElementById("reader")&&readerI<readerQ.length-1){readerI++;setTimeout(readerSay,700);}};if(UI.sound)speechSynthesis.speak(u);}catch(e){}};
+/* تدريب المهارة بالصور */
+const SkillTrain=()=>{const a=ACTIVITIES[S.idx],st=SKILL_STEPS[a.id],i=S.sk||0,x=st[i];return `<div class="card center" style="border-color:var(--teal)">${Dots(st.length,i)}<span class="badge">الخطوة ${i+1} من ${st.length}</span><div style="font-size:6.5em;line-height:1.1;margin:8px 0" class="fade">${x.e}</div><h2 style="font-size:1.9em">${x.t}</h2><button class="speak" data-act="say" data-say="${esc(x.t)}" style="margin:10px 0;font-size:1.1em">🔊 اسمعي</button>
+ <div class="grid g2"><button class="btn ghost big" data-act="skprev" ${i===0?"disabled style='opacity:.4'":""}>◀ السابقة</button><button class="btn primary big" data-act="sknext">${i+1<st.length?"فعلتُها، التالية ▶":"أنهيتُ كل الخطوات 🎉"}</button></div></div>`;};
+
 /* ====================== الحالة ====================== */
 const S={screen:"landing",role:null,staff:null,me:null,cs:1,lesson:null,step:"read",qi:0,ti:0,wrong:null,said:new Set(),sel:null,pairs:[],score:0,idx:0,tab:"progress",preview:false,previewRet:null,mood:null,order:[]};
-const go=(scr)=>{S.screen=scr;S.wrong=null;render();window.scrollTo({top:0,behavior:"instant"});};
+const go=(scr)=>{S.screen=scr;S.wrong=null;render();window.scrollTo({top:0,behavior:"instant"});fx();};
+const fx=()=>{const show=["landing","login","role"].includes(S.screen);const L=document.getElementById("lights");if(L)L.hidden=!show;if(show)Petals.start(S.screen==="landing"?32:16);else Petals.stop();};
 const rnd=a=>a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
 
 /* ====================== قطع الواجهة ====================== */
@@ -301,10 +643,14 @@ const A11y=()=>`<div class="a11y" aria-label="إعدادات الوصول">
  <button data-act="fs" data-v="1.18" class="${UI.fs==1.18?"on":""}" title="خط كبير" style="font-size:1.1em">أ+</button>
  <button data-act="fs" data-v="1.36" class="${UI.fs==1.36?"on":""}" title="خط أكبر" style="font-size:1.25em">أ++</button>
  <button data-act="hc" class="${UI.hc?"on":""}" title="تباين عالٍ">◐ تباين</button>
- <button data-act="snd" class="${UI.sound?"on":""}" title="الصوت">${UI.sound?"🔊":"🔇"}</button></div>`;
+ <button data-act="clear" class="${UI.clear?"on":""}" title="خط واضح بلا تشكيل">Aa واضح</button>
+ <button data-act="focus" class="${UI.focus?"on":""}" title="تقليل المشتّتات">🧘 هدوء</button>
+ <button data-act="scan" class="${UI.scan?"on":""}" title="المسح التلقائي بزر واحد">⏱️ مسح</button>
+ <button data-act="snd" class="${UI.sound?"on":""}" title="الصوت">${UI.sound?"🔊":"🔇"}</button>
+ ${arVoices().length>1?`<select id="voicepick" title="اختيار الصوت العربي" style="width:auto;padding:6px 10px;border-radius:12px;font-size:.85em;font-weight:800">${arVoices().slice().sort((a,b)=>voiceScore(b)-voiceScore(a)).map(v=>`<option value="${esc(v.name)}" ${(bestVoice()||{}).name===v.name?"selected":""}>🎙️ ${esc(v.name.replace(/Microsoft |Google |Online \(Natural\)| - Arabic.*| \(.*\)/g,"").trim()||v.name)}</option>`).join("")}</select>`:""}</div>`;
 const Top=(right="",left="")=>`<div class="topbar"><div class="row between"><div class="row">${left}</div><div class="row">${right}</div></div></div>`;
 const BackBtn=(to,label="رجوع")=>`<button class="btn ghost" data-act="go" data-v="${to}" style="width:auto;min-height:48px;padding:8px 18px">◀ ${label}</button>`;
-const Footer=()=>`<div class="footer">أجنحة الأمل · منصّة تعليمية لطالبات معاهد وبرامج التربية الفكرية · الصف الثاني التأهيلي · ١٤٤٨هـ</div>`;
+const Footer=()=>`<div class="footer">أجنحة الأمل · منصّة تعليمية لطالبات معاهد وبرامج التربية الفكرية · الصف الثاني التأهيلي · ١٤٤٨هـ · مشروع صُنّاع الأثر — إعداد المعلمة نسيم عكام</div>`;
 
 /* ——— رسم صفحة البداية: مشهد الأمل ——— */
 const HeroArt=()=>`<svg viewBox="0 0 900 420" role="img" aria-label="ثلاث طالبات تحت شمس الصباح، إحداهن على كرسي متحرّك، وفراشات تطير حول شجرة تنمو">
@@ -333,26 +679,26 @@ const HeroArt=()=>`<svg viewBox="0 0 900 420" role="img" aria-label="ثلاث ط
 const V={};
 V.landing=()=>`<div class="fade">
  <div class="row between" style="margin-bottom:14px"><div class="brand">${Logo(44)} أجنحة الأمل</div>${A11y()}</div>
- <section class="hero">${HeroArt()}
+ <section class="hero"><button class="btn gold welcome-btn" data-act="welcome" style="min-height:46px;padding:8px 16px">🔊 استمعي للترحيب</button>${HeroArt()}<div class="glow"></div>
   <div class="hero-text"><h1>قدراتٌ مختلفة… وأحلامٌ بلا حدود</h1>
    <p class="sub">الإعاقةُ ليست حاجزًا عن الحياة، بل طريقٌ آخر نمشيه معًا؛ خطوةً بخطوة، وبكلِّ حبّ.</p>
    <span class="tag">🤍 نحنُ معكنّ… نُصدّقُ بكنّ، ونرافقُ خطواتكنّ حتى تكبرَ أحلامُكنّ</span>
    <div style="margin-top:22px;max-width:420px;margin-inline:auto"><button class="btn primary big" data-act="go" data-v="role">الدخول إلى المنصّة ▶</button></div>
   </div></section>
  <div class="grid g3" style="margin-top:18px">
-  <div class="kpi"><div class="n">${LESSONS.length}</div><div class="muted">دروسٌ مصوّرة بالصوت والإشارة</div></div>
+  <div class="kpi"><div class="n">${LESSONS.length+CRAFTS.length}</div><div class="muted">دروسٌ مصوّرة بالصوت والإشارة، منها درسان مهنيّان ثلاثيّا الأبعاد (صُنّاع الأثر)</div></div>
   <div class="kpi"><div class="n">${STUDENTS.length}</div><div class="muted">طالباتٌ حبيبات نرافق تقدّمهنّ</div></div>
-  <div class="kpi"><div class="n">٦</div><div class="muted">أدوارٌ متكاملة: طالبة، معلمة، ولي أمر، مرشدة، رائدة صحية، مديرة</div></div>
+  <div class="kpi"><div class="n">٨</div><div class="muted">أدوارٌ متكاملة: طالبة، معلمة، ولي أمر، مرشدة، رائدة صحية، رائدة نشاط، وكيلة، مديرة</div></div>
  </div>
  <div class="grid g3" style="margin-top:14px">
-  <div class="card"><div style="font-size:2em">👆🔊</div><h3>تعلّمٌ باللمس والصوت</h3><p class="muted mini">كل صورةٍ تنطق عند لمسها، وكل إجابةٍ صحيحةٍ لها نغمةٌ ونجمة.</p></div>
+  <div class="card"><div style="font-size:2em">👆🔊</div><h3>تعلّمٌ باللمس والصوت والصورة</h3><p class="muted mini">كل صورةٍ تنطق عند لمسها، وكل إجابةٍ صحيحةٍ لها نغمةٌ ونجمة. وفي «صُنّاع الأثر» تُركّب الطالبة باقتها وشمعتها بنفسها في مشهدٍ ثلاثيّ الأبعاد، ثم تصنعها بيدها من قالبٍ يناسب قدراتها.</p></div>
   <div class="card"><div style="font-size:2em">⭐📈</div><h3>متابعةٌ مشتركة</h3><p class="muted mini">المعلمة تقيّم بالنجوم، وولي الأمر يرى التقدّم ويكتب ملاحظاته من المنزل.</p></div>
   <div class="card"><div style="font-size:2em">🩺💬</div><h3>دعمٌ صحيٌّ ونفسيّ</h3><p class="muted mini">نشراتُ الرائدة الصحية ونصائح المرشدة تصل للأسرة في مكانٍ واحد.</p></div>
  </div>${Footer()}</div>`;
 
 V.role=()=>`<div class="fade">${Top(A11y(),`<div class="brand">${Logo(40)} أجنحة الأمل</div>`)}
  <h2 class="center" style="font-size:1.8em;margin-bottom:6px">مَن يدخلُ المنصّة؟</h2><p class="center muted" style="margin-bottom:20px">اختاري دورك للمتابعة</p>
- <div class="grid g3">${[["student","var(--rose-soft)"],["teacher","var(--teal-soft)"],["parent","var(--gold-soft)"],["counselor","var(--lav-soft)"],["health","var(--sky-soft)"],["principal","var(--ok-soft)"]].map(([r,c])=>`<button class="rolecard" data-act="role" data-v="${r}"><span class="ic" style="background:${c}">${ROLE_ICON[r]}</span><span class="t">${ROLE_AR[r]}</span></button>`).join("")}</div>
+ <div class="grid g3">${[["student","var(--rose-soft)"],["teacher","var(--teal-soft)"],["parent","var(--gold-soft)"],["counselor","var(--lav-soft)"],["health","var(--sky-soft)"],["activity","var(--rose-soft)"],["deputy","var(--gold-soft)"],["principal","var(--ok-soft)"]].map(([r,c])=>`<button class="rolecard" data-act="role" data-v="${r}"><span class="ic" style="background:${c}">${ROLE_ICON[r]}</span><span class="t">${ROLE_AR[r]}</span></button>`).join("")}</div>
  <div class="center" style="margin-top:18px">${BackBtn("landing","الصفحة الرئيسية")}</div>${Footer()}</div>`;
 
 V.pickuser=()=>{const list=S.role==="teacher"?TEACHERS:PARENTS;return `<div class="fade narrow" style="margin:auto">${Top("",BackBtn("role"))}
@@ -361,7 +707,7 @@ V.pickuser=()=>{const list=S.role==="teacher"?TEACHERS:PARENTS;return `<div clas
 
 V.login=()=>`<div class="fade narrow" style="margin:auto">${Top("",BackBtn("role"))}
  <h2 class="center" style="font-size:1.8em">مَن أنتِ يا حبيبتي؟</h2><p class="center muted" style="margin-bottom:22px">المسي صورتكِ</p>
- <div class="grid g3">${STUDENTS.map(s=>`<button class="tile" data-act="login" data-v="${s.id}" style="min-height:200px">${Avatar(s,96)}<span class="t" style="margin-top:8px">${s.short}</span></button>`).join("")}</div></div>`;
+ <div class="grid g3">${STUDENTS.map(s=>`<button class="tile stu-tile" data-act="login" data-v="${s.id}" data-greet="${s.id}" style="min-height:220px;background:${s.tint}"><span class="hi">أهلًا يا ${s.short} 🌸</span>${Avatar(s,104)}<span class="t" style="margin-top:10px;font-size:1.5em">${s.short}</span><span class="mini muted">المسيني لأرحّب بكِ</span></button>`).join("")}</div></div>`;
 
 V.mood=()=>`<div class="fade narrow" style="margin:auto">${Top(`<button class="iconbtn" data-act="exit" aria-label="خروج">✕</button>`,`<div class="row">${Avatar(S.me,48)}<b style="font-size:1.3em">${S.me.short}</b></div>`)}
  <h2 class="center" style="font-size:1.8em">كيف تشعرين اليوم؟ <button class="speak" data-act="say" data-say="كيف تشعرين اليوم؟">🔊</button></h2><p class="center muted" style="margin-bottom:22px">المسي الوجه الذي يشبهكِ</p>
@@ -369,16 +715,36 @@ V.mood=()=>`<div class="fade narrow" style="margin:auto">${Top(`<button class="i
 
 V.hub=()=>{const me=S.me,stars=DB.stars[me.id]||0,msg=DB.messages[me.id],done=DB.lessons[me.id]||{};return `<div class="fade">${Top(`<span class="badge" style="background:var(--gold-soft);color:var(--gold-ink);font-size:1.1em">⭐ ${stars}</span><button class="iconbtn" data-act="exit" aria-label="خروج">✕</button>`,`<div class="row">${Avatar(me,48)}<b style="font-size:1.3em">${me.short}</b>${S.mood?`<span class="badge">${S.mood.e} ${S.mood.t}</span>`:""}</div>`)}
  ${msg&&msg.text?`<div class="card" style="background:var(--gold-soft);border-color:var(--gold);margin-bottom:16px"><div class="row between"><div><b>💌 رسالة من ${esc(msg.by)}:</b> <span style="font-family:var(--display);font-size:1.2em">${esc(msg.text)}</span></div><button class="speak" data-act="say" data-say="${esc(msg.text)}">🔊 اسمعي</button></div></div>`:""}
+ ${DaySchedule()}${RewardBar(me.id)}
  <h2 style="font-size:1.6em;margin-bottom:4px">دروسي 📚 <button class="speak" data-act="say" data-say="اختاري درسًا يا ${me.short}">🔊</button></h2><p class="muted" style="margin-bottom:14px">المسي الدرس لتبدئي — ${lessonsDone(me.id)} من ${LESSONS.length} دروس مكتملة</p>
  ${Bar(progressOf(me.id))}
  <div class="grid g3" style="margin-top:14px">${LESSONS.map(l=>{const d=done[l.id];return `<button class="tile ${d?"done":""}" data-act="lesson" data-v="${l.id}" style="border-color:${d?"var(--ok)":l.accent};background:${d?"var(--card)":l.soft}">${d?`<span class="tick">✓</span>`:""}<span class="badge" style="position:absolute;top:10px;inset-inline-end:12px">${l.n}</span><span class="ic">${l.icon}</span><span class="t">${l.title}</span>${d?`<span class="mini muted">${d.score}/${d.max} ⭐</span>`:""}</button>`;}).join("")}</div>
+ ${CraftHub(me)}
  <h2 style="font-size:1.4em;margin:26px 0 10px">أنشطتي 🌼</h2>
  <div class="grid g3">
   <button class="tile" data-act="go" data-v="activity" style="background:var(--teal-soft)"><span class="ic">🪥</span><span class="t">روتيني اليومي</span></button>
+  <button class="tile" data-act="go" data-v="skills" style="background:var(--sky-soft)"><span class="ic">🎬</span><span class="t">أتعلّم بالصور</span></button>
   <button class="tile" data-act="go" data-v="comm" style="background:var(--rose-soft)"><span class="ic">🗣️</span><span class="t">أريد أن أقول</span></button>
   <button class="tile" data-act="go" data-v="mystars" style="background:var(--gold-soft)"><span class="ic">🏆</span><span class="t">نجومي</span></button>
+  <button class="tile" data-act="go" data-v="journey" style="background:var(--lav-soft)"><span class="ic">🛤️</span><span class="t">رحلتي</span></button>
  </div></div>`;};
 
+V.journey=()=>{const me=S.me;return `<div class="fade">${Top(`<button class="iconbtn" data-act="go" data-v="hub">✕</button>`,`<b style="font-size:1.3em">رحلتي 🛤️</b>`)}
+ <p class="center muted" style="margin-bottom:10px">كل محطةٍ خطوةٌ في رحلتكِ — المسي المحطة لتسمعيها</p>
+ ${Journey(me.id,{mode:"student"})}
+ <div class="grid g3" style="margin-top:14px">${(DB.activities[me.id]||[]).map(a=>`<div class="badgecard on"><span class="e">${a.badge.split(" ")[0]}</span><b>${esc(a.badge.slice(a.badge.indexOf(" ")+1))}</b><span class="mini muted">${esc(a.t)}</span></div>`).join("")}</div></div>`;};
+
+V.reward=()=>`<div class="fade narrow" style="margin:auto">${Top(`<button class="iconbtn" data-act="go" data-v="hub">✕</button>`,`<div class="row">${Avatar(S.me,48)}<b style="font-size:1.3em">${S.me.short}</b></div>`)}
+ <h2 class="center" style="font-size:1.9em">اختاري مكافأتكِ لليوم 🎁 <button class="speak" data-act="say" data-say="اختاري مكافأتكِ لليوم. اجمعي ${REWARD_TARGET} نجوم لتحصلي عليها">🔊</button></h2><p class="center muted" style="margin-bottom:20px">اجمعي ${REWARD_TARGET} نجوم ⭐ وستكونُ لكِ</p>
+ <div class="grid g3">${REWARDS.map((r,i)=>`<button class="tile" data-act="pickreward" data-v="${i}" style="min-height:160px;background:var(--gold-soft)"><span class="ic" style="font-size:3.6em">${r.e}</span><span class="t">${r.t}</span></button>`).join("")}</div>
+ <div class="center" style="margin-top:14px"><button class="btn ghost" data-act="go" data-v="hub">لاحقًا</button></div></div>`;
+V.skills=()=>`<div class="fade">${Top(`<button class="iconbtn" data-act="go" data-v="hub">✕</button>`,`<b style="font-size:1.3em">أتعلّم بالصور 🎬</b>`)}
+ <p class="center muted" style="margin-bottom:14px">اختاري المهارة، وشاهدي خطواتها صورةً صورة، ثم صوّري نفسكِ وأنتِ تفعلينها</p>
+ <div class="grid g2">${ACTIVITIES.map((a,i)=>`<button class="tile" data-act="skill" data-v="${i}" style="min-height:170px;background:var(--sky-soft)"><span class="ic" style="font-size:3.6em">${a.emoji}</span><span class="t">${a.title}</span><span class="mini muted">${SKILL_STEPS[a.id].length} خطوات</span></button>`).join("")}</div></div>`;
+V.skill=()=>{const a=ACTIVITIES[S.idx];return `<div class="fade narrow" style="margin:auto">${Top(`<button class="iconbtn" data-act="go" data-v="skills">✕</button>`,`<b style="font-size:1.3em">${a.emoji} ${a.title}</b>`)}
+ ${S.sk==="photo"?`<div class="card center"><div style="font-size:4em">📸</div><h2 style="font-size:1.7em">صوّري نفسكِ وأنتِ ${a.title==="غسل الأسنان"?"تغسلين أسنانكِ":a.title==="غسل اليدين"?"تغسلين يديكِ":a.title==="ترتيب السرير"?"ترتّبين سريركِ":"تطوين ملابسكِ"}</h2><p class="muted">ستُحفظ الصورة في ملفكِ لتراها معلمتكِ وأسرتكِ</p>
+  <div class="row" style="justify-content:center;margin-top:14px"><label class="btn primary big" style="cursor:pointer;max-width:340px">📷 افتحي الكاميرا<input type="file" accept="image/*" capture="user" hidden data-skillphoto="${a.id}"></label></div>
+  <div class="row" style="justify-content:center;margin-top:10px"><button class="btn ghost" data-act="go" data-v="skills">تخطّي</button></div></div>`:SkillTrain()}</div>`;};
 /* ——— الدرس ——— */
 const LessonTop=(l)=>Top(`<span class="badge" style="background:var(--gold-soft);color:var(--gold-ink)">⭐ ${DB.stars[S.me.id]||0}</span><button class="iconbtn" data-act="go" data-v="hub" aria-label="رجوع للقائمة">✕</button>`,`<div class="row"><span style="font-size:1.8em">${l.icon}</span><b style="font-size:1.2em">${l.title}</b></div>`);
 const steps=["read","explore","mcq","tf","match"];
@@ -387,7 +753,7 @@ V.lesson=()=>{const l=S.lesson;const si=steps.indexOf(S.step);let body="";
   <div class="row" style="justify-content:center;margin-bottom:14px">${l.facts.map(f=>`<span class="badge" style="font-size:1em">${f.e} ${f.t}</span>`).join("")}</div>
   <p style="font-size:1.25em;max-width:60ch;margin:auto">${l.intro}</p>
   <div style="margin:16px auto 0;max-width:60ch" class="hadith">${l.hadith}</div>
-  <div class="row" style="justify-content:center;margin-top:16px"><button class="btn gold" data-act="say" data-say="${esc(l.intro)}">🔊 اسمعي الدرس</button><button class="btn line" data-act="say" data-say="${esc(l.hadith)}">🔊 اسمعي النص</button></div>
+  <div class="row" style="justify-content:center;margin-top:16px"><button class="btn gold" data-act="say" data-say="${esc(l.intro)}">🔊 اسمعي الدرس</button><button class="btn line" data-act="say" data-say="${esc(l.hadith)}">🔊 اسمعي النص</button><button class="btn line" data-act="reader">📖 اقرئي لي جملةً جملة</button></div>
   <div style="margin-top:22px"><button class="btn primary big" data-act="step" data-v="explore">التالي: الصور والإشارات ▶</button></div></div>`;}
  else if(S.step==="explore"){body=`<h2 class="center" style="font-size:1.6em">المسي الصورة لتسمعي 👆🔊</h2><p class="center muted" style="margin-bottom:16px">تعرّفي على كلماتِ الدرس بالصور والإشارات — ${S.said.size} من ${l.pictos.length}</p>
   <div class="grid g3">${l.pictos.map((p,i)=>`<button class="picto ${S.said.has(i)?"said":""}" data-act="picto" data-v="${i}"><span class="ic">${p.e}</span><span class="lbl">${p.t}</span><span class="spk">${S.said.has(i)?"✓ سمعتِها":"🔊 المسي"}</span></button>`).join("")}</div>
@@ -412,15 +778,281 @@ V.activity=()=>{const a=ACTIVITIES[S.idx];return `<div class="fade narrow" style
  <div class="card center"><div style="font-size:6em;line-height:1">${a.emoji}</div><h2 style="font-size:2em;margin:10px 0">${a.title}</h2><p style="font-size:1.25em">${a.say}</p><button class="speak" data-act="say" data-say="${esc(a.say)}" style="margin:12px 0 20px;font-size:1.1em">🔊 اسمعي</button>
  <p class="muted" style="margin-bottom:10px">هل فعلتِها؟</p><div class="grid g2"><button class="opt" data-act="did" data-v="alone" style="border-color:var(--ok)">💪 وحدي</button><button class="opt" data-act="did" data-v="help" style="border-color:var(--gold)">🤝 بمساعدة</button></div></div></div>`;};
 
-V.comm=()=>`<div class="fade">${Top(`<button class="iconbtn" data-act="go" data-v="hub">✕</button>`,`<b style="font-size:1.3em">أريد أن أقول 🗣️</b>`)}
- <p class="center muted" style="margin-bottom:14px">المسي الصورة وسأقولها بصوتٍ عالٍ، وستصلُ إلى معلمتكِ</p>
- <div class="grid g3">${COMM.map((c,i)=>`<button class="tile" data-act="comm" data-v="${i}" style="min-height:130px"><span class="ic">${c.e}</span><span class="t">${c.t}</span></button>`).join("")}</div>
- ${(DB.said[S.me.id]||[]).filter(x=>x.reply).slice(-2).map(x=>`<div class="card" style="margin-top:14px;background:var(--gold-soft);border-color:var(--gold)"><b>قلتِ: ${x.e} ${esc(x.t)}</b><div>💬 ${esc(x.reply.by)}: <span style="font-family:var(--display);font-size:1.15em">${esc(x.reply.t)}</span> <button class="speak" data-act="say" data-say="${esc(x.reply.t)}">🔊</button></div></div>`).join("")}</div>`;
+V.comm=()=>{const pk=S.cpage||"need",pg=COMM_PAGES[pk];return `<div class="fade">${Top(`<button class="iconbtn" data-act="go" data-v="hub">✕</button>`,`<b style="font-size:1.3em">أريد أن أقول 🗣️</b>`)}
+ <div class="sentence" id="sentence">${pg.starter?`<span class="w">${pg.starter}</span>`:""}${(S.sent||[]).map(x=>`<span class="w">${x.ph?`<img src="${x.ph}" class="ph" style="width:44px;height:44px;border-radius:50%;object-fit:cover">`:x.e} ${x.t}</span>`).join("")||`<span class="muted mini" style="font-size:.6em">المسي صورةً لتكوّني جملتكِ…</span>`}<span style="flex:1"></span><button class="speak" data-act="commsay" style="font-size:.7em">🔊 قولي جملتي</button></div>
+ <div class="commpages">${Object.entries(COMM_PAGES).map(([k,g])=>`<button class="${k===pk?"on":""}" data-act="commpage" data-v="${k}">${g.e} ${g.t}</button>`).join("")}</div>
+ <div class="grid g3">${pg.items.map((c,i)=>{const ph=c.k&&DB.people[c.k];return `<button class="tile" data-act="commpick" data-v="${i}" style="min-height:140px">${ph?`<img class="ph" src="${ph.data}" alt="">`:`<span class="ic">${c.e}</span>`}<span class="t">${c.t}</span></button>`;}).join("")}</div>
+ ${(DB.said[S.me.id]||[]).filter(x=>x.reply).slice(-2).map(x=>`<div class="card" style="margin-top:14px;background:var(--gold-soft);border-color:var(--gold)"><b>قلتِ: ${x.e} ${esc(x.t)}</b><div>💬 ${esc(x.reply.by)}: <span style="font-family:var(--display);font-size:1.15em">${esc(x.reply.t)}</span> <button class="speak" data-act="say" data-say="${esc(x.reply.t)}">🔊</button></div></div>`).join("")}</div>`;};
 
 V.mystars=()=>{const me=S.me,done=DB.lessons[me.id]||{},rt=DB.ratings[me.id]||{};return `<div class="fade">${Top(`<button class="iconbtn" data-act="go" data-v="hub">✕</button>`,`<b style="font-size:1.3em">نجومي 🏆</b>`)}
  <div class="card center" style="background:var(--gold-soft);border-color:var(--gold)"><div style="font-size:4em">⭐</div><div style="font-family:var(--display);font-size:3em;font-weight:800;color:var(--gold-ink)">${DB.stars[me.id]||0}</div><p>نجمة جمعتِها بجهدكِ</p></div>
  <div class="grid g2" style="margin-top:14px">${LESSONS.map(l=>`<div class="card" style="border-color:${done[l.id]?"var(--ok)":"var(--line)"}"><div class="row between"><b>${l.icon} ${l.title}</b>${done[l.id]?`<span class="badge" style="background:var(--ok-soft);color:var(--ok)">✓ ${done[l.id].score}/${done[l.id].max}</span>`:`<span class="badge">لم يبدأ</span>`}</div>${rt[l.id]?`<div style="margin-top:8px">${Stars(rt[l.id].stars)}<div class="mini muted">من معلمتكِ: ${esc(rt[l.id].t)}</div></div>`:""}</div>`).join("")}</div>
+ <h3 style="margin:18px 0 8px">🌸 نجومي في صُنّاع الأثر</h3><div class="grid g2">${CRAFTS.map(c=>{const r=crRec(me.id,c.id);const rt=(DB.ratings[me.id]||{})["cr_"+c.id];return `<div class="card" style="border-color:${r.done?"var(--ok)":"var(--line)"}"><div class="row between"><b>${c.icon} ${c.title}</b><span class="badge" style="${r.done?"background:var(--ok-soft);color:var(--ok)":""}">${r.done?"✓ أنجزتُ قالبي":crPct(r)+"٪"} · ⭐ ${r.stars}</span></div>${rt?`<div style="margin-top:8px">${Stars(rt.stars)}<div class="mini muted">من معلمتكِ: ${esc(rt.t)}</div></div>`:""}${r.photo?`<img src="${r.photo}" class="thumb" style="margin-top:8px" alt="">`:""}</div>`;}).join("")}</div>
  <div class="center" style="margin-top:16px"><button class="btn ghost" data-act="say" data-say="أنتِ بطلة يا ${me.short}، جمعتِ ${DB.stars[me.id]||0} نجمة">🔊 اسمعي تشجيعًا</button></div></div>`;};
+</script>
+<script>
+/* ====================== مشروع صُنّاع الأثر — الدروس المهنية ====================== */
+const LVL={1:"دعم كامل",2:"دعم جزئي",3:"مستقلة"},LVL_E={1:"🤝",2:"🤲",3:"💪"},
+LVL_D={1:"٣ خطوات كبيرة، والمعلمة تساعد في كل خطوة",2:"٥ خطوات مع تلميحات ومساعدة عند الحاجة",3:"جميع الخطوات الثماني تنفّذها بنفسها"};
+
+/* ——— مكتبة الرسم (SVG ثلاثي الأبعاد بتدرجات لونية) ——— */
+const SV=(inner,vb="0 0 100 100")=>`<svg viewBox="${vb}" class="art" aria-hidden="true" focusable="false">${inner}</svg>`;
+const shd=(cx=50,cy=91,rx=28,ry=4.5)=>`<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="rgba(30,44,49,.16)"/>`;
+const flower=(x,y,r,g="gPink",n=6)=>{let p="";for(let i=0;i<n;i++)p+=`<ellipse cy="${-r*.6}" rx="${r*.4}" ry="${r*.62}" fill="url(#${g})" stroke="rgba(0,0,0,.07)" transform="rotate(${i*360/n})"/>`;return `<g transform="translate(${x} ${y})">${p}<circle r="${r*.3}" fill="url(#gYellow)"/><circle r="${r*.13}" fill="#B77A17" opacity=".55"/></g>`;};
+const rose=(x,y,r,g="gPink")=>`<g transform="translate(${x} ${y})"><circle r="${r}" fill="url(#${g})" stroke="rgba(0,0,0,.08)"/><circle r="${r*.7}" cx="${r*.1}" cy="${-r*.08}" fill="url(#${g})" stroke="rgba(0,0,0,.12)"/><circle r="${r*.42}" cx="${-r*.05}" cy="${r*.05}" fill="url(#${g})" stroke="rgba(0,0,0,.14)"/><path d="M${-r*.2} ${-r*.1}q${r*.25} ${-r*.25} ${r*.35} 0" stroke="rgba(0,0,0,.18)" fill="none"/></g>`;
+const leaf=(x,y,rot,len=22,w=9)=>`<g transform="translate(${x} ${y}) rotate(${rot})"><path d="M0 0C${w} ${-len*.35} ${w} ${-len*.75} 0 ${-len}C${-w} ${-len*.75} ${-w} ${-len*.35} 0 0Z" fill="url(#gGreen)"/><path d="M0 -2V${-len+3}" stroke="rgba(255,255,255,.5)"/></g>`;
+const stem=(x1,y1,x2,y2,w=2.6)=>`<path d="M${x1} ${y1}L${x2} ${y2}" stroke="#3E8E5A" stroke-width="${w}" stroke-linecap="round"/>`;
+const heart=(x,y,s=1,c="#E4788F")=>`<path d="M0 -2C-2 -6 -8 -4 -6 1C-4 4 0 6 0 6C0 6 4 4 6 1C8 -4 2 -6 0 -2Z" transform="translate(${x} ${y}) scale(${s})" fill="${c}"/>`;
+const tagArt=(x,y,rot=0,s=1)=>`<g transform="translate(${x} ${y}) rotate(${rot}) scale(${s})"><rect x="-9" y="-6" width="18" height="12" rx="2" fill="#FFF8F0" stroke="#D9C7B0"/><circle cx="-6" cy="0" r="1.3" fill="#D9C7B0"/>${heart(3,0,.55)}</g>`;
+const bow=(x,y,s=1,c="#E4788F",c2="#C9526C")=>`<g transform="translate(${x} ${y}) scale(${s})"><ellipse cx="-9" cy="-1" rx="9" ry="6" fill="${c}" stroke="${c2}"/><ellipse cx="9" cy="-1" rx="9" ry="6" fill="${c}" stroke="${c2}"/><path d="M-3 3l-5 14h5l3-9zM3 3l5 14h-5l-3-9z" fill="${c2}"/><circle r="3.2" fill="${c2}"/></g>`;
+const sparkles=(pts,c="#F0AE33")=>`<g fill="${c}">${pts.map(([x,y,s=1])=>`<path transform="translate(${x} ${y}) scale(${s})" d="M0-4l1.2 2.8L4 0l-2.8 1.2L0 4l-1.2-2.8L-4 0l2.8-1.2z"/>`).join("")}</g>`;
+const darken=(c)=>c;
+
+/* الباقة: مركّبة من أجزاء يمكن إظهارها أو إخفاؤها */
+const bouquet=(o={})=>{const sh=Object.assign({stems:0,f1:0,f2:0,f3:0,leaves:0,wrap:0,ribbon:0,tag:0,baby:0},o.show||ALL_SHOW);const [a,b,d]=(o.slots&&o.slots.length?o.slots:["gPink","gWhite","gYellow"]);const b2=b||a,d2=d||b2;const wc=o.wrap||"gPinkPaper";const rc=o.rc||"#E4788F";let s=shd(50,94,26,4);
+ if(sh.stems)s+=stem(50,56,50,88)+stem(40,58,46,88)+stem(60,58,54,88)+stem(34,60,44,88,2)+stem(66,60,56,88,2);
+ if(sh.wrap)s+=`<path d="M20 48L35 92H65L80 48Q50 60 20 48Z" fill="url(#${wc})" stroke="rgba(0,0,0,.08)"/>`;
+ if(sh.leaves)s+=leaf(31,52,-42)+leaf(69,52,42)+leaf(50,56,0,28,11)+leaf(40,51,-16)+leaf(60,51,16);
+ if(sh.f2)s+=flower(32,42,9,b2)+rose(58,50,6.5,b2);
+ if(sh.f3)s+=flower(68,42,9,d2)+rose(42,50,6.5,d2);
+ if(sh.f1)s+=rose(50,33,12.5,a);
+ if(sh.baby)s+=`<g fill="#fff" stroke="rgba(0,0,0,.08)">${[[26,38],[74,38],[44,30],[56,30],[36,58],[64,58]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="2.2"/>`).join("")}</g>`;
+ if(sh.wrap)s+=`<path d="M27 56L38 92H62L73 56Q50 68 27 56Z" fill="url(#${wc})" opacity=".93" stroke="rgba(0,0,0,.08)"/>`;
+ if(sh.ribbon)s+=bow(50,68,1.1,rc,"rgba(0,0,0,.28)");
+ if(sh.tag)s+=tagArt(65,77,-14);
+ return s;};
+
+/* الشمعة: مركّبة من كوب وفتيل وشمع ولون ورائحة وزينة ولهب */
+const SCENT_C={lav:"#A98BDD",rose:"#E4788F",van:"#E8C89A",lemon:"#F0AE33"};
+const candle=(o={})=>{const sh=Object.assign({cup:0,wick:0,wax:0,color:0,scent:0,decor:0,flame:0},o.show||ALL_SHOW);const wc=sh.color?(o.wax||"gWaxPink"):"gWax";const top=o.level||42;const decor=o.decor||"flowers";let s=shd(50,93,22,4);
+ if(sh.cup)s+=`<path d="M30 30V82a20 8 0 0 0 40 0V30Z" fill="url(#gGlass)" stroke="#B9C7D1" stroke-width="1.2"/>`;
+ if(sh.wax)s+=`<path d="M31 ${top}V82a19 7.5 0 0 0 38 0V${top}Z" fill="url(#${wc})"/><ellipse cx="50" cy="${top}" rx="19" ry="6" fill="url(#${wc})" stroke="rgba(0,0,0,.08)"/>`;
+ if(sh.cup)s+=`<ellipse cx="50" cy="30" rx="20" ry="7" fill="none" stroke="#B9C7D1" stroke-width="1.5"/><path d="M34 36V78" stroke="rgba(255,255,255,.7)" stroke-width="2.5" stroke-linecap="round"/>`;
+ if(sh.wick){if(sh.wax)s+=`<path d="M50 ${top-1}V${top-11}" stroke="#4A3B2A" stroke-width="2" stroke-linecap="round"/>`;else s+=`<rect x="46" y="79" width="8" height="3" rx="1" fill="#9AA5AE"/><path d="M50 79V36" stroke="#4A3B2A" stroke-width="2" stroke-linecap="round"/>`;}
+ if(sh.decor&&sh.wax){if(decor!=="glitter")s+=rose(40,top-2,3.6,"gPeach")+leaf(44,top+1,-30,7,3)+rose(60,top-1,3,"gPurple")+leaf(56,top+1,30,6,2.5);if(decor!=="flowers")s+=sparkles([[36,top+2,.6],[64,top+3,.6],[46,top+4,.45],[56,top+4,.45]]);}
+ if(sh.scent)s+=`<g class="aroma" stroke="${SCENT_C[o.scent]||"#A98BDD"}" fill="none" stroke-width="1.6" stroke-linecap="round" opacity=".75"><path d="M36 22q3-4 0-8"/><path d="M50 18q3-4 0-8"/><path d="M64 22q3-4 0-8"/></g>`;
+ if(sh.flame)s+=`<g class="flame"><ellipse cx="50" cy="${top-17}" rx="8" ry="12" fill="url(#gFlame)"/><path d="M50 ${top-9}c-4-4-4-10 0-15 4 5 4 11 0 15z" fill="#FFB22B"/><path d="M50 ${top-10}c-2-2-2-5 0-8 2 3 2 6 0 8z" fill="#FFF3B0"/></g>`;
+ return s;};
+
+/* الأدوات (رسوم منفردة) */
+const I={};
+I.flowers=shd()+stem(50,50,50,88)+stem(36,54,42,88)+stem(64,54,58,88)+leaf(44,72,-30,14,6)+leaf(56,70,30,14,6)+rose(50,34,13,"gPink")+flower(34,44,10,"gWhite")+flower(66,44,10,"gYellow");
+I.tape=shd(50,88,26)+`<g transform="translate(50 56)"><circle r="28" cy="6" fill="#1E6A45"/><circle r="28" fill="url(#gGreen)"/><circle r="10" style="fill:var(--card)"/><circle r="10" fill="none" stroke="#1E5C3A" stroke-width="2"/><path d="M28 0q8-26-6-40" stroke="#5FBF86" stroke-width="7" fill="none" stroke-linecap="round"/></g>`;
+I.leaves=shd()+leaf(50,88,0,54,18)+leaf(30,84,-32,44,15)+leaf(70,84,32,44,15);
+I.stems=shd()+[30,40,50,60,70].map((x,i)=>stem(x,88,x+(i-2)*3,22,3)+`<circle cx="${x+(i-2)*3}" cy="20" r="4.5" fill="url(#gGreen)"/>`).join("")+`<rect x="24" y="58" width="52" height="10" rx="3" fill="#2E8F5E" opacity=".9"/>`;
+I.scissors=shd()+`<g transform="translate(50 46)"><g transform="rotate(-18)"><path d="M0 0L-5 -40 5 -40z" fill="url(#gMetal)" stroke="#8F9BA5"/><ellipse cy="22" rx="8" ry="13" fill="none" stroke="#D6455D" stroke-width="6"/></g><g transform="rotate(18)"><path d="M0 0L-5 -40 5 -40z" fill="url(#gMetal)" stroke="#8F9BA5"/><ellipse cy="22" rx="8" ry="13" fill="none" stroke="#D6455D" stroke-width="6"/></g><circle r="3" fill="#F0AE33"/></g>`;
+I.wire=shd()+[0,1,2,3,4,5].map(i=>`<path d="M${22+i*4} 86Q${30+i*5} 40 ${60+i*3} 16" stroke="#9AA5AE" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M${22+i*4} 86Q${30+i*5} 40 ${60+i*3} 16" stroke="rgba(255,255,255,.6)" stroke-width=".8" fill="none"/>`).join("")+`<rect x="34" y="56" width="26" height="8" rx="4" fill="#7E8A94" transform="rotate(-55 47 60)"/>`;
+I.wrap=shd()+`<g transform="rotate(-8 50 50)"><rect x="18" y="26" width="18" height="64" rx="9" fill="url(#gPinkPaper)"/><ellipse cx="27" cy="26" rx="9" ry="4" fill="#F9CFDD"/><rect x="40" y="18" width="18" height="72" rx="9" fill="url(#gBluePaper)"/><ellipse cx="49" cy="18" rx="9" ry="4" fill="#C6DCF5"/><rect x="62" y="30" width="18" height="60" rx="9" fill="url(#gWhite)"/><ellipse cx="71" cy="30" rx="9" ry="4" fill="#F1ECE4"/></g>`;
+I.ribbon=shd()+bow(50,48,2.2)+`<path d="M22 84q28-14 56 0" stroke="#F0AE33" stroke-width="5" fill="none" stroke-linecap="round"/>`;
+I.base=shd()+`<path d="M22 22h56l-8 68H30z" fill="url(#gKraft)" stroke="rgba(0,0,0,.1)"/><path d="M22 22h56l-3 8H25z" fill="#F3E3CC"/><path d="M34 30l6 54M66 30l-6 54" stroke="rgba(0,0,0,.08)"/>`;
+I.bows=shd()+`<rect x="30" y="52" width="40" height="30" rx="4" style="fill:var(--card)" stroke="#D9C7B0"/><rect x="30" y="58" width="40" height="18" fill="#E4788F"/><path d="M70 60q14 6 8 20" stroke="#E4788F" stroke-width="5" fill="none" stroke-linecap="round"/>`+bow(34,32,1,"#F0AE33","#C98A12")+bow(66,30,1,"#6FAAE3","#3F7FC0");
+I.tags=shd()+`<g transform="rotate(-10 50 50)"><rect x="22" y="30" width="34" height="46" rx="4" fill="#FFF8F0" stroke="#D9C7B0" stroke-width="1.5"/><circle cx="39" cy="38" r="2.5" fill="#D9C7B0"/>${heart(39,50,1)}<path d="M28 62h22M28 68h16" stroke="#D9C7B0" stroke-width="2" stroke-linecap="round"/></g><circle cx="70" cy="66" r="14" fill="url(#gYellow)" stroke="#C98A12"/><path d="M64 66l4 4 8-9" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>`;
+I.pitcher=`<path d="M28 30h40l-4 56H32z" fill="url(#gMetal)" stroke="#8F9BA5"/><path d="M28 30l-10 6 12 6" fill="url(#gMetal)" stroke="#8F9BA5"/><path d="M68 36q16 4 14 24-2 14-14 16" stroke="#8F9BA5" stroke-width="5" fill="none" stroke-linecap="round"/><ellipse cx="48" cy="30" rx="20" ry="4" fill="#DDE3E8" stroke="#8F9BA5"/><ellipse cx="48" cy="31" rx="16" ry="3" fill="url(#gWax)"/><path d="M36 38v42" stroke="rgba(255,255,255,.7)" stroke-width="3" stroke-linecap="round"/>`;
+I.cups=shd()+`<path d="M18 34v46a14 6 0 0 0 28 0V34z" fill="url(#gGlass)" stroke="#B9C7D1"/><ellipse cx="32" cy="34" rx="14" ry="5" fill="none" stroke="#B9C7D1" stroke-width="1.5"/><path d="M52 26v54a14 6 0 0 0 28 0V26z" fill="url(#gGlass)" stroke="#B9C7D1"/><ellipse cx="66" cy="26" rx="14" ry="5" fill="none" stroke="#B9C7D1" stroke-width="1.5"/><path d="M22 40v34M56 32v42" stroke="rgba(255,255,255,.8)" stroke-width="2.5" stroke-linecap="round"/>`;
+I.wicks=shd()+`<g fill="none" stroke="#E8DCC8" stroke-width="4"><circle cx="36" cy="40" r="20"/><circle cx="36" cy="40" r="13"/><circle cx="36" cy="40" r="6"/></g>`+[62,74,86].map(x=>`<path d="M${x} 86V40" stroke="#4A3B2A" stroke-width="2.5" stroke-linecap="round"/><rect x="${x-5}" y="84" width="10" height="4" rx="1" fill="url(#gMetal)" stroke="#8F9BA5"/>`).join("");
+I.wick1=shd(50,90,14)+`<rect x="40" y="82" width="20" height="6" rx="1.5" fill="url(#gMetal)" stroke="#8F9BA5"/><path d="M50 82V18" stroke="#4A3B2A" stroke-width="4" stroke-linecap="round"/><path d="M50 82V18" stroke="rgba(255,255,255,.35)" stroke-width="1.2" stroke-linecap="round"/>`;
+I.molds=shd()+`<rect x="12" y="34" width="76" height="46" rx="10" fill="#F4A9BD" stroke="#D97F98"/>`+[[31,50],[57,50],[44,68],[70,68]].map(([x,y])=>`<g transform="translate(${x} ${y})">${[0,60,120,180,240,300].map(a=>`<circle cx="${(Math.cos(a*Math.PI/180)*6).toFixed(2)}" cy="${(Math.sin(a*Math.PI/180)*6).toFixed(2)}" r="4.5" fill="#E68CA4"/>`).join("")}<circle r="4" fill="#D97F98"/></g>`).join("");
+I.soy=(()=>{let f="";for(let i=0;i<40;i++){const a=i*137.5,rr=Math.sqrt(i/40)*26;const x=50+Math.cos(a*Math.PI/180)*rr,y=66-Math.sin(a*Math.PI/180)*rr*.6-(26-rr)*.5;f+=`<rect x="${(x-4).toFixed(1)}" y="${(y-2.5).toFixed(1)}" width="8" height="5" rx="2" fill="url(#gWhite)" stroke="rgba(0,0,0,.08)" transform="rotate(${a%60-30} ${x.toFixed(1)} ${y.toFixed(1)})"/>`;}return shd(50,90,32)+f;})();
+I.decor=shd()+rose(34,42,13,"gPeach")+rose(64,40,10,"gPurple")+leaf(48,72,-30,20,7)+leaf(52,72,30,20,7)+rose(50,62,8,"gWhite")+sparkles([[20,70],[80,66],[26,30],[76,24],[50,20],[14,50]]);
+I.spoon=shd()+`<g transform="rotate(35 50 50)"><rect x="46" y="30" width="8" height="58" rx="4" fill="url(#gMetal)" stroke="#8F9BA5"/><ellipse cx="50" cy="24" rx="14" ry="18" fill="url(#gMetal)" stroke="#8F9BA5"/><ellipse cx="47" cy="22" rx="7" ry="11" fill="rgba(255,255,255,.55)"/></g>`;
+I.thermo=shd()+`<rect x="42" y="12" width="16" height="60" rx="8" style="fill:var(--card)" stroke="#8F9BA5"/><circle cx="50" cy="80" r="11" fill="#D6455D"/><rect x="47" y="34" width="6" height="40" fill="#D6455D"/>${[22,30,38,46,54,62].map(y=>`<path d="M58 ${y}h6" stroke="#8F9BA5" stroke-width="1.5"/>`).join("")}`;
+I.scale=shd(50,92,34)+`<rect x="14" y="56" width="72" height="30" rx="8" fill="url(#gMetal)" stroke="#8F9BA5"/><rect x="26" y="62" width="30" height="12" rx="3" fill="#1E2C31"/><text x="41" y="71.5" font-size="8" fill="#5FE0C5" text-anchor="middle" font-family="monospace">150g</text><circle cx="70" cy="68" r="4" fill="#0F6E66"/><ellipse cx="50" cy="52" rx="34" ry="8" fill="#DDE3E8" stroke="#8F9BA5"/><ellipse cx="50" cy="50" rx="34" ry="8" fill="url(#gMetal)" stroke="#8F9BA5"/>`;
+I.oils=shd()+[[28,0],[50,1],[72,2]].map(([x,i])=>`<rect x="${x-10}" y="${44-i*4}" width="20" height="${44+i*4}" rx="5" fill="url(#gAmber)" stroke="rgba(0,0,0,.15)"/><rect x="${x-5}" y="${30-i*4}" width="10" height="16" rx="2" fill="#1E2C31"/><rect x="${x-3}" y="${22-i*4}" width="6" height="9" rx="3" fill="#1E2C31"/><rect x="${x-7}" y="${58-i*4}" width="14" height="14" rx="2" fill="#FFF8F0" opacity=".9"/><path d="M${x-7} ${50-i*4}v28" stroke="rgba(255,255,255,.5)" stroke-width="2"/>`).join("");
+I.flame=shd(50,88,10,3)+`<g class="flame"><ellipse cx="50" cy="52" rx="20" ry="30" fill="url(#gFlame)"/><path d="M50 78c-12-12-12-30 0-46 12 16 12 34 0 46z" fill="#FFB22B"/><path d="M50 76c-6-6-6-16 0-26 6 10 6 20 0 26z" fill="#FFF3B0"/></g>`;
+I.drop=(g)=>shd(50,90,16)+`<path d="M50 14c-16 20-18 30-18 38a18 18 0 0 0 36 0c0-8-2-18-18-38z" fill="url(#${g})" stroke="rgba(0,0,0,.1)"/><ellipse cx="42" cy="50" rx="4" ry="9" fill="rgba(255,255,255,.55)"/>`;
+I.heat=`<g stroke="#F0AE33" stroke-width="3" fill="none" stroke-linecap="round"><path d="M30 94q5-6 10 0t10 0t10 0t10 0"/></g><g stroke="#D9822B" stroke-width="2" fill="none" stroke-linecap="round" opacity=".7"><path d="M40 18q-4-5 0-10M50 16q-4-5 0-10M60 18q-4-5 0-10"/></g>`;
+I.hourglass=`<g transform="translate(78 30)"><path d="M-8-12h16l-6 12 6 12h-16l6-12z" fill="#F0AE33" opacity=".85"/><rect x="-10" y="-14" width="20" height="3" rx="1" fill="#9A6512"/><rect x="-10" y="11" width="20" height="3" rx="1" fill="#9A6512"/></g>`;
+const ART=k=>SV(I[k]);
+
+/* ——— بيانات الدرسَين ——— */
+const CRAFTS=[
+ {id:"flowers",n:1,title:"تنسيق الزهور الصناعية",obj:"باقتكِ",icon:"💐",accent:"var(--rose)",soft:"var(--rose-soft)",
+  slogan:"وردةٌ من يدي… تبقى أثرًا",
+  intro:"في هذا الدرس نتعلّم كيف نجمعُ الزهورَ الصناعيةَ معًا لنصنعَ باقةً جميلة، ثم نغلّفُها ونربطُها بشريط، لنعرضَها في متجرِ صُنّاعِ الأثر.",
+  why:[{e:"🛍️",t:"نبيعها في متجر صُنّاع الأثر"},{e:"🎁",t:"نُهديها لمن نحب"},{e:"💪",t:"أصنعها بيدي"}],
+  safety:"المقصُّ حادّ: أستعملُه بهدوء وأعيدُه إلى مكانِه بعد الانتهاء.",
+  tools:[
+   {k:"flowers",t:"زهور صناعية",e:"🌸",s:"زهورٌ صناعيةٌ بألوانٍ مختلفة. نختارُ منها ما نحب."},
+   {k:"tape",t:"شريط فلورال أخضر",e:"🟢",s:"شريطٌ فلورالٌ أخضر. نلفُّ به السيقانَ لتثبتَ معًا."},
+   {k:"leaves",t:"أوراق خضراء",e:"🍃",s:"أوراقٌ خضراءُ صناعية. تجعلُ الباقةَ أجمل."},
+   {k:"stems",t:"سيقان زهور جاهزة",e:"🌿",s:"سيقانٌ جاهزة. نثبّتُ عليها الزهور."},
+   {k:"scissors",t:"مقص",e:"✂️",s:"مقصٌّ للأعمالِ اليدوية. نقصُّ به الشريطَ والورق. أستعملُه بهدوء."},
+   {k:"wire",t:"أسلاك تثبيت",e:"🧷",s:"أسلاكُ تثبيتٍ معدنية. تمسكُ الزهورَ معًا."},
+   {k:"wrap",t:"أوراق تغليف",e:"🎀",s:"أوراقُ تغليفٍ بألوانٍ مختلفة. نلفُّ بها الباقة."},
+   {k:"ribbon",t:"أربطة وزينة",e:"🎗️",s:"أربطةٌ وزينة. نربطُ بها الباقةَ من الوسط."},
+   {k:"base",t:"كرتون وقواعد",e:"📦",s:"كرتونٌ وقواعدُ للباقات. تحملُ الباقةَ من الأسفل."},
+   {k:"bows",t:"شرائط وفيونكات",e:"🎀",s:"شرائطُ وفيونكات. نضعُها فوقَ التغليف."},
+   {k:"tags",t:"بطاقات إهداء",e:"💌",s:"بطاقاتُ إهداءٍ وملصقات. نكتبُ فيها كلمةً جميلة."}],
+  steps:[
+   {t:"اختيار الأزهار والألوان المناسبة",s:"أختارُ الزهورَ والألوانَ التي أحبُّها.",art:()=>SV(shd()+stem(28,60,30,88)+stem(50,56,50,88)+stem(72,60,70,88)+flower(28,50,12,"gPink")+flower(72,50,12,"gYellow")+rose(50,44,13,"gWhite")+`<circle cx="50" cy="44" r="19" fill="none" stroke="#0F6E66" stroke-width="2.5" stroke-dasharray="5 4"/>`)},
+   {t:"تنظيف الأزهار وتنسيقها",s:"أنظّفُ الزهورَ بلطف، وأرتّبُها بجانبِ بعضِها.",art:()=>SV(shd()+[[24,"gPink"],[42,"gWhite"],[60,"gYellow"],[78,"gPurple"]].map(([x,g])=>stem(x,58,x,88)+leaf(x-3,80,-25,12,5)+flower(x,48,9,g)).join("")+sparkles([[14,30,.9],[86,26,.9],[50,20,.8]]))},
+   {t:"تجهيز السيقان وتثبيت الزهور",s:"أثبّتُ الزهورَ على السيقان، وألفُّها بالشريطِ الأخضر.",art:()=>SV(shd()+stem(40,40,44,88,3)+stem(50,38,50,88,3)+stem(60,40,56,88,3)+`<rect x="38" y="58" width="24" height="12" rx="3" fill="#2E8F5E"/>`+rose(40,34,8,"gPink")+rose(50,30,9,"gWhite")+rose(60,34,8,"gYellow")+`<g transform="translate(76 66) scale(.42)">${I.tape.replace(shd(50,88,26),"")}</g>`)},
+   {t:"تجهيز الزهور بتنسيق جمالي",s:"أجمعُ الزهورَ معًا بشكلٍ جميل: الكبيرةُ في الوسط.",art:()=>SV(bouquet({show:SHOW("wrap","ribbon","tag","leaves","baby")}))},
+   {t:"إضافة الأوراق الخضراء والزينة",s:"أضيفُ الأوراقَ الخضراءَ حولَ الزهور، وزهورًا صغيرةً للزينة.",art:()=>SV(bouquet({show:SHOW("wrap","ribbon","tag")}))},
+   {t:"تغليف الباقة بشكل مناسب",s:"ألفُّ الباقةَ بورقِ التغليفِ بلونٍ يناسبُ الزهور.",art:()=>SV(bouquet({show:SHOW("ribbon","tag","baby")}))},
+   {t:"إضافة بطاقة إهداء",s:"أربطُ الشريط، وأضعُ بطاقةَ إهداءٍ فيها كلمةٌ جميلة.",art:()=>SV(bouquet({show:SHOW("baby")}))},
+   {t:"المنتج النهائي",s:"هذه باقتي الجميلة! جاهزةٌ للمعرضِ أو للإهداء.",art:()=>SV(bouquet({show:SHOW()})+sparkles([[14,24],[86,20],[20,70,.8],[84,64,.8]]))}],
+  parts:[{k:"f1",t:"الزهرة الوردية الكبيرة",min:1},{k:"f2",t:"الزهور البيضاء",min:2},{k:"f3",t:"الزهور الصفراء",min:3},{k:"leaves",t:"الأوراق الخضراء",min:1},{k:"wrap",t:"ورق التغليف",min:2},{k:"ribbon",t:"الشريط",min:1},{k:"tag",t:"بطاقة الإهداء",min:3}],
+  def:{slots:["gPink","gWhite","gYellow"],wrap:"gPinkPaper",rc:"#E4788F"},
+  design:[
+   {k:"slots",t:"اختاري ٣ ألوانٍ لزهوركِ",multi:3,opts:[{v:"gPink",t:"وردي",c:"#E4788F"},{v:"gWhite",t:"أبيض",c:"#F1ECE4"},{v:"gYellow",t:"أصفر",c:"#F0AE33"},{v:"gPurple",t:"بنفسجي",c:"#A98BDD"},{v:"gRed",t:"أحمر",c:"#D6455D"},{v:"gPeach",t:"خوخي",c:"#F2A07B"}]},
+   {k:"wrap",t:"اختاري لونَ ورقِ التغليف",opts:[{v:"gPinkPaper",t:"وردي",c:"#F5B7C8"},{v:"gBluePaper",t:"أزرق",c:"#A9C9F0"},{v:"gWhite",t:"أبيض",c:"#F1ECE4"},{v:"gKraft",t:"بُنّي",c:"#C89B6A"}]},
+   {k:"rc",t:"اختاري لونَ الشريط",opts:[{v:"#E4788F",t:"وردي",c:"#E4788F"},{v:"#F0AE33",t:"ذهبي",c:"#F0AE33"},{v:"#6FAAE3",t:"أزرق",c:"#6FAAE3"},{v:"#A98BDD",t:"بنفسجي",c:"#A98BDD"}]}],
+  tpl:[
+   {t:"أختارُ الزهورَ بألواني",min:1,i:0},{t:"أنظّفُ الزهورَ وأرتّبُها",min:3,i:1},{t:"أثبّتُ السيقانَ بالشريطِ الأخضر",min:2,i:2},{t:"أجمعُ الزهورَ معًا",min:1,i:3},{t:"أضيفُ الأوراقَ الخضراء",min:2,i:4},{t:"أغلّفُ الباقةَ بالورق",min:3,i:5},{t:"أربطُ الشريط",min:1,i:6},{t:"أضعُ بطاقةَ الإهداء",min:3,i:7}],
+  scene:(show,d)=>SV(bouquet({show,slots:d.slots,wrap:d.wrap,rc:d.rc})),
+  partArt:(k,d)=>{const sl=d.slots&&d.slots.length?d.slots:["gPink","gWhite","gYellow"];switch(k){case "f1":return SV(shd(50,90,20)+stem(50,60,50,86,3)+rose(50,40,24,sl[0]));case "f2":return SV(shd(50,90,24)+stem(34,64,36,86)+stem(66,64,64,86)+flower(34,44,15,sl[1]||sl[0])+rose(66,50,12,sl[1]||sl[0]));case "f3":return SV(shd(50,90,24)+stem(34,64,36,86)+stem(66,64,64,86)+flower(34,44,15,sl[2]||sl[0])+rose(66,50,12,sl[2]||sl[0]));case "leaves":return ART("leaves");case "wrap":return SV(shd()+`<g transform="rotate(-8 50 50)"><rect x="34" y="14" width="32" height="76" rx="14" fill="url(#${d.wrap||"gPinkPaper"})" stroke="rgba(0,0,0,.08)"/><ellipse cx="50" cy="14" rx="16" ry="6" fill="rgba(255,255,255,.6)" stroke="rgba(0,0,0,.08)"/></g>`);case "ribbon":return SV(shd()+bow(50,50,2.4,d.rc||"#E4788F","rgba(0,0,0,.28)"));case "tag":return SV(shd()+tagArt(50,50,-10,3.4));}return "";}},
+ {id:"candles",n:2,title:"صناعة الشموع",obj:"شمعتكِ",icon:"🕯️",accent:"var(--teal)",soft:"var(--teal-soft)",
+  slogan:"شمعةٌ مضيئة… من صُنعِ يدي",
+  intro:"في هذا الدرس نتعلّم كيف نصنعُ شمعةً معطّرةً وجميلة: نُذيبُ الشمع، ونضيفُ اللونَ والرائحة، ثم نصبُّه في كوبٍ ونزيّنُه.",
+  why:[{e:"🛍️",t:"نبيعها في متجر صُنّاع الأثر"},{e:"🏠",t:"تُضيء بيتنا برائحةٍ جميلة"},{e:"💪",t:"أصنعها بيدي"}],
+  safety:"الشمعُ المذابُ حارٌّ جدًا 🔥: المعلمةُ تقومُ بالإذابةِ والصبّ، وأنا أراقبُ من مكانٍ آمنٍ وأساعدُ في الباقي.",
+  tools:[
+   {k:"pitcher",t:"إبريق صبّ",e:"🫖",s:"إبريقُ صبٍّ مقاومٌ للحرارة. نذيبُ فيه الشمع. حار! المعلمةُ تمسكُه."},
+   {k:"cups",t:"أكواب مقاومة للحرارة",e:"🥛",s:"أكوابٌ وعلبٌ مقاومةٌ للحرارة. نصبُّ فيها الشمع."},
+   {k:"wicks",t:"فتائل قطنية",e:"🧵",s:"فتائلُ قطنيةٌ وقواعدُ تثبيت. الفتيلُ هو الخيطُ الذي يشتعل."},
+   {k:"molds",t:"قوالب سيليكون",e:"🌸",s:"قوالبُ سيليكون بأشكالٍ مختلفة. تعطي الشمعةَ شكلَها."},
+   {k:"soy",t:"شمع صويا",e:"⬜",s:"شمعُ صويا. حبيباتٌ بيضاءُ تذوبُ بالحرارة."},
+   {k:"decor",t:"زينة للتزيين",e:"✨",s:"زينةٌ للتزيين: زهورٌ مجففةٌ وجليتر."},
+   {k:"spoon",t:"ملعقة تقليب",e:"🥄",s:"ملعقةُ تقليب. نحرّكُ بها الشمع."},
+   {k:"thermo",t:"ميزان حرارة",e:"🌡️",s:"ميزانُ حرارة. يخبرُنا كم الشمعُ حار."},
+   {k:"scale",t:"ميزان رقمي",e:"⚖️",s:"ميزانٌ رقمي. نزنُ به كميةَ الشمع."},
+   {k:"oils",t:"زيوت عطرية",e:"🌿",s:"زيوتٌ عطرية. تعطي الشمعةَ رائحةً جميلة."}],
+  steps:[
+   {t:"وزن كمية الشمع بالميزان",s:"أضعُ حبيباتَ الشمعِ على الميزانِ وأزنُها.",art:()=>SV(I.scale+`<g transform="translate(50 44) scale(.55) translate(-50 -66)">${I.soy.replace(shd(50,90,32),"")}</g>`)},
+   {t:"إذابة الشمع في الإبريق",s:"المعلمةُ تُذيبُ الشمعَ في الإبريقِ على حرارةٍ هادئة. أنا أراقبُ من بعيد.",warn:"حار جدًا 🔥 — هذه خطوةُ المعلمة.",art:()=>SV(shd()+I.pitcher+I.heat)},
+   {t:"إضافة اللون والرائحة",s:"نضيفُ قطراتَ اللونِ والزيتِ العطري، ونحرّكُ بالملعقة.",art:()=>SV(shd()+I.pitcher+`<g transform="translate(70 4) scale(.45)">${I.oils.replace(shd(),"")}</g>`+`<path d="M62 30q-2 6 0 8t2-8" fill="#A98BDD"/><path d="M56 26q-2 6 0 8t2-8" fill="#E4788F"/>`)},
+   {t:"تثبيت الفتيل في الكوب",s:"أُلصقُ قاعدةَ الفتيلِ في وسطِ الكوب، وأثبّتُ طرفَه بعودٍ فوقَ الكوب.",art:()=>SV(candle({show:{cup:1,wick:1,wax:0,decor:0}})+`<rect x="22" y="27" width="56" height="4" rx="2" fill="url(#gWood)"/>`)},
+   {t:"صبّ الشمع في الكوب",s:"المعلمةُ تصبُّ الشمعَ المذابَ في الكوبِ بهدوء.",warn:"حار جدًا 🔥 — المعلمةُ تصبّ، وأنا أراقب.",art:()=>SV(candle({show:{cup:1,wick:1,wax:1,decor:0,color:0},level:62})+`<g transform="translate(-4 -14) rotate(-35 50 50) scale(.62)">${I.pitcher}</g><path d="M38 34q4 8 8 26" stroke="url(#gWax)" stroke-width="5" fill="none" stroke-linecap="round"/>`)},
+   {t:"ترك الشمعة لتبرد وتتصلّب",s:"أنتظرُ بصبرٍ حتى تبردَ الشمعةُ وتتصلّب.",art:()=>SV(candle({show:SHOW("decor","flame","scent")})+I.hourglass)},
+   {t:"إخراج الشمعة من القالب",s:"أُخرجُ الشمعةَ من القالبِ بلطفٍ بعد أن تتصلّب.",art:()=>SV(shd(50,92,34)+`<rect x="14" y="60" width="72" height="26" rx="8" fill="#F4A9BD" stroke="#D97F98"/><g transform="translate(50 62)">${[0,60,120,180,240,300].map(a=>`<circle cx="${(Math.cos(a*Math.PI/180)*9).toFixed(2)}" cy="${(Math.sin(a*Math.PI/180)*9*.5).toFixed(2)}" r="6" fill="#E68CA4"/>`).join("")}</g>`+`<g transform="translate(50 36)">${[0,60,120,180,240,300].map(a=>`<circle cx="${(Math.cos(a*Math.PI/180)*11).toFixed(2)}" cy="${(Math.sin(a*Math.PI/180)*11*.55).toFixed(2)}" r="7" fill="url(#gWaxLav)" stroke="rgba(0,0,0,.08)"/>`).join("")}<circle r="7" fill="url(#gWaxLav)"/><path d="M0 2V-10" stroke="#4A3B2A" stroke-width="2" stroke-linecap="round"/></g><path d="M50 50v6" stroke="#0F6E66" stroke-width="2.5" stroke-dasharray="2 2"/>`)},
+   {t:"تزيين الشمعة",s:"أزيّنُ شمعتي بالزهورِ المجففةِ والجليتر. هذه شمعتي الجميلة!",art:()=>SV(candle({show:SHOW(),decor:"both",scent:"lav"})+sparkles([[16,30],[84,26],[22,72,.8],[80,70,.8]]))}],
+  parts:[{k:"cup",t:"الكوب",min:2,pre:1},{k:"wick",t:"الفتيل",min:1},{k:"wax",t:"الشمع",min:1},{k:"color",t:"اللون",min:2},{k:"scent",t:"الرائحة",min:3},{k:"decor",t:"الزينة",min:1},{k:"flame",t:"اللهب (المعلمة تُشعله)",min:3}],
+  def:{wax:"gWaxPink",scent:"lav",decor:"flowers"},
+  design:[
+   {k:"wax",t:"اختاري لونَ شمعتكِ",opts:[{v:"gWax",t:"أبيض",c:"#FFF7EA"},{v:"gWaxPink",t:"وردي",c:"#F2B5C7"},{v:"gWaxLav",t:"بنفسجي",c:"#C7B3EA"},{v:"gWaxYellow",t:"أصفر",c:"#F5D889"},{v:"gWaxMint",t:"أخضر فاتح",c:"#A9E3C4"}]},
+   {k:"scent",t:"اختاري رائحتكِ المفضّلة",opts:[{v:"lav",t:"لافندر",e:"🌿"},{v:"rose",t:"ورد",e:"🌹"},{v:"van",t:"فانيلا",e:"🍦"},{v:"lemon",t:"ليمون",e:"🍋"}]},
+   {k:"decor",t:"اختاري الزينة",opts:[{v:"flowers",t:"زهور مجففة",e:"🌸"},{v:"glitter",t:"جليتر",e:"✨"},{v:"both",t:"زهور وجليتر",e:"🌸✨"}]}],
+  tpl:[
+   {t:"أزنُ الشمعَ بالميزان",min:3,i:0},{t:"المعلمةُ تُذيبُ الشمع 🔥 وأنا أراقب",min:2,i:1},{t:"أختارُ اللونَ والرائحة",min:2,i:2},{t:"أثبّتُ الفتيلَ في الكوب",min:1,i:3},{t:"أساعدُ المعلمةَ في صبِّ الشمع",min:1,i:4},{t:"أنتظرُ حتى تبردَ الشمعة",min:3,i:5},{t:"أُخرجُ الشمعةَ من القالب",min:3,i:6},{t:"أزيّنُ شمعتي",min:1,i:7}],
+  scene:(show,d)=>SV(candle({show,wax:d.wax,scent:d.scent,decor:d.decor})),
+  partArt:(k,d)=>{switch(k){case "cup":return SV(candle({show:{cup:1,wick:0,wax:0,decor:0,color:0}}));case "wick":return SV(I.wick1);case "wax":return SV(I.soy);case "color":return SV(I.drop(d.wax||"gWaxPink"));case "scent":return SV(I.oils);case "decor":return SV(I.decor);case "flame":return SV(I.flame);}return "";}},
+];
+const craftOf=id=>CRAFTS.find(c=>c.id===id);
+const ALL_SHOW={stems:1,f1:1,f2:1,f3:1,leaves:1,wrap:1,ribbon:1,tag:1,baby:1,cup:1,wick:1,wax:1,color:1,scent:1,decor:1,flame:1};
+const SHOW=(...off)=>{const o=Object.assign({},ALL_SHOW);off.forEach(k=>o[k]=0);return o;};
+const crRec=(sid,cid)=>{DB.craft=DB.craft||{};DB.craft[sid]=DB.craft[sid]||{};const c=craftOf(cid);if(!DB.craft[sid][cid])DB.craft[sid][cid]={level:2,tools:false,steps:false,build:false,design:JSON.parse(JSON.stringify(c.def)),checked:[],done:false,doneAt:"",photo:null,stars:0};const r=DB.craft[sid][cid];r.design=Object.assign(JSON.parse(JSON.stringify(c.def)),r.design||{});return r;};
+const activeParts=(c,lvl)=>c.parts.filter(p=>p.min<=lvl);
+const preShow=(c,lvl)=>{const o={stems:1};c.parts.forEach(p=>{if(p.pre&&p.min>lvl)o[p.k]=1;});return o;};
+const tplSteps=(c,lvl)=>c.tpl.filter(t=>t.min<=lvl);
+const crPct=r=>[r.tools,r.steps,r.build,r.done].filter(Boolean).length*25;
+const designText=(c,d)=>c.design.map(q=>{const vals=Array.isArray(d[q.k])?d[q.k]:[d[q.k]];return q.t.replace(/^اختاري\s*/,"")+": "+vals.map(v=>(q.opts.find(o=>o.v===v)||{}).t||"").filter(Boolean).join("، ");}).join(" · ");
+const Chip=(t,on)=>`<span class="badge" style="${on?"background:var(--ok-soft);color:var(--ok)":""}">${on?"✓":"○"} ${t}</span>`;
+const burst=el=>{try{if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;const r=el.getBoundingClientRect();const box=document.createElement("div");box.className="burst";box.style.left=(r.left+r.width/2)+"px";box.style.top=(r.top+r.height/2)+"px";const em=["✨","⭐","💖","🌸"];for(let i=0;i<8;i++){const s=document.createElement("i");s.textContent=em[i%4];s.style.setProperty("--dx",(Math.cos(i/8*6.283)*70)+"px");s.style.setProperty("--dy",(Math.sin(i/8*6.283)*70)+"px");box.appendChild(s);}document.body.appendChild(box);setTimeout(()=>box.remove(),900);}catch(e){}};
+
+/* ——— قطع واجهة خاصة بالمشروع ——— */
+const Hero3D=(inner,cls="",act="")=>`<div class="stage"><div class="float"><div class="sway"><div class="tilt hero3d ${cls}" ${act}>${inner}</div></div></div></div>`;
+const CraftHub=(me)=>`<h2 style="font-size:1.5em;margin:28px 0 2px">مشروع صُنّاع الأثر 🌸🕯️ <button class="speak" data-act="cr_say" data-say="مشروع صناع الأثر: شموع مضيئة، وورود تبقى أثرا. اختاري درسا يا ${me.short}">🔊</button></h2>
+ <p class="muted" style="margin-bottom:14px">شموعٌ مضيئة.. ووردٌ يبقى أثرًا — دروسٌ مهنيةٌ ثلاثيةُ الأبعاد، المسي وركّبي واصنعي بيدكِ</p>
+ <div class="grid g2">${CRAFTS.map(c=>{const r=crRec(me.id,c.id);const pct=crPct(r);return `<button class="tile craft3d ${pct===100?"done":""}" data-act="cr_open" data-v="${c.id}" style="border-color:${pct===100?"var(--ok)":c.accent};background:${c.soft}">${pct===100?`<span class="tick">✓</span>`:""}<span class="badge" style="position:absolute;top:10px;inset-inline-end:12px">${LVL_E[r.level]} ${LVL[r.level]}</span><div class="stage"><div class="float"><div style="width:130px">${c.scene(ALL_SHOW,r.design)}</div></div></div><span class="t">${c.icon} ${c.title}</span><span class="mini muted">${c.slogan}</span><div style="width:100%;margin-top:6px">${Bar(pct)}</div>${r.stars?`<span class="mini muted">⭐ ${r.stars}</span>`:""}</button>`;}).join("")}</div>`;
+
+const CraftSummary=(sid)=>`<h3 style="margin:18px 0 8px">🌸 مشروع صُنّاع الأثر</h3><div class="grid g2">${CRAFTS.map(c=>{const r=crRec(sid,c.id);return `<div class="soft"><div class="row" style="align-items:flex-start"><div style="width:72px;flex:none">${c.scene(ALL_SHOW,r.design)}</div><div style="flex:1"><b>${c.icon} ${c.title}</b><div class="row mini" style="gap:6px;margin-top:6px">${Chip("الأدوات",r.tools)}${Chip("الخطوات",r.steps)}${Chip("التركيب",r.build)}${Chip("القالب",r.done)}</div><div class="mini muted" style="margin-top:6px">${LVL_E[r.level]} ${LVL[r.level]} · ⭐ ${r.stars}${r.doneAt?` · أنجزت قالبها ${r.doneAt}`:""}</div></div>${r.photo?`<img src="${r.photo}" class="thumb" alt="صورة منتج الطالبة">`:""}</div></div>`;}).join("")}</div>`;
+
+const CraftTeacher=(sid)=>{const s=stu(sid);return `<p class="muted" style="margin-bottom:12px">حدّدي مستوى الدعم المناسب لـ${s.short} في كل درس، وتابعي إنجازها خطوةً بخطوة، وأضيفي صورة منتجها الحقيقي وتقييمكِ.</p>
+ ${CRAFTS.map(c=>{const r=crRec(sid,c.id);const rt=(DB.ratings[sid]||{})["cr_"+c.id]||{stars:0,t:""};const st=tplSteps(c,r.level);return `<div class="card" style="padding:16px;margin-bottom:12px"><div class="row between"><b style="font-size:1.15em">${c.icon} ${c.title}</b>${Stars(rt.stars,{ro:false,act:"rate:cr_"+c.id})}</div>
+  <div class="row" style="margin-top:10px;align-items:flex-start"><div style="width:120px;flex:none">${c.scene(ALL_SHOW,r.design)}</div><div style="flex:1;min-width:220px">
+   <div class="mini muted">مستوى الدعم:</div><div class="row" style="gap:6px;margin:4px 0">${[1,2,3].map(l=>`<button class="pill ${r.level===l?"on":""}" data-act="cr_level" data-v="${c.id}:${l}">${LVL_E[l]} ${LVL[l]}</button>`).join("")}</div>
+   <div class="mini muted">${LVL_D[r.level]}</div>
+   <div class="row mini" style="gap:6px;margin-top:8px">${Chip("الأدوات",r.tools)}${Chip("الخطوات",r.steps)}${Chip("التركيب",r.build)}${Chip("القالب",r.done)}</div>
+   <div class="mini" style="margin-top:6px">القالب: <b>${r.checked.length}/${st.length}</b> خطوات ✓ · ⭐ ${r.stars}${r.doneAt?` · أنجزته ${r.doneAt}`:""}</div>
+   <div class="mini muted">تصميمها: ${designText(c,r.design)}</div>
+  </div></div>
+  <div class="row" style="margin-top:10px"><input type="text" id="rt-cr_${c.id}" value="${esc(rt.t)}" placeholder="تعليق المعلمة…" style="flex:1"><button class="btn primary" data-act="ratesave" data-v="cr_${c.id}" style="min-height:48px">حفظ</button></div>
+  <div class="row" style="margin-top:8px"><label class="btn ghost" style="min-height:44px;cursor:pointer">📷 صورة المنتج<input type="file" accept="image/*" hidden data-photo="${c.id}" data-sid="${sid}"></label>${r.photo?`<img src="${r.photo}" class="thumb" alt=""><button class="badge" data-act="cr_delphoto" data-v="${c.id}">🗑 حذف الصورة</button>`:""}<button class="btn line" data-act="cr_print" data-v="${c.id}:${sid}" style="min-height:44px">🖨️ طباعة القالب</button><button class="btn line" data-act="cr_reset" data-v="${c.id}" style="min-height:44px">🔁 إعادة الدرس</button></div></div>`;}).join("")}`;};
+
+/* ——— شاشة الدرس المهني ——— */
+const CR_STEPS=["watch","tools","steps","build","tpl"],CR_NAMES=["أشاهد","أدواتي","الخطوات","أُركّب","قالبي"];
+V.craft=()=>{const c=S.cr.c,r=crRec(S.me.id,c.id),lvl=r.level,si=CR_STEPS.indexOf(S.cr.step);let body="";
+ const top=Top(`<span class="badge" style="background:var(--gold-soft);color:var(--gold-ink)">⭐ ${DB.stars[S.me.id]||0}</span><button class="iconbtn" data-act="go" data-v="hub" aria-label="رجوع للقائمة">✕</button>`,`<div class="row"><span style="font-size:1.8em">${c.icon}</span><b style="font-size:1.2em">${c.title}</b></div>`);
+ if(S.cr.step==="watch"){body=`<div class="card center" style="border-color:${c.accent}">${Hero3D(c.scene(ALL_SHOW,r.design),"",`data-act="cr_say" data-say="${esc(c.slogan)}"`)}
+  <h2 style="font-size:2em;margin:6px 0 2px">${c.title}</h2><p class="muted" style="font-family:var(--display);font-size:1.15em">${c.slogan}</p>
+  <div class="row" style="justify-content:center;margin:12px 0">${c.why.map(w=>`<span class="badge" style="font-size:1em">${w.e} ${w.t}</span>`).join("")}<span class="badge" style="font-size:1em;background:var(--teal-soft);color:var(--teal)">${LVL_E[lvl]} ${LVL[lvl]}</span></div>
+  <p style="font-size:1.2em;max-width:60ch;margin:auto">${c.intro}</p>
+  <div class="note rose" style="margin:14px auto 0;max-width:60ch;text-align:start">🛡️ <b>السلامة:</b> ${c.safety}</div>
+  <div class="row" style="justify-content:center;margin-top:16px"><button class="btn gold" data-act="cr_say" data-say="${esc(c.intro)}">🔊 اسمعي الدرس</button><button class="btn line" data-act="cr_say" data-say="${esc(c.safety)}">🔊 اسمعي السلامة</button></div>
+  <div style="margin-top:22px"><button class="btn primary big" data-act="cr_step" data-v="tools">التالي: أدواتي 🧰 ▶</button></div></div>`;}
+ else if(S.cr.step==="tools"){const need=Math.min(4,c.tools.length);body=`<h2 class="center" style="font-size:1.6em">المسي الأداة لتعرفيها 👆🔊</h2><p class="center muted" style="margin-bottom:16px">كل أداةٍ تنطقُ وتنقلبُ لتُخبركِ ما فائدتها — ${S.cr.tools.size} من ${c.tools.length}</p>
+  <div class="grid g3">${c.tools.map((t,i)=>`<button class="toolcard ${S.cr.tools.has(i)?"said":""} ${S.cr.flipped.has(i)?"flip":""}" data-act="cr_tool" data-v="${i}" aria-label="${t.t}"><div class="in"><div class="f">${ART(t.k)}<span class="lbl">${t.t}</span><span class="spk">${S.cr.tools.has(i)?"✓ عرفتُها":"🔊 المسي"}</span></div><div class="b"><span style="font-size:2.4em;line-height:1">${t.e}</span><span class="lbl">${t.t}</span><span class="mini">${t.s}</span></div></div></button>`).join("")}</div>
+  <div style="margin-top:22px;max-width:520px;margin-inline:auto"><button class="btn primary big" data-act="cr_step" data-v="steps" ${S.cr.tools.size<need?"disabled style='opacity:.5'":""}>${S.cr.tools.size<need?`المسي ${need} أدواتٍ على الأقل`:"جاهزة للخطوات ▶"}</button></div>`;}
+ else if(S.cr.step==="steps"){const st=c.steps[S.cr.si];body=`${Dots(c.steps.length,S.cr.si)}<div class="card center" style="border-color:${c.accent}"><span class="badge">الخطوة ${S.cr.si+1} من ${c.steps.length}</span>
+  <div class="stage" style="margin:10px auto 0"><div class="tilt stepart" data-act="cr_say" data-say="${esc(st.s)}">${st.art()}</div></div>
+  <h2 style="font-size:1.8em;margin:8px 0 4px">${st.t}</h2><p style="font-size:1.25em;max-width:50ch;margin:auto">${st.s}</p>
+  ${st.warn?`<div class="note rose" style="margin:12px auto 0;max-width:50ch;text-align:start">⚠️ ${st.warn}</div>`:""}
+  <button class="speak" data-act="cr_say" data-say="${esc(st.s)}" style="margin:12px 0;font-size:1.05em">🔊 اسمعي مرةً أخرى</button>
+  <div class="grid g2"><button class="btn ghost big" data-act="cr_prev" ${S.cr.si===0?"disabled style='opacity:.4'":""}>◀ السابقة</button><button class="btn primary big" data-act="cr_next">${S.cr.si+1<c.steps.length?"فهمتُ، التالية ▶":"جاهزة للتركيب 🧩"}</button></div></div>`;}
+ else if(S.cr.step==="build"){const parts=activeParts(c,lvl);const next=parts.find(p=>!S.cr.placed.includes(p.k));const show=preShow(c,lvl);S.cr.placed.forEach(k=>show[k]=1);const done=!next;
+  body=`<h2 class="center" style="font-size:1.6em">ركّبي ${c.obj} بنفسكِ 🧩</h2><p class="center muted" style="margin-bottom:10px">المسي الجزءَ الذي أطلبُه ليطيرَ إلى مكانه — ${S.cr.placed.length} من ${parts.length}</p>
+  <div class="card center" style="border-color:${c.accent};padding:14px">${Hero3D(c.scene(show,r.design),S.cr.fly?"flyin":"")}
+   ${done?`<h2 style="color:var(--teal);font-size:1.8em">اكتملت ${c.obj}! 🎉</h2><p class="muted">صنعتِها بنفسكِ خطوةً خطوة</p><div style="margin-top:14px;max-width:520px;margin-inline:auto"><button class="btn primary big" data-act="cr_step" data-v="tpl">الآن قالبي الخاص 🎨 ▶</button></div>`
+   :`<div class="soft" style="background:var(--gold-soft);font-family:var(--display);font-size:1.35em;font-weight:800;display:inline-flex;gap:10px;align-items:center;padding:10px 20px">👉 ضعي: ${next.t} <button class="speak" data-act="cr_say" data-say="ضعي ${esc(next.t)}">🔊</button></div>`}</div>
+  ${done?"":`<div class="grid g3" style="margin-top:14px">${S.cr.order.filter(k=>!S.cr.placed.includes(k)).map(k=>{const p=parts.find(x=>x.k===k);return `<button class="tile part ${S.cr.hint===k?"hint":""} ${S.cr.wrong===k?"bad":""}" data-act="cr_part" data-v="${k}"><div style="width:96px;height:96px">${c.partArt(k,r.design)}</div><span class="t" style="font-size:1.05em">${p.t}</span></button>`;}).join("")}</div>`}`;}
+ else if(S.cr.step==="tpl"){const qs=c.design;const tq=S.cr.tq;
+  if(tq<qs.length){const q=qs[tq];const cur=r.design[q.k];body=`${Dots(qs.length+1,tq)}<div class="card center" style="border-color:${c.accent}"><span class="badge">قالبي 🎨 — ${tq+1} من ${qs.length}</span>
+   <h2 style="font-size:1.7em;margin:8px 0">${q.t} <button class="speak" data-act="cr_say" data-say="${esc(q.t)}">🔊</button></h2>
+   <div class="row" style="justify-content:center;gap:14px;margin:10px 0 6px">${q.opts.map(o=>{const on=Array.isArray(cur)?cur.includes(o.v):cur===o.v;return `<button class="swatchbtn ${on?"on":""}" data-act="cr_pick" data-v="${tq}:${o.v}" aria-pressed="${on}"><span class="swatch" style="background:${o.c||"var(--card2)"}">${o.e||""}${on?`<i class="swck">✓</i>`:""}</span><span class="t">${o.t}</span></button>`;}).join("")}</div>
+   ${q.multi?`<p class="muted mini">اختاري حتى ${q.multi} ألوان — الأخيرُ يستبدلُ الأول</p>`:""}
+   ${Hero3D(c.scene(ALL_SHOW,r.design))}
+   <div style="margin-top:12px;max-width:520px;margin-inline:auto"><button class="btn primary big" data-act="cr_tplnext">${tq+1<qs.length?"التالي ▶":"شاهدي تصميمي ✨"}</button></div></div>`;}
+  else{const st=tplSteps(c,lvl);const all=r.checked.length>=st.length;body=`${Dots(qs.length+1,qs.length)}<div class="card center" style="border-color:${c.accent}"><h2 style="font-size:1.9em;color:var(--teal)">هذا تصميمي! ✨</h2><p class="muted">${designText(c,r.design)}</p>
+   ${Hero3D(c.scene(ALL_SHOW,r.design),"",`data-act="cr_say" data-say="هذا تصميمي الجميل"`)}
+   <div class="row" style="justify-content:center"><span class="badge" style="background:var(--teal-soft);color:var(--teal);font-size:1em">${LVL_E[lvl]} ${LVL[lvl]} — ${st.length} خطوات</span><button class="pill" data-act="cr_redesign">🎨 غيّري التصميم</button></div>
+   <p style="font-size:1.2em;margin-top:14px">الآن أصنعُها بيدي في الصف — أضعُ ✓ عند كلِّ خطوةٍ أنجزُها <button class="speak" data-act="cr_say" data-say="الآن اصنعيها بيديك. المسي كل خطوة تنجزينها">🔊</button></p>
+   <div class="grid g2" style="margin-top:12px;text-align:start">${st.map((t,i)=>{const on=r.checked.includes(i);return `<button class="checkt ${on?"on":""}" data-act="cr_check" data-v="${i}" aria-pressed="${on}"><span class="num">${i+1}</span><div class="ico">${c.steps[t.i].art()}</div><span class="t">${t.t}</span><span class="ck">${on?"✓":""}</span></button>`;}).join("")}</div>
+   ${all?`<div class="note ok" style="margin-top:14px;text-align:start">🏅 أنجزتِ قالبكِ كاملًا${r.doneAt?` يوم ${r.doneAt}`:""} — أنتِ صانعةُ أثر!</div>`:""}
+   ${r.photo?`<img src="${r.photo}" class="photo" alt="صورة منتجي">`:""}
+   <div class="row" style="justify-content:center;margin-top:14px"><label class="btn ghost" style="cursor:pointer">📷 أضيفي صورةَ منتجي<input type="file" accept="image/*" capture="environment" hidden data-photo="${c.id}"></label><button class="btn line" data-act="cr_print" data-v="${c.id}:${S.me.id}">🖨️ اطبعي قالبي</button><button class="btn primary" data-act="go" data-v="hub">دروسي 📚</button></div></div>`;}}
+ return `<div class="fade">${top}<div class="row" style="justify-content:center;gap:6px;margin-bottom:14px">${CR_NAMES.map((n,i)=>`<button class="badge" data-act="cr_step" data-v="${CR_STEPS[i]}" style="${i===si?"background:var(--teal);color:#fff":i<si?"background:var(--ok-soft);color:var(--ok)":""}">${i<si?"✓ ":""}${n}</button>`).join("")}</div>${body}</div>`;};
+
+/* ——— طباعة قالب الطالبة ——— */
+const printTpl=(c,r,s)=>{const st=tplSteps(c,r.level);const el=document.getElementById("print");el.innerHTML=`<div class="pt"><div class="row between"><b>أجنحة الأمل · مشروع صُنّاع الأثر</b><b>الطالبة: ${esc(s.name)}</b></div><h1>${c.icon} قالبُ عملي: ${c.title}</h1><div class="row" style="align-items:flex-start;gap:24px"><div style="width:220px;flex:none">${c.scene(ALL_SHOW,r.design)}</div><div><p><b>مستوى الدعم:</b> ${LVL_E[r.level]} ${LVL[r.level]}</p><p><b>تصميمي:</b> ${designText(c,r.design)}</p><p><b>السلامة:</b> ${c.safety}</p><p>التاريخ: ______________</p></div></div><h2>خطواتي</h2><ol>${st.map((t,i)=>`<li><span class="box">${r.checked.includes(i)?"✓":""}</span><span class="ico">${c.steps[t.i].art()}</span><span>${t.t}</span></li>`).join("")}</ol><p class="sig">تقييم المعلمة: ☆ ☆ ☆ ☆ ☆ &nbsp; توقيع المعلمة: ____________ &nbsp; توقيع ولي الأمر: ____________</p><p class="sig">إعداد المعلمة: نسيم عكام · مديرة المدرسة: عفاف صباغ · ١٤٤٨هـ</p></div>`;setTimeout(()=>window.print(),80);};
+
+/* ——— الصور: ضغط وحفظ محلي ——— */
+document.addEventListener("change",e=>{const inp=e.target;if(!inp.matches||!inp.matches("input[type=file][data-photo]"))return;const f=inp.files&&inp.files[0];if(!f)return;const sid=inp.dataset.sid?+inp.dataset.sid:(S.me?S.me.id:S.cs);const cid=inp.dataset.photo;const rd=new FileReader();rd.onload=()=>{const img=new Image();img.onload=()=>{const k=Math.min(1,520/Math.max(img.width,img.height));const cv=document.createElement("canvas");cv.width=Math.round(img.width*k);cv.height=Math.round(img.height*k);cv.getContext("2d").drawImage(img,0,0,cv.width,cv.height);const r=crRec(sid,cid);r.photo=cv.toDataURL("image/jpeg",.72);save();tone("ok");toast("حُفظت صورة المنتج 📷");render();};img.src=rd.result;};rd.readAsDataURL(f);});
+
+/* ——— التفاعل ثلاثي الأبعاد: إمالة العناصر مع الإصبع/المؤشر ——— */
+document.addEventListener("pointerover",e=>{const t=e.target.closest&&e.target.closest("[data-greet]");if(t&&!(e.relatedTarget&&t.contains(e.relatedTarget)))greetStudent(+t.dataset.greet,t);});
+document.addEventListener("focusin",e=>{const t=e.target.closest&&e.target.closest("[data-greet]");if(t)greetStudent(+t.dataset.greet,t);});
+document.addEventListener("pointermove",e=>{const t=e.target.closest&&e.target.closest(".tilt");if(!t)return;const r=t.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;t.style.transform=`rotateY(${(x*22).toFixed(1)}deg) rotateX(${(-y*22).toFixed(1)}deg) translateZ(14px)`;},{passive:true});
+document.addEventListener("pointerout",e=>{const t=e.target.closest&&e.target.closest(".tilt");if(t&&!(e.relatedTarget&&t.contains(e.relatedTarget)))t.style.transform="";});
+
+/* ——— معالجة أحداث المشروع ——— */
+document.addEventListener("click",e=>{const b=e.target.closest("[data-act^='cr_']");if(!b)return;const act=b.dataset.act,v=b.dataset.v;const c=S.cr&&S.cr.c;
+ switch(act){
+  case "cr_open":{const cc=craftOf(v);S.cr={c:cc,step:"watch",si:0,tools:new Set(),flipped:new Set(),placed:[],wrongN:0,wrong:null,hint:null,order:[],tq:0,fly:false};speak(cc.title+". "+cc.slogan);tone("tap");go("craft");break;}
+  case "cr_say":speak(b.dataset.say);burst(b);break;
+  case "cr_step":{if(!c)break;const r=crRec(S.me.id,c.id);S.cr.step=v;S.cr.wrong=null;S.cr.fly=false;
+   if(v==="tools")speak("المسي الأداة لتعرفيها");
+   if(v==="steps"){S.cr.si=0;if(!r.tools&&S.cr.tools.size>=Math.min(4,c.tools.length)){r.tools=true;r.stars+=2;award(2);save();}speak(c.steps[0].s);}
+   if(v==="build"){S.cr.placed=[];S.cr.wrongN=0;S.cr.hint=null;const parts=activeParts(c,r.level);S.cr.order=rnd(parts.map(p=>p.k));speak("ركّبي بنفسكِ. ضعي "+parts[0].t);}
+   if(v==="tpl"){S.cr.tq=r.checked.length?c.design.length:0;speak(S.cr.tq?"هذا تصميمكِ. المسي كل خطوة تنجزينها":c.design[0].t);}
+   go("craft");break;}
+  case "cr_tool":{const i=+v,t=c.tools[i];S.cr.tools.add(i);if(S.cr.flipped.has(i))S.cr.flipped.delete(i);else S.cr.flipped.add(i);speak(t.s);tone("tap");burst(b);render();break;}
+  case "cr_prev":S.cr.si=Math.max(0,S.cr.si-1);tone("tap");speak(c.steps[S.cr.si].s);render();break;
+  case "cr_next":{if(S.cr.si+1<c.steps.length){S.cr.si++;tone("tap");speak(c.steps[S.cr.si].s);render();}else{const r=crRec(S.me.id,c.id);if(!r.steps){r.steps=true;r.stars+=3;award(3);save();toast("تعلّمتِ كل الخطوات ⭐⭐⭐");}tone("ok");S.cr.step="build";S.cr.placed=[];S.cr.wrongN=0;S.cr.hint=null;const parts=activeParts(c,r.level);S.cr.order=rnd(parts.map(p=>p.k));speak("أحسنتِ! الآن ركّبي بنفسكِ. ضعي "+parts[0].t);go("craft");}break;}
+  case "cr_part":{const r=crRec(S.me.id,c.id);const parts=activeParts(c,r.level);const next=parts.find(p=>!S.cr.placed.includes(p.k));if(!next)break;
+   if(v===next.k){S.cr.placed.push(v);S.cr.wrongN=0;S.cr.hint=null;S.cr.fly=true;award(1);r.stars+=1;tone("ok");burst(b);const after=parts.find(p=>!S.cr.placed.includes(p.k));if(after){speak("أحسنتِ! الآن ضعي "+after.t);}else{r.build=true;setTimeout(()=>{confetti();tone("win");speak(`ممتازة يا ${S.me.short}! اكتملت ${c.obj}`);},250);}save();render();}
+   else{S.cr.wrong=v;S.cr.wrongN++;if(S.cr.wrongN>=2)S.cr.hint=next.k;tone("bad");speak("ليس هذا. نحتاجُ "+next.t);render();setTimeout(()=>{S.cr.wrong=null;render();},450);}break;}
+  case "cr_pick":{const [qi,val]=v.split(/:(.+)/);const q=c.design[+qi];const r=crRec(S.me.id,c.id);if(q.multi){let arr=(r.design[q.k]||[]).slice();const at=arr.indexOf(val);if(at>=0){if(arr.length>1)arr.splice(at,1);}else{arr.push(val);if(arr.length>q.multi)arr.shift();}r.design[q.k]=arr;}else r.design[q.k]=val;const o=q.opts.find(x=>x.v===val);speak(o?o.t:"");tone("tap");burst(b);save();render();break;}
+  case "cr_tplnext":{if(S.cr.tq<c.design.length){S.cr.tq++;tone("tap");if(S.cr.tq<c.design.length)speak(c.design[S.cr.tq].t);else{speak("هذا تصميمكِ الجميل! الآن اصنعيه بيديكِ، والمسي كل خطوة تنجزينها");confetti();}render();}break;}
+  case "cr_redesign":S.cr.tq=0;tone("tap");speak(c.design[0].t);render();break;
+  case "cr_check":{const r=crRec(S.me.id,c.id);const i=+v;const st=tplSteps(c,r.level);const at=r.checked.indexOf(i);if(at>=0){r.checked.splice(at,1);tone("tap");}else{r.checked.push(i);tone("ok");speak("أحسنتِ! "+st[i].t);burst(b);}
+   if(r.checked.length>=st.length&&!r.done){r.done=true;r.doneAt=today();r.stars+=3;award(3);setTimeout(()=>{confetti();tone("win");speak(`أنهيتِ قالبكِ يا ${S.me.short}! أنتِ صانعةُ أثر`);},300);}save();render();break;}
+  case "cr_print":{const [cid,sid]=v.split(":");printTpl(craftOf(cid),crRec(+sid,cid),stu(+sid));break;}
+  case "cr_level":{const [cid,l]=v.split(":");const r=crRec(S.cs,cid);r.level=+l;const n=tplSteps(craftOf(cid),+l).length;r.checked=r.checked.filter(i=>i<n);if(r.checked.length<n)r.done=false;save();tone("tap");toast("حُفظ مستوى الدعم");render();break;}
+  case "cr_delphoto":{const r=crRec(S.cs,v);r.photo=null;save();render();break;}
+  case "cr_reset":{const cc=craftOf(v);const r=crRec(S.cs,v);Object.assign(r,{tools:false,steps:false,build:false,checked:[],done:false,doneAt:"",stars:0,design:JSON.parse(JSON.stringify(cc.def))});save();toast("أُعيد الدرس إلى البداية 🔁");render();break;}
+ }});
+
 </script>
 <script>
 /* ====================== شاشات الفريق ====================== */
@@ -431,7 +1063,74 @@ const NoteList=(arr,cls="")=>arr.length?`<div class="feed">${arr.slice().reverse
 const ProgressPanel=(sid)=>{const s=stu(sid),done=DB.lessons[sid]||{},rt=DB.ratings[sid]||{};return `<div class="grid g3" style="margin-bottom:14px"><div class="kpi"><div class="n">${progressOf(sid)}٪</div><div class="muted mini">إتقان الدروس</div></div><div class="kpi"><div class="n">${lessonsDone(sid)}/${LESSONS.length}</div><div class="muted mini">دروس مكتملة</div></div><div class="kpi"><div class="n">⭐ ${DB.stars[sid]||0}</div><div class="muted mini">النجوم المجموعة</div></div></div>
  ${Bar(progressOf(sid),"التقدّم العام")}
  <div class="grid" style="margin-top:14px">${LESSONS.map(l=>{const d=done[l.id],r=rt[l.id];return `<div class="soft row between"><div class="row"><span style="font-size:1.6em">${l.icon}</span><div><b>${l.title}</b><div class="mini muted">${d?`أنهتها الطالبة: ${d.score}/${d.max}`:"لم تبدأ بعد"}</div></div></div><div style="text-align:end">${r?Stars(r.stars):`<span class="muted mini">بلا تقييم</span>`}${r&&r.t?`<div class="mini muted">${esc(r.t)}</div>`:""}</div></div>`;}).join("")}</div>
- <h3 style="margin:18px 0 8px">😊 مشاعرها الأخيرة</h3><div class="row">${(DB.moods[sid]||[]).slice(-6).map(m=>`<span class="badge">${m.e} ${m.t} · ${m.d}</span>`).join("")||'<span class="muted">لم تسجّل بعد</span>'}</div>`;};
+ <h3 style="margin:18px 0 8px">😊 مشاعرها الأخيرة</h3><div class="row">${(DB.moods[sid]||[]).slice(-6).map(m=>`<span class="badge">${m.e} ${m.t} · ${m.d}</span>`).join("")||'<span class="muted">لم تسجّل بعد</span>'}</div>${CraftSummary(sid)}`;};
+
+/* ——— محطات خطة المتابعة ——— */
+const stageOf=p=>p>=85?["مُتقنة","var(--ok-soft)","var(--ok)"]:p>=60?["تتقدّم","var(--teal-soft)","var(--teal)"]:p>=30?["في الطريق","var(--gold-soft)","var(--gold-ink)"]:["بداية","var(--rose-soft)","var(--rose)"];
+const Ring=(pct,color,ic)=>{const r=30,c=2*Math.PI*r;return `<div class="ring"><svg viewBox="0 0 76 76"><circle cx="38" cy="38" r="${r}" fill="none" stroke="var(--card2)" stroke-width="9"/><circle cx="38" cy="38" r="${r}" fill="none" stroke="${color}" stroke-width="9" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c*(1-pct/100)}" style="transition:stroke-dashoffset .6s"/></svg><span class="pct">${pct}٪</span>${ic?`<span class="ic">${ic}</span>`:""}</div>`;};
+const planAvg=sid=>{const p=DB.plan[sid]||{};const v=PLAN_TEMPLATE.map(t=>(p[t.id]||{pct:0}).pct);return Math.round(v.reduce((a,b)=>a+b,0)/v.length);};
+const Journey=(sid,{mode="view"}={})=>{const p=DB.plan[sid]||{};const ap=DB.planApproved[sid];const s=stu(sid);
+ return `<div class="card" style="padding:16px 14px 6px">
+  <div class="row between" style="margin-bottom:6px"><div><h3 style="font-size:1.3em">🛤️ خطة متابعة ${s.short} — محطات الرحلة</h3><span class="muted mini">متوسط التقدّم ${planAvg(sid)}٪ · ${PLAN_TEMPLATE.filter(t=>(p[t.id]||{}).pct>=85).length} محطات مُتقنة</span></div>
+  ${ap?`<span class="badge" style="background:var(--ok-soft);color:var(--ok)">✓ اعتمدتها ${esc(ap.by)} · ${ap.d}</span>`:`<span class="badge">بانتظار اعتماد الوكيلة</span>`}</div>
+  <div class="journey ${mode==="student"?"":"compact"}">${PLAN_TEMPLATE.map((t,i)=>{const it=p[t.id]||{pct:0,note:""};const [lbl,bg,fg]=stageOf(it.pct);
+   return `<div class="station">${mode==="student"?`<button data-act="say" data-say="${esc(t.t)}. ${esc(t.d)}. تقدّمكِ ${it.pct} بالمئة" style="padding:0">${Ring(it.pct,t.c,t.ic)}</button>`:Ring(it.pct,t.c,t.ic)}
+    <div class="stcard"><span class="num">${String(i+1).padStart(2,"0")}</span><div class="row between"><h4>${t.t}</h4><span class="stage" style="background:${bg};color:${fg}">${lbl}</span></div><div class="d">${t.d}</div>
+    ${it.note&&mode!=="edit"?`<div class="mini" style="margin-top:6px;color:var(--teal)">✎ ${esc(it.note)}</div>`:""}
+    ${mode==="edit"?`<input type="range" min="0" max="100" step="5" value="${it.pct}" id="pl-${t.id}" data-plan="${t.id}" aria-label="تقدّم ${t.t}"><div class="row" style="margin-top:6px"><input type="text" id="pn-${t.id}" value="${esc(it.note)}" placeholder="ملاحظة على هذه المحطة…" style="flex:1;padding:8px 12px"><button class="btn primary" data-act="plansave" data-v="${t.id}" style="min-height:42px;padding:6px 14px">حفظ</button></div>`:""}
+    </div></div>`;}).join("")}</div></div>`;};
+
+/* ——— صندوق ملفات الطالبة ——— */
+const fmtSize=b=>b>1048576?(b/1048576).toFixed(1)+" م.ب":Math.round(b/1024)+" ك.ب";
+const FilesBox=(sid,{canUpload=false}={})=>{const s=stu(sid),arr=DB.files[sid]||[];const total=arr.reduce((a,f)=>a+f.size,0);
+ return `<div class="folder" style="margin-bottom:14px"><span class="tab">📁</span><div style="flex:1"><h3>ملف ${s.short} — التقارير والأوراق</h3><span class="muted mini">${arr.length} ملف · ${fmtSize(total)} · يظهر للمعلمة وولي الأمر والإدارة</span></div></div>
+ ${canUpload?`<label class="dropzone" id="dz" for="fileinp"><div style="font-size:2.4em">📎</div><b style="font-family:var(--display);font-size:1.15em">اسحبي التقرير هنا أو اضغطي للاختيار</b><div class="muted mini">صور أو PDF — حتى ٣ م.ب للملف</div><input type="file" id="fileinp" accept="image/*,application/pdf" multiple class="sr"></label>
+  <div class="row" style="margin:10px 0 14px"><span class="muted mini">تصنيف الملف:</span><select id="fcat" style="width:auto">${FILE_CATS.map(c=>`<option>${c}</option>`).join("")}</select></div>`:""}
+ ${arr.length?`<div class="files">${arr.slice().reverse().map(f=>`<div class="file"><div class="thumb">${f.type.startsWith("image/")?`<img src="${f.data}" alt="${esc(f.name)}">`:"📄"}</div><div class="meta"><span class="badge" style="align-self:start">${esc(f.cat)}</span><b>${esc(f.name)}</b><span class="muted mini">${esc(f.by)} · ${f.d} · ${fmtSize(f.size)}</span><div class="row"><button class="btn ghost" data-act="openfile" data-v="${f.id}" style="min-height:38px;padding:4px 12px;font-size:.9em">فتح</button>${canUpload?`<button class="btn ghost" data-act="delfile" data-v="${f.id}" style="min-height:38px;padding:4px 12px;font-size:.9em;color:var(--bad)">حذف</button>`:""}</div></div></div>`).join("")}</div>`:`<p class="muted center" style="padding:16px">لا ملفات مرفقة بعد.</p>`}`;};
+
+/* ——— مبادرة المحطات الصحية الذكية ——— */
+const initRec=n=>{DB.initiative=DB.initiative||{};return DB.initiative[n]||{status:"todo",pct:0,note:"",d:""};};
+const initAvg=()=>Math.round(INIT.stations.reduce((a,x)=>a+initRec(x.n).pct,0)/INIT.stations.length);
+const Initiative=(edit=false)=>{const done=INIT.stations.filter(x=>initRec(x.n).status==="done").length;const avg=initAvg();const tab=S.itab||"plan";
+ return `<section class="init-hero"><div class="row between" style="align-items:flex-start"><div><span class="badge" style="background:var(--card)">🩺 خطة المعلمة · ${esc(INIT.motto)}</span><h2 style="margin-top:8px">${INIT.name}</h2><span class="slg">🌸 ${INIT.slogan}</span></div>
+  <div class="row" style="gap:16px">${Ring(avg,"var(--rose)","🩺")}<div><div style="font-family:var(--display);font-weight:800;font-size:1.1em">${done} من ${INIT.stations.length} محطات منجزة</div><div class="muted mini">متوسط الإنجاز ${avg}٪ على مدار العام</div></div></div></div></section>
+ <div class="tabs" style="margin-top:14px">${[["about","📖 نبذة"],["plan","🗓️ الخطة التنفيذية والإنجاز"],["doc","📎 التوثيق والتقييم"],["end","🌷 الخاتمة"]].map(([k,t])=>`<button class="${tab===k?"on":""}" data-act="itab" data-v="${k}" style="${tab===k?"background:var(--rose)":""}">${t}</button>`).join("")}</div>
+ ${tab==="about"?`<div class="grid g2"><div class="card">${INIT.about.map(p=>`<p style="margin-bottom:12px;line-height:1.9">🌿 ${p}</p>`).join("")}<div class="quote">لأن كل طالبة قادرة على أن تصنع أثرًا.. معًا نحو جيل أكثر صحة ووعيًا</div></div>
+   <div class="infolist">${INIT.info.map(([i,k,v])=>`<div><span class="i">${i}</span><span class="k">${k}:</span><span class="v">${v}</span></div>`).join("")}</div></div>`:""}
+ ${tab==="plan"?`<p class="muted" style="margin-bottom:10px">${edit?"لكل شهر محطة. حدّدي حالة المحطة ومقدار تقدّمها، واكتبي ما أُنجز ثم احفظي.":"محطة واحدة كل شهر — وأمام كل محطة مقدار التقدّم والإنجاز."}</p>
+  <div class="initrail">${INIT.stations.map(x=>{const r=initRec(x.n);const [lbl,bg,fg]=INIT_STATUS[r.status];const col=r.status==="done"?"var(--ok)":r.status==="progress"?"var(--gold)":"var(--line)";
+   return `<div class="st-card" style="--st:${col}"><div class="month"><b>${["١","٢","٣","٤","٥","٦","٧"][x.n-1]}</b><span>${x.month}</span></div>
+    <div><div class="row" style="gap:8px"><span style="font-size:1.6em">${x.ic}</span><h4>${x.t}</h4><span class="stage" style="background:${bg};color:${fg}">${lbl}</span></div><div class="l"><b>النشاط والتنفيذ:</b> ${x.act}</div><div class="l"><b>المخرج:</b> ${x.out}</div>${r.note?`<div class="l" style="color:var(--teal)">✎ ${esc(r.note)}${r.d?` <span class="muted">· ${r.d}</span>`:""}</div>`:""}</div>
+    <div class="st-prog">${edit?`<select id="is-${x.n}"><option value="todo" ${r.status==="todo"?"selected":""}>لم تبدأ</option><option value="progress" ${r.status==="progress"?"selected":""}>قيد التنفيذ</option><option value="done" ${r.status==="done"?"selected":""}>منجزة</option></select><div class="row" style="gap:8px;flex-wrap:nowrap"><input type="range" min="0" max="100" step="5" value="${r.pct}" id="ip-${x.n}" data-init="${x.n}"><b id="ipv-${x.n}" style="min-width:44px;text-align:center;font-variant-numeric:tabular-nums">${r.pct}٪</b></div><input type="text" id="in-${x.n}" value="${esc(r.note)}" placeholder="ما أُنجز في هذه المحطة…" style="padding:8px 10px"><button class="btn primary" data-act="initsave" data-v="${x.n}" style="min-height:40px;background:var(--rose)">حفظ</button>`
+     :`${Bar(r.pct,"التقدّم")}${r.status==="done"?`<div class="st-done">✓ أُنجزت${r.d?" · "+r.d:""}</div>`:""}`}</div></div>`;}).join("")}</div>
+  <div class="quote" style="margin-top:14px">${INIT.closing}</div>`:""}
+ ${tab==="doc"?`<div class="grid g2"><div class="card"><h3>📊 ملخّص التقييم</h3><div class="grid g3" style="margin:10px 0"><div class="kpi"><div class="n">${done}</div><div class="muted mini">محطات منجزة</div></div><div class="kpi"><div class="n">${INIT.stations.filter(x=>initRec(x.n).status==="progress").length}</div><div class="muted mini">قيد التنفيذ</div></div><div class="kpi"><div class="n">${avg}٪</div><div class="muted mini">متوسط الإنجاز</div></div></div>
+   <div class="grid" style="gap:8px">${INIT.stations.map(x=>{const r=initRec(x.n);return `<div class="row" style="gap:10px"><span style="width:26px">${x.ic}</span><div style="flex:1">${Bar(r.pct,x.t)}</div></div>`;}).join("")}</div></div>
+  <div class="card"><h3>📎 توثيق المحطات</h3><p class="muted mini" style="margin:6px 0 10px">${edit?"اكتبي توثيق كل محطة (ما نُفّذ، الحضور، الأثر) واحفظي؛ وترفعين الصور والتقارير في «ملف الطالبة» لكل طالبة.":"ما وثّقته المعلمة لكل محطة."}</p><div class="feed">${INIT.stations.map(x=>{const r=initRec(x.n);return `<div class="note rose"><div class="row between mini"><b>${x.ic} ${x.t}</b><span class="stage" style="background:${INIT_STATUS[r.status][1]};color:${INIT_STATUS[r.status][2]}">${INIT_STATUS[r.status][0]} · ${r.pct}٪</span></div>${edit?`<div class="row" style="margin-top:6px"><input type="text" id="in-${x.n}" value="${esc(r.note)}" placeholder="توثيق المحطة…" style="flex:1;padding:8px 10px"><button class="btn primary" data-act="initsave" data-v="${x.n}" style="min-height:40px;background:var(--rose)">حفظ</button></div>`:`<div>${esc(r.note)||'<span class="muted">لم تُوثَّق بعد</span>'}</div>`}</div>`;}).join("")}</div></div></div>`:""}
+ ${tab==="end"?`<div class="card" style="background:linear-gradient(180deg,var(--rose-soft),var(--card))"><h3 style="color:var(--rose);font-size:1.5em">🌷 خاتمة المبادرة</h3>${INIT.closingText.map(p=>`<p style="margin-top:12px;line-height:1.9">${p}</p>`).join("")}<div class="quote" style="margin-top:14px">معًا.. نحو مدارس أكثر صحة ووعيًا</div><div class="row" style="justify-content:center;gap:8px">${["صحة","وعي","معرفة","سلوك إيجابي","مستقبل أفضل"].map(t=>`<span class="badge" style="background:var(--card)">♥ ${t}</span>`).join("")}</div></div>`:""}`;};
+
+/* ——— الخطة التربوية الفردية ——— */
+const stName=id=>(PLAN_TEMPLATE.find(t=>t.id===id)||{}).t||"—";
+const stPct=(sid,id)=>((DB.plan[sid]||{})[id]||{pct:0}).pct;
+const IEP=(sid,edit)=>{const s=stu(sid);const p=DB.iep[sid]||{strengths:"",needs:"",long:[],short:[]};const goalRow=(g,kind,i)=>`<div class="soft iep-goal"><div><b>${esc(g.t)}</b><div class="mini muted">المسؤول: ${esc(g.by)} · الموعد: ${esc(g.due||"—")}</div></div><div class="mini">🛤️ ${stName(g.st)}</div><div>${Bar(stPct(sid,g.st))}</div><div class="mini" style="text-align:center"><b style="color:var(--teal)">${stPct(sid,g.st)}٪</b> ${stPct(sid,g.st)>=85?'<span class="stage" style="background:var(--ok-soft);color:var(--ok)">تحقّق</span>':""}</div>${edit?`<button class="badge" data-act="iepdel" data-v="${kind}:${i}">🗑</button>`:"<span></span>"}</div>`;
+ const addRow=kind=>edit?`<div class="soft" style="margin-top:8px;border:2px dashed var(--line)"><div class="row"><input type="text" id="iep-${kind}-t" placeholder="اكتبي الهدف ${kind==="long"?"طويل":"قصير"} المدى…" style="flex:2;min-width:200px"><select id="iep-${kind}-st" style="width:auto">${PLAN_TEMPLATE.map(t=>`<option value="${t.id}">${t.ic} ${t.t}</option>`).join("")}</select><input type="text" id="iep-${kind}-by" placeholder="المسؤول" style="width:130px"><input type="text" id="iep-${kind}-due" placeholder="الموعد" style="width:130px"><button class="btn primary" data-act="iepadd" data-v="${kind}" style="min-height:44px">إضافة</button></div></div>`:"";
+ return `<div class="card"><div class="row between"><div><h3 style="font-size:1.4em">📋 الخطة التربوية الفردية — ${s.name}</h3><span class="muted mini">ترتبط كل هدفٍ بمحطةٍ من محطات الرحلة، فيتحدّث تقدّمه تلقائيًا</span></div><div class="row">${DB.planApproved[sid]?`<span class="badge" style="background:var(--ok-soft);color:var(--ok)">✓ معتمدة</span>`:""}<button class="btn line" data-act="iepprint" style="min-height:44px">🖨️ طباعة</button></div></div>
+  <div class="grid g2" style="margin-top:12px"><div><b>💪 نقاط القوة</b>${edit?`<textarea id="iep-s" rows="3">${esc(p.strengths)}</textarea>`:`<p class="soft">${esc(p.strengths)||"—"}</p>`}</div><div><b>🎯 الاحتياجات</b>${edit?`<textarea id="iep-n" rows="3">${esc(p.needs)}</textarea>`:`<p class="soft">${esc(p.needs)||"—"}</p>`}</div></div>
+  ${edit?`<button class="btn primary" data-act="iepsave" style="margin-top:8px">حفظ نقاط القوة والاحتياجات</button>`:""}
+  <h3 style="margin:18px 0 8px">🏁 الأهداف طويلة المدى</h3><div class="iepgrid">${(p.long||[]).map((g,i)=>goalRow(g,"long",i)).join("")||'<p class="muted">لا أهداف بعد.</p>'}</div>${addRow("long")}
+  <h3 style="margin:18px 0 8px">🚩 الأهداف قصيرة المدى</h3><div class="iepgrid">${(p.short||[]).map((g,i)=>goalRow(g,"short",i)).join("")||'<p class="muted">لا أهداف بعد.</p>'}</div>${addRow("short")}</div>`;};
+const printIEP=sid=>{const s=stu(sid),p=DB.iep[sid]||{long:[],short:[]};const el=document.getElementById("print");el.innerHTML=`<div class="row"><b>أجنحة الأمل · معاهد وبرامج التربية الفكرية</b><b>${today()}</b></div><h1>الخطة التربوية الفردية — ${esc(s.name)}</h1><p><b>نقاط القوة:</b> ${esc(p.strengths||"")}</p><p><b>الاحتياجات:</b> ${esc(p.needs||"")}</p><h2>الأهداف طويلة المدى</h2><ol>${(p.long||[]).map(g=>`<li><span class="box">${stPct(sid,g.st)>=85?"✓":""}</span><span>${esc(g.t)} — ${stName(g.st)} — ${stPct(sid,g.st)}٪ — ${esc(g.by)} — ${esc(g.due||"")}</span></li>`).join("")}</ol><h2>الأهداف قصيرة المدى</h2><ol>${(p.short||[]).map(g=>`<li><span class="box">${stPct(sid,g.st)>=85?"✓":""}</span><span>${esc(g.t)} — ${stName(g.st)} — ${stPct(sid,g.st)}٪ — ${esc(g.by)} — ${esc(g.due||"")}</span></li>`).join("")}</ol><h2>محطات المتابعة</h2><ol>${PLAN_TEMPLATE.map(t=>`<li><span class="ico">${t.ic}</span><span>${t.t}: ${stPct(sid,t.id)}٪</span></li>`).join("")}</ol><p class="sig">المعلمة: نسيم عكام ____ · وكيلة الشؤون التعليمية: رضية صباغ ____ · المديرة: عفاف صباغ ____ · ولي الأمر: ____</p>`;setTimeout(()=>window.print(),80);};
+/* ——— تقرير الأسبوع للأسرة ——— */
+const topMoods=sid=>{const m={};(DB.moods[sid]||[]).slice(-10).forEach(x=>m[x.e+" "+x.t]=(m[x.e+" "+x.t]||0)+1);return Object.entries(m).sort((a,b)=>b[1]-a[1]).slice(0,3);};
+const WeekReport=sid=>{const s=stu(sid);const rt=DB.ratings[sid]||{};const lastNote=[...(DB.notes[sid]||[]),...(DB.comments[sid]||[])].slice(-1)[0];const badges=(DB.activities[sid]||[]).slice(-3);return `<div class="card" style="background:linear-gradient(160deg,var(--rose-soft),var(--card) 60%,var(--gold-soft));border-color:var(--rose)"><div class="row between"><div class="row">${Avatar(s,64)}<div><h3 style="font-size:1.4em;color:var(--rose)">🌸 تقرير الأسبوع — ${s.name}</h3><span class="muted mini">${today()} · أجنحة الأمل</span></div></div><button class="btn line" data-act="weekprint" style="min-height:44px">🖨️ طباعة / حفظ</button></div>
+ <div class="grid g3" style="margin-top:14px"><div class="kpi"><div class="n">${lessonsDone(sid)}/${LESSONS.length}</div><div class="muted mini">دروس أنهتها</div></div><div class="kpi"><div class="n">⭐ ${DB.stars[sid]||0}</div><div class="muted mini">مجموع النجوم</div></div><div class="kpi"><div class="n">${planAvg(sid)}٪</div><div class="muted mini">خطة المتابعة</div></div></div>
+ <div class="grid g2" style="margin-top:12px"><div class="soft"><b>😊 مشاعرها هذا الأسبوع</b><div class="row" style="margin-top:6px">${topMoods(sid).map(([k,n])=>`<span class="badge" style="background:var(--card)">${k} ×${n}</span>`).join("")||'<span class="muted mini">لا تسجيلات</span>'}</div></div><div class="soft"><b>🏅 شاراتها</b><div class="row" style="margin-top:6px">${badges.map(b=>`<span class="badge" style="background:var(--card)">${b.badge}</span>`).join("")||'<span class="muted mini">—</span>'}</div></div></div>
+ <div class="soft" style="margin-top:10px"><b>⭐ تقييمات المعلمة</b><div class="row" style="margin-top:6px">${LESSONS.filter(l=>rt[l.id]).slice(-4).map(l=>`<span class="badge" style="background:var(--card)">${l.icon} ${l.title} ${"⭐".repeat(rt[l.id].stars)}</span>`).join("")||'<span class="muted mini">—</span>'}</div></div>
+ ${lastNote?`<div class="note gold" style="margin-top:10px"><b>💬 ${esc(lastNote.by)}:</b> ${esc(lastNote.t)}</div>`:""}
+ <div class="quote" style="margin-top:10px;font-size:1.2em">من فكرة صغيرة نصنع أثرًا كبيرًا 🌷</div></div>`;};
+const printWeek=sid=>{const s=stu(sid);const rt=DB.ratings[sid]||{};const el=document.getElementById("print");el.innerHTML=`<div class="row"><b>أجنحة الأمل</b><b>${today()}</b></div><h1>🌸 تقرير الأسبوع — ${esc(s.name)}</h1><ol><li><span class="ico">📚</span><span>دروس أنهتها: ${lessonsDone(sid)} من ${LESSONS.length}</span></li><li><span class="ico">⭐</span><span>مجموع النجوم: ${DB.stars[sid]||0}</span></li><li><span class="ico">🛤️</span><span>خطة المتابعة: ${planAvg(sid)}٪</span></li><li><span class="ico">😊</span><span>مشاعرها: ${topMoods(sid).map(([k,n])=>k+" ×"+n).join("، ")||"—"}</span></li>${LESSONS.filter(l=>rt[l.id]).map(l=>`<li><span class="ico">${l.icon}</span><span>${l.title}: ${"★".repeat(rt[l.id].stars)}${"☆".repeat(5-rt[l.id].stars)} — ${esc(rt[l.id].t)}</span></li>`).join("")}</ol><p class="sig">مع تحيات فريق أجنحة الأمل · المعلمة نسيم عكام</p>`;setTimeout(()=>window.print(),80);};
+/* ——— خريطة ABC ——— */
+const ABCHeat=sid=>{const arr=DB.abc[sid]||[];if(!arr.length)return "";const days=["أحد","اثنين","ثلاثاء","أربعاء","خميس"];const hours=[7,8,9,10,11,12];const cnt={};arr.forEach(r=>{cnt[r.dow+":"+r.h]=(cnt[r.dow+":"+r.h]||0)+1;});const mx=Math.max(1,...Object.values(cnt));return `<h4 style="margin:12px 0 6px;font-family:var(--display)">🔥 متى يتكرّر التوتر؟</h4><div class="heat" style="grid-template-columns:60px repeat(${hours.length},1fr)"><div class="h"></div>${hours.map(h=>`<div class="h">${h}</div>`).join("")}${days.map((d,di)=>`<div class="h">${d}</div>${hours.map(h=>{const n=cnt[di+":"+h]||0;return `<div style="background:${n?`rgba(228,120,143,${.25+.75*n/mx})`:"var(--card2)"};color:${n/mx>.6?"#fff":"inherit"}">${n||""}</div>`;}).join("")}`).join("")}</div>`;};
 
 /* المعلمة */
 V.t_home=()=>{const sid=S.cs,s=stu(sid);let panel="";
@@ -441,12 +1140,20 @@ V.t_home=()=>{const sid=S.cs,s=stu(sid);let panel="";
   <h3 style="margin-bottom:8px">ملاحظات الفريق</h3>${NoteList(DB.notes[sid]||[])}
   <h3 style="margin:18px 0 8px">🏠 ملاحظات ولي الأمر</h3>${NoteList(DB.parentNotes[sid]||[],"gold")}`;
  else if(S.tab==="goals")panel=`<div class="card" style="margin-bottom:14px"><h3>🎯 هدف جديد</h3><div class="row" style="margin-top:8px"><input type="text" id="ginp" placeholder="مثال: إتمام درس الإحرام هذا الأسبوع" style="flex:1"><button class="btn primary" data-act="addgoal">إضافة</button></div></div><div class="grid">${(DB.goals[sid]||[]).map((g,i)=>`<div class="soft row between"><b>🎯 ${esc(g.t)}</b><span class="badge">${esc(g.d)}</span></div>`).join("")}</div>`;
+ else if(S.tab==="plan")panel=`<p class="muted" style="margin-bottom:12px">حرّكي المؤشّر أمام كل محطة لتحديد مقدار تقدّم ${s.short}، واكتبي ملاحظة إن شئتِ ثم احفظي. تراها الأسرة والوكيلة والمديرة.</p>${Journey(sid,{mode:"edit"})}`;
+ else if(S.tab==="files")panel=FilesBox(sid,{canUpload:true});
+ else if(S.tab==="craft")panel=CraftTeacher(sid);
+ else if(S.tab==="init")panel=Initiative(true);
+ else if(S.tab==="iep")panel=IEP(sid,true);
+ else if(S.tab==="commset")panel=`<p class="muted" style="margin-bottom:12px">ارفعي صورًا حقيقية للأشخاص الذين تعرفهم الطالبات لتظهر في لوحة «أريد أن أقول» بدل الرموز — الوجوه الحقيقية أسهل فهمًا لطالباتنا.</p><div class="grid g3">${COMM_PAGES.people.items.filter(x=>x.k).map(x=>{const ph=DB.people[x.k];return `<div class="card center" style="padding:14px">${ph?`<img src="${ph.data}" class="ph" style="width:96px;height:96px;border-radius:50%;object-fit:cover">`:`<div style="font-size:3.5em">${x.e}</div>`}<b style="display:block;margin:6px 0">${x.t}</b><label class="btn ghost" style="cursor:pointer;min-height:42px">📷 ${ph?"تغيير":"رفع صورة"}<input type="file" accept="image/*" hidden data-person="${x.k}"></label>${ph?`<button class="badge" data-act="delperson" data-v="${x.k}" style="margin-top:6px">🗑 حذف</button>`:""}</div>`;}).join("")}</div>
+  <h3 style="margin:18px 0 8px">🗣️ ما قالته ${s.short} اليوم</h3>${SaidList(sid,false)}`;
  else if(S.tab==="msg")panel=`<div class="card"><h3>💌 رسالة تشجيع تسمعها ${s.short} عند دخولها</h3><p class="muted mini" style="margin:6px 0 10px">الرسالة الحالية: <b>${esc((DB.messages[sid]||{}).text||"—")}</b></p><div class="grid g3">${["أنا فخورةٌ بكِ!","أحسنتِ، استمرّي يا بطلة!","نحبكِ ونثق بكِ 💚"].map(t=>`<button class="pill" data-act="msg" data-v="${esc(t)}">${t}</button>`).join("")}</div><div class="row" style="margin-top:10px"><input type="text" id="minp" placeholder="أو اكتبي رسالتكِ…" style="flex:1"><button class="btn primary" data-act="msgcustom">إرسال</button></div></div>
   <h3 style="margin:18px 0 8px">🗣️ ما قالته ${s.short} عبر لوحة التواصل</h3>${SaidList(sid,false)}
   <div style="margin-top:16px"><button class="btn gold" data-act="preview">👀 معاينة واجهة الطالبة</button></div>`;
- return `<div class="fade">${StaffTop()}<h2 style="margin-bottom:10px">طالباتي</h2>${StudentPicker()}
+ const dir=DB.directives.slice(-1)[0];
+ return `<div class="fade">${StaffTop()}${dir?`<div class="note gold" style="margin-bottom:14px">📣 <b>توجيه الوكيلة ${esc(dir.by)}:</b> ${esc(dir.t)} <span class="muted mini">· ${dir.d}</span></div>`:""}<h2 style="margin-bottom:10px">طالباتي</h2>${StudentPicker()}
  <div class="card" style="padding:18px"><div class="row" style="margin-bottom:12px">${Avatar(s,56)}<h2 style="font-size:1.5em">${s.name}</h2></div>
- ${Tabs([["progress","📈 التقدّم"],["rate","⭐ التقييم بالنجوم"],["notes","📝 الملاحظات"],["goals","🎯 الأهداف"],["msg","💌 رسالة ومعاينة"]])}${panel}</div>${Footer()}</div>`;};
+ ${Tabs([["progress","📈 التقدّم"],["plan","🛤️ خطة المتابعة"],["rate","⭐ التقييم بالنجوم"],["files","📁 ملف الطالبة"],["notes","📝 الملاحظات"],["goals","🎯 الأهداف"],["craft","🌸 صنّاع الأثر"],["init","🩺 المحطات الصحية"],["iep","📋 الخطة الفردية"],["commset","🗣️ لوحة التواصل"],["msg","💌 رسالة ومعاينة"]])}${panel}</div>${Footer()}</div>`;};
 
 const SaidList=(sid,canReply)=>{const arr=DB.said[sid]||[];return arr.length?`<div class="feed">${arr.slice().reverse().map((x,ri)=>{const i=arr.length-1-ri;return `<div class="msg"><div class="who"><span style="font-size:1.4em">${x.e}</span><b>${esc(x.t)}</b><span class="muted mini">${x.d}</span></div>${x.reply?`<div class="note ok" style="margin-top:4px">💬 <b>${esc(x.reply.by)}</b>: ${esc(x.reply.t)}</div>`:canReply?`<div class="row"><input type="text" id="rp-${i}" placeholder="ردّ المديرة على الطالبة…" style="flex:1"><button class="btn primary" data-act="reply" data-v="${i}" style="min-height:44px">ردّ</button></div>`:""}</div>`;}).join("")}</div>`:`<p class="muted">لم تستخدم لوحة التواصل بعد.</p>`;};
 
@@ -456,9 +1163,28 @@ V.p_home=()=>{const sid=S.cs,s=stu(sid);let panel="";
  else if(S.tab==="home")panel=`<p class="muted" style="margin-bottom:12px">سجّل ما أنجزته ${s.short} في المنزل اليوم — تراه المعلمة والرائدة الصحية.</p><div class="grid">${ACTIVITIES.map(a=>{const v=(DB.home[sid]||{})[a.id];return `<div class="soft row between"><div class="row"><span style="font-size:1.8em">${a.emoji}</span><b>${a.title}</b></div><div class="row"><button class="pill ${v==="alone"?"on":""}" data-act="home" data-v="${a.id}:alone">💪 وحدها</button><button class="pill ${v==="help"?"on":""}" data-act="home" data-v="${a.id}:help">🤝 بمساعدة</button><button class="pill ${v==="no"?"on":""}" data-act="home" data-v="${a.id}:no">⏳ لم تفعل</button></div></div>`;}).join("")}</div>`;
  else if(S.tab==="notes")panel=`<div class="card" style="margin-bottom:14px"><h3>✍️ ملاحظة من المنزل</h3><textarea id="pinp" rows="3" placeholder="اكتب ما لاحظته على ${s.short} في المنزل، أو سؤالًا للمعلمة…" style="margin-top:8px"></textarea><button class="btn primary" data-act="addparent" style="margin-top:10px">إرسال للمدرسة</button></div><h3 style="margin-bottom:8px">ملاحظاتي السابقة</h3>${NoteList(DB.parentNotes[sid]||[],"gold")}
   <h3 style="margin:18px 0 8px">💬 تعليقات الفريق على ${s.short}</h3>${NoteList([...(DB.notes[sid]||[]),...(DB.comments[sid]||[])])}`;
+ else if(S.tab==="plan")panel=Journey(sid)+`<h3 style="margin:18px 0 8px">🎨 مشاركاتها في الأنشطة</h3><div class="grid g3">${(DB.activities[sid]||[]).map(a=>`<div class="badgecard on"><span class="e">${a.badge.split(" ")[0]}</span><b>${esc(a.badge.slice(a.badge.indexOf(" ")+1))}</b><span class="mini muted">${esc(a.t)} · ${a.d}</span></div>`).join("")||'<p class="muted">لا مشاركات مسجّلة بعد.</p>'}</div>`;
+ else if(S.tab==="files")panel=FilesBox(sid);
+ else if(S.tab==="week")panel=WeekReport(sid)+`<div class="card" style="margin-top:14px"><h3>🏠 مكافأة المنزل</h3><p class="muted mini" style="margin:6px 0 10px">ما المكافأة التي تنتظر ${s.short} في البيت عند جمعها ${REWARD_TARGET} نجوم؟ تراها الطالبة بجانب مكافأة المدرسة.</p><div class="row"><input type="text" id="hrw" value="${esc((DB.reward[sid]||{}).home||"")}" placeholder="مثال: نزهة يوم الجمعة" style="flex:1"><button class="btn primary" data-act="homereward">حفظ</button></div></div>`;
  else if(S.tab==="health")panel=`<h3 style="margin-bottom:8px">🩺 توجيهات صحية خاصة بـ${s.short}</h3>${NoteList(DB.health[sid]||[],"sky")}<h3 style="margin:18px 0 8px">📰 نشرات الرائدة الصحية</h3>${Bulletins()}`;
  return `<div class="fade">${StaffTop()}<div class="card"><div class="row" style="margin-bottom:12px">${Avatar(s,64)}<div><h2 style="font-size:1.5em">${s.name}</h2><span class="muted">ابنتكم الغالية — نتابع معكم خطوةً بخطوة</span></div></div>
- ${Tabs([["progress","📈 تقدّمها"],["home","🏠 إنجازات المنزل"],["notes","✍️ ملاحظاتي"],["health","🩺 الصحة والنشرات"]])}${panel}</div>${Footer()}</div>`;};
+ ${Tabs([["progress","📈 تقدّمها"],["week","🗓️ تقرير الأسبوع"],["plan","🛤️ خطة المتابعة"],["files","📁 ملفها"],["home","🏠 إنجازات المنزل"],["notes","✍️ ملاحظاتي"],["health","🩺 الصحة والنشرات"]])}${panel}</div>${Footer()}</div>`;};
+
+/* رائدة النشاط */
+V.a_home=()=>{const sid=S.cs,s=stu(sid);return `<div class="fade">${StaffTop()}<h2 style="margin-bottom:10px">الأنشطة والمبادرات 🎨</h2>${StudentPicker()}
+ <div class="grid g2"><div class="card"><h3>✨ تسجيل مشاركة لـ${s.short}</h3><input type="text" id="ainp" placeholder="اسم النشاط أو المبادرة — مثال: المحطات الصحية الذكية" style="margin-top:8px"><p class="muted mini" style="margin:10px 0 6px">اختاري الشارة التي تستحقّها:</p><div class="grid g3">${ACTIVITY_BADGES.map((b,i)=>`<button class="badgecard ${S.sel===i?"on":""}" data-act="badge" data-v="${i}"><span class="e">${b.e}</span><b class="mini">${b.t}</b></button>`).join("")}</div><button class="btn primary wide" data-act="addact" style="margin-top:12px">حفظ المشاركة ومنح الشارة 🏅</button>
+  <h3 style="margin:18px 0 8px">سجل مشاركات ${s.short}</h3>${(DB.activities[sid]||[]).length?`<div class="feed">${DB.activities[sid].slice().reverse().map(a=>`<div class="note rose"><b>${a.badge}</b> — ${esc(a.t)} <span class="muted mini">· ${a.d}</span></div>`).join("")}</div>`:'<p class="muted">لا مشاركات بعد.</p>'}</div>
+ <div class="card"><h3>🛤️ محطة «المواهب والأنشطة» في خطتها</h3><p class="muted mini" style="margin:6px 0 10px">حدّثي تقدّم هذه المحطة بناءً على مشاركاتها.</p>${(()=>{const it=(DB.plan[sid]||{}).activity||{pct:0,note:""};return `<div class="row">${Ring(it.pct,"var(--rose)","🎨")}<div style="flex:1"><input type="range" min="0" max="100" step="5" value="${it.pct}" id="pl-activity" data-plan="activity"><input type="text" id="pn-activity" value="${esc(it.note)}" placeholder="ملاحظة…" style="margin-top:6px"></div></div><button class="btn primary" data-act="plansave" data-v="activity" style="margin-top:10px">حفظ</button>`;})()}
+  <h3 style="margin:18px 0 8px">🏆 لوحة الشارات</h3><div class="grid g3">${STUDENTS.map(x=>`<div class="badgecard">${Avatar(x,44)}<b>${x.short}</b><span style="font-size:1.3em">${(DB.activities[x.id]||[]).map(a=>a.badge.split(" ")[0]).join(" ")||"—"}</span></div>`).join("")}</div></div></div>${Footer()}</div>`;};
+
+/* وكيلة الشؤون التعليمية */
+V.d_home=()=>{const sid=S.cs,s=stu(sid);const ap=DB.planApproved[sid];return `<div class="fade">${StaffTop()}<h2 style="margin-bottom:10px">الشؤون التعليمية 📋</h2>
+ <div class="grid g3" style="margin-bottom:16px">${STUDENTS.map(x=>`<div class="kpi"><div class="row between"><b>${x.short}</b>${DB.planApproved[x.id]?'<span class="badge" style="background:var(--ok-soft);color:var(--ok)">معتمدة</span>':'<span class="badge" style="background:var(--gold-soft);color:var(--gold-ink)">للمراجعة</span>'}</div><div class="n">${planAvg(x.id)}٪</div><div class="muted mini">متوسط محطات الخطة</div></div>`).join("")}</div>
+ ${StudentPicker()}
+ <div class="grid g2"><div>${Journey(sid)}<div style="margin-top:12px">${ap?`<div class="approve">✓ اعتمدتِ خطة ${s.short} بتاريخ ${ap.d}<button class="btn ghost" data-act="unapprove" style="min-height:40px;padding:4px 14px">إلغاء الاعتماد</button></div>`:`<button class="btn primary wide" data-act="approve">✓ اعتماد خطة متابعة ${s.short}</button>`}</div></div>
+ <div class="card"><h3>📣 توجيه للفريق</h3><textarea id="dinp" rows="3" placeholder="توجيه تربوي يظهر للمعلمة والمرشدة والرائدات…" style="margin-top:8px"></textarea><button class="btn primary" data-act="adddirective" style="margin-top:10px">نشر التوجيه</button>
+  <div style="margin-top:12px">${NoteList(DB.directives.map(d=>({...d,role:"الوكيلة"})),"gold")}</div>
+  <h3 style="margin:18px 0 8px">📁 ملف ${s.short}</h3>${FilesBox(sid,{canUpload:true})}</div></div><div style="margin-top:16px">${Initiative(false)}</div>${Footer()}</div>`;};
 
 const Bulletins=(edit=false)=>`<div class="grid g2">${DB.bulletins.map(b=>`<article class="bulletin" style="background:${b.bg}"><div class="row between"><span class="badge" style="background:rgba(255,255,255,.7)">${esc(b.cat)}</span><span style="font-size:2em">${b.icon}</span></div><h3>${esc(b.title)}</h3><p>${esc(b.body)}</p><div class="row between mini" style="opacity:.75"><span>${esc(b.by)}</span>${edit?`<button class="badge" data-act="delb" data-v="${b.id}">🗑 حذف</button>`:`<button class="badge" data-act="say" data-say="${esc(b.title)}. ${esc(b.body)}">🔊</button>`}</div></article>`).join("")}</div>`;
 
@@ -473,40 +1199,85 @@ V.h_home=()=>{const sid=S.cs,s=stu(sid);let panel="";
 V.c_home=()=>{const sid=S.cs,s=stu(sid);return `<div class="fade">${StaffTop()}<h2 style="margin-bottom:10px">الإرشاد الطلابي 💬</h2>${StudentPicker()}
  <div class="grid g2"><div class="card"><h3>✍️ ملاحظة إرشادية عن ${s.short}</h3><div class="row" style="margin-top:8px"><select id="ncat" style="width:auto">${NOTE_CATS.map(c=>`<option>${c}</option>`).join("")}</select></div><textarea id="ninp" rows="3" placeholder="الملاحظة السلوكية أو الاجتماعية أو الانفعالية…" style="margin-top:8px"></textarea><button class="btn primary" data-act="addnote" style="margin-top:10px">حفظ الملاحظة</button>
   <h3 style="margin:18px 0 8px">السجل</h3>${NoteList(DB.notes[sid]||[],"lav")}</div>
+ <div class="card"><h3>📋 سجلّ السلوك السريع (ABC)</h3><p class="muted mini" style="margin:4px 0 8px">ثلاث لمسات: ماذا حدث قبل، ما السلوك، وماذا فعلنا — يُسجَّل الوقت تلقائيًا.</p>
+  <div class="grid g2" style="gap:8px"><select id="abc-a">${ABC.a.map(x=>`<option>${x}</option>`).join("")}</select><select id="abc-b">${ABC.b.map(x=>`<option>${x}</option>`).join("")}</select><select id="abc-c">${ABC.c.map(x=>`<option>${x}</option>`).join("")}</select><select id="abc-p">${ABC.p.map(x=>`<option>${x}</option>`).join("")}</select></div><input type="text" id="abc-n" placeholder="ملاحظة قصيرة (اختياري)" style="margin-top:8px"><button class="btn primary" data-act="abcadd" style="margin-top:8px">تسجيل الموقف</button>
+  ${ABCHeat(sid)}
+  <div class="feed" style="margin-top:10px">${(DB.abc[sid]||[]).slice(-4).reverse().map(r=>`<div class="note lav mini"><b>${esc(r.b)}</b> بعد «${esc(r.a)}» في ${esc(r.p)} → ${esc(r.c)} <span class="muted">· ${r.d} س${r.h}</span></div>`).join("")}</div></div>
  <div class="card"><h3>😊 مشاعرها المسجّلة</h3><div class="row" style="margin:8px 0 14px">${(DB.moods[sid]||[]).slice(-8).map(m=>`<span class="badge">${m.e} ${m.t} · ${m.d}</span>`).join("")||'<span class="muted">لا تسجيلات بعد</span>'}</div><h3>🗣️ ما تقوله عبر لوحة التواصل</h3><div style="margin-top:8px">${SaidList(sid,false)}</div>
+  <h3 style="margin:18px 0 8px">🕊️ استخدامها لركن الهدوء</h3><div class="row">${(DB.calm[sid]||[]).slice(-8).map(c=>`<span class="badge">🕊️ ${c.d} · الساعة ${c.h}</span>`).join("")||'<span class="muted">لم تستخدمه بعد</span>'}</div>
   <h3 style="margin:18px 0 8px">💡 نصائح سريعة للفريق</h3><div class="feed">${["ابدئي كل جلسة بسؤال المشاعر — الوجوه الأربعة في المنصة تسهّل التعبير.","استخدمي «الحِلم والأناة» كقصة يومية: أهدأ، أتنفّس، أفكّر ثم أتصرّف.","عزّزي فورًا وبالاسم: «أحسنتِ يا شهد» أقوى من «أحسنتِ» وحدها."].map(t=>`<div class="note lav">${t}</div>`).join("")}</div></div></div>${Footer()}</div>`;};
 
 /* المديرة */
 V.pr_home=()=>{const avg=Math.round(STUDENTS.reduce((a,s)=>a+progressOf(s.id),0)/STUDENTS.length);const totalNotes=STUDENTS.reduce((a,s)=>a+(DB.notes[s.id]||[]).length+(DB.parentNotes[s.id]||[]).length,0);const sid=S.cs,s=stu(sid),ev=(DB.principalEval[sid]||{stars:0,t:""});
  return `<div class="fade">${StaffTop()}<h2 style="margin-bottom:10px">لوحة المديرة 🏫</h2>
  <div class="grid g3" style="margin-bottom:16px"><div class="kpi"><div class="n">${avg}٪</div><div class="muted mini">متوسط إتقان الدروس</div></div><div class="kpi"><div class="n">${STUDENTS.reduce((a,x)=>a+(DB.stars[x.id]||0),0)}</div><div class="muted mini">إجمالي النجوم</div></div><div class="kpi"><div class="n">${totalNotes}</div><div class="muted mini">ملاحظات الفريق والأسر</div></div><div class="kpi"><div class="n">${DB.bulletins.length}</div><div class="muted mini">نشرات صحية منشورة</div></div></div>
- <div class="card" style="margin-bottom:16px"><h3 style="margin-bottom:10px">📊 تقدّم الطالبات</h3><div class="grid">${STUDENTS.map(x=>`<div class="row" style="gap:14px">${Avatar(x,44)}<div style="flex:1">${Bar(progressOf(x.id),x.name)}</div><span class="badge">⭐ ${DB.stars[x.id]||0}</span>${Stars((DB.principalEval[x.id]||{}).stars||0)}</div>`).join("")}</div></div>
+ <div class="card" style="margin-bottom:16px"><h3 style="margin-bottom:10px">📊 تقدّم الطالبات</h3><div class="grid">${STUDENTS.map(x=>`<div class="row" style="gap:14px">${Avatar(x,44)}<div style="flex:1">${Bar(progressOf(x.id),x.name)}<div class="mini muted" style="margin-top:4px">خطة المتابعة ${planAvg(x.id)}٪ ${DB.planApproved[x.id]?"· معتمدة ✓":"· بانتظار الاعتماد"}</div></div><span class="badge">⭐ ${DB.stars[x.id]||0}</span>${Stars((DB.principalEval[x.id]||{}).stars||0)}</div>`).join("")}</div></div>
  ${StudentPicker()}
- <div class="grid g2"><div class="card"><h3>🏅 تقييم المديرة لـ${s.short}</h3><div style="margin:10px 0">${Stars(ev.stars,{ro:false,act:"peval",size:"1.8em"})}</div><input type="text" id="pevt" value="${esc(ev.t)}" placeholder="ملاحظة التقييم…"><button class="btn primary" data-act="pevalsave" style="margin-top:10px">حفظ التقييم</button>
+ ${Tabs([["progress","🏅 التقييم والتعليقات"],["plan","🛤️ خطة المتابعة"],["files","📁 ملف الطالبة"],["init","🩺 مبادرة المحطات الصحية"]])}
+ ${S.tab==="plan"?Journey(sid):S.tab==="files"?FilesBox(sid):S.tab==="init"?Initiative(false):""}
+ ${S.tab!=="progress"?"":`<div class="grid g2"><div class="card"><h3>🏅 تقييم المديرة لـ${s.short}</h3><div style="margin:10px 0">${Stars(ev.stars,{ro:false,act:"peval",size:"1.8em"})}</div><input type="text" id="pevt" value="${esc(ev.t)}" placeholder="ملاحظة التقييم…"><button class="btn primary" data-act="pevalsave" style="margin-top:10px">حفظ التقييم</button>
   <h3 style="margin:18px 0 8px">💬 تعليق للطالبة وأسرتها</h3><textarea id="cinp" rows="2" placeholder="كلمة تشجيع أو ملاحظة تظهر لولي الأمر والمعلمة…"></textarea><button class="btn gold" data-act="addcomment" style="margin-top:10px">إضافة التعليق</button><div style="margin-top:12px">${NoteList(DB.comments[sid]||[],"ok")}</div></div>
  <div class="card"><h3>🗣️ كلام ${s.short} عبر لوحة التواصل — علّقي عليه</h3><div style="margin-top:8px">${SaidList(sid,true)}</div>
   <h3 style="margin:18px 0 8px">📝 آخر ملاحظات الفريق والأسرة</h3>${NoteList([...(DB.notes[sid]||[]),...(DB.parentNotes[sid]||[]),...(DB.health[sid]||[]).map(h=>({...h,role:"الرائدة الصحية"}))].slice(-5))}
-  <h3 style="margin:18px 0 8px">⭐ تقييمات المعلمة</h3><div class="grid">${LESSONS.filter(l=>(DB.ratings[sid]||{})[l.id]).map(l=>{const r=DB.ratings[sid][l.id];return `<div class="soft row between"><b>${l.icon} ${l.title}</b><div>${Stars(r.stars)}<div class="mini muted">${esc(r.by)}: ${esc(r.t)}</div></div></div>`;}).join("")||'<p class="muted">لا تقييمات بعد.</p>'}</div></div></div>${Footer()}</div>`;};
+  <h3 style="margin:18px 0 8px">⭐ تقييمات المعلمة</h3><div class="grid">${[...LESSONS,...CRAFTS.map(c=>({id:"cr_"+c.id,icon:c.icon,title:c.title}))].filter(l=>(DB.ratings[sid]||{})[l.id]).map(l=>{const r=DB.ratings[sid][l.id];return `<div class="soft row between"><b>${l.icon} ${l.title}</b><div>${Stars(r.stars)}<div class="mini muted">${esc(r.by)}: ${esc(r.t)}</div></div></div>`;}).join("")||'<p class="muted">لا تقييمات بعد.</p>'}</div></div></div>`}${Footer()}</div>`;};
 
 /* ====================== المعالجة ====================== */
 const val=id=>{const el=document.getElementById(id);return el?el.value.trim():"";};
 const push=(map,sid,obj)=>{map[sid]=map[sid]||[];map[sid].push(obj);save();};
 const finishStep=(next)=>{setTimeout(()=>{S.step=next;S.wrong=null;S.qi=0;S.ti=0;S.sel=null;S.pairs=[];if(next==="mcq")S.order=rnd(S.lesson.mcq[0].opts.map((_,i)=>i));if(next==="match")S.order=rnd(S.lesson.match.map((_,i)=>i));render();},420);};
-const award=(n=1)=>{DB.stars[S.me.id]=(DB.stars[S.me.id]||0)+n;S.score+=n;save();};
+const award=(n=1)=>{DB.stars[S.me.id]=(DB.stars[S.me.id]||0)+n;S.score+=n;const d=DB.dayStars[S.me.id];const was=d&&d.date===dayKey()?d.n:0;DB.dayStars[S.me.id]={date:dayKey(),n:was+n};save();const r=rewardOf(S.me.id);if(r&&was<REWARD_TARGET&&was+n>=REWARD_TARGET){setTimeout(()=>{confetti();tone("win");speak(`مبروك يا ${S.me.short}! حصلتِ على مكافأتكِ: ${r.t}`);toast("🎁 حصلتِ على مكافأتكِ!");},600);}};
 
 document.addEventListener("click",e=>{const b=e.target.closest("[data-act]");if(!b)return;const act=b.dataset.act,v=b.dataset.v;
  switch(act){
   case "go":go(v);break;
+  case "welcome":welcomed=false;welcome();break;
+  case "greet":greetStudent(+v,b);break;
   case "say":speak(b.dataset.say);break;
   case "fs":UI.fs=parseFloat(v);document.documentElement.style.setProperty("--fs",UI.fs);saveUI();render();break;
   case "hc":UI.hc=!UI.hc;document.documentElement.toggleAttribute("data-contrast",UI.hc);if(UI.hc)document.documentElement.setAttribute("data-contrast","high");saveUI();render();break;
   case "snd":UI.sound=!UI.sound;saveUI();render();break;
-  case "role":S.role=v;S.tab=v==="health"?"students":"progress";S.cs=1;if(v==="student")go("login");else if(v==="teacher"||v==="parent")go("pickuser");else if(v==="counselor"){S.staff=COUNSELOR;go("c_home");}else if(v==="health"){S.staff=HEALTH;go("h_home");}else{S.staff=PRINCIPAL;go("pr_home");}break;
+  case "clear":UI.clear=!UI.clear;document.documentElement.toggleAttribute("data-clear",UI.clear);if(UI.clear)document.documentElement.setAttribute("data-clear","1");saveUI();render();break;
+  case "focus":UI.focus=!UI.focus;document.documentElement.toggleAttribute("data-focus",UI.focus);if(UI.focus)document.documentElement.setAttribute("data-focus","1");saveUI();render();fx();break;
+  case "scan":UI.scan=!UI.scan;saveUI();render();toast(UI.scan?"المسح التلقائي يعمل: انتظري الإضاءة ثم المسي أي مكان":"أُوقف المسح التلقائي");break;
+  case "calm":calmOpen();break;
+  case "calmclose":calmClose();break;
+  case "readerclose":try{speechSynthesis.cancel();}catch(e){}document.getElementById("reader")?.remove();break;
+  case "readernext":readerI=Math.min(readerQ.length-1,readerI+1);readerSay();break;
+  case "readerprev":readerI=Math.max(0,readerI-1);readerSay();break;
+  case "readerrepeat":readerSay();break;
+  case "readerslow":readerRate=Math.max(.5,readerRate-.1);toast("أبطأ 🐢");readerSay();break;
+  case "reader":{const l=S.lesson;readerOpen([l.title,...l.intro.split(/(?<=[.؟!])\s+/),l.hadith,...l.pictos.map(p=>p.s)],l.title);break;}
+  case "pickreward":{const r=REWARDS[v];DB.reward[S.me.id]={...r,date:dayKey(),home:(DB.reward[S.me.id]||{}).home||""};save();speak(`اختيارٌ رائع! مكافأتكِ اليوم ${r.t}. اجمعي ${REWARD_TARGET} نجوم`);tone("ok");go("hub");break;}
+  case "homereward":{const t=val("hrw");DB.reward[S.cs]=Object.assign(DB.reward[S.cs]||{date:dayKey()},{home:t});save();toast("حُفظت مكافأة المنزل 🏠");render();break;}
+  case "skill":S.idx=+v;S.sk=0;speak(SKILL_STEPS[ACTIVITIES[S.idx].id][0].t);go("skill");break;
+  case "skprev":S.sk=Math.max(0,(S.sk||0)-1);speak(SKILL_STEPS[ACTIVITIES[S.idx].id][S.sk].t);render();break;
+  case "sknext":{const st=SKILL_STEPS[ACTIVITIES[S.idx].id];if((S.sk||0)+1<st.length){S.sk++;tone("tap");speak(st[S.sk].t);render();}else{award(2);confetti();tone("win");speak(`أحسنتِ يا ${S.me.short}! الآن صوّري نفسكِ وأنتِ تفعلينها`);S.sk="photo";render();}break;}
+  case "commpage":S.cpage=v;S.sent=[];render();break;
+  case "commpick":{const pg=COMM_PAGES[S.cpage||"need"],it=pg.items[v];const ph=(DB.people[it.k]||{});const txt=(pg.starter?pg.starter+" ":"")+it.t;S.sent=[{e:it.e,t:it.t,ph:ph.data}];speak(txt);tone("tap");push(DB.said,S.me.id,{t:txt,e:it.e,d:today()});toast("وصلت رسالتكِ 💌");render();break;}
+  case "commsay":{if(!S.sent||!S.sent.length)break;const pg=COMM_PAGES[S.cpage||"need"];speak((pg.starter?pg.starter+" ":"")+S.sent.map(x=>x.t).join(" و"));break;}
+  case "abcadd":{const rec={a:val("abc-a"),b:val("abc-b"),c:val("abc-c"),p:val("abc-p"),h:new Date().getHours(),dow:(new Date().getDay()),d:today(),by:S.staff.name,note:val("abc-n")};push(DB.abc,S.cs,rec);toast("سُجّل الموقف");render();break;}
+  case "iepsave":{DB.iep[S.cs]=DB.iep[S.cs]||{long:[],short:[]};DB.iep[S.cs].strengths=val("iep-s");DB.iep[S.cs].needs=val("iep-n");save();toast("حُفظت الخطة التربوية ✓");render();break;}
+  case "iepadd":{const kind=v;DB.iep[S.cs]=DB.iep[S.cs]||{long:[],short:[],strengths:"",needs:""};const t=val("iep-"+kind+"-t");if(!t){toast("اكتبي الهدف أولًا");break;}DB.iep[S.cs][kind].push({t,st:val("iep-"+kind+"-st"),by:val("iep-"+kind+"-by")||"المعلمة",due:val("iep-"+kind+"-due")});save();render();break;}
+  case "iepdel":{const [kind,i]=v.split(":");DB.iep[S.cs][kind].splice(+i,1);save();render();break;}
+  case "iepprint":printIEP(S.cs);break;
+  case "weekprint":printWeek(S.cs);break;
+  case "delperson":delete DB.people[v];save();render();break;
+  case "role":S.role=v;S.tab=v==="health"?"students":"progress";S.cs=1;S.sel=null;if(v==="student")go("login");else if(v==="teacher"&&TEACHERS.length===1){S.staff=TEACHERS[0];go("t_home");}else if(v==="teacher"||v==="parent")go("pickuser");else if(v==="counselor"){S.staff=COUNSELOR;go("c_home");}else if(v==="health"){S.staff=HEALTH;go("h_home");}else if(v==="activity"){S.staff=ACTIVITY_LEAD;go("a_home");}else if(v==="deputy"){S.staff=DEPUTY;go("d_home");}else{S.staff=PRINCIPAL;go("pr_home");}break;
+  case "itab":S.itab=v;render();break;
+  case "initsave":{DB.initiative=DB.initiative||{};const cur=initRec(+v);const stEl=document.getElementById("is-"+v);const st=stEl?stEl.value:cur.status;const pEl=document.getElementById("ip-"+v);let pct=pEl?+pEl.value:cur.pct;let status=st;if(status==="done")pct=100;else if(pct>=100)status="done";else if(pct>0&&status==="todo")status="progress";DB.initiative[v]={status,pct,note:val("in-"+v),d:status==="done"?(cur.d||today()):""};save();tone("ok");toast("حُفظت المحطة ✓");render();break;}
+  case "plansave":{DB.plan[S.cs]=DB.plan[S.cs]||{};const pct=+(document.getElementById("pl-"+v)?.value??0);DB.plan[S.cs][v]={pct,note:val("pn-"+v),by:S.staff.name,d:today()};save();tone("ok");toast("حُفظت المحطة ✓");render();break;}
+  case "approve":DB.planApproved[S.cs]={by:S.staff.name,d:today()};save();tone("win");toast("اعتُمدت الخطة ✓");render();break;
+  case "unapprove":DB.planApproved[S.cs]=null;save();render();break;
+  case "adddirective":{const t=val("dinp");if(!t)break;DB.directives.push({t,by:S.staff.name,d:today()});save();toast("نُشر التوجيه 📣");render();break;}
+  case "badge":S.sel=+v;tone("tap");render();break;
+  case "addact":{const t=val("ainp");if(!t){toast("اكتبي اسم النشاط أولًا");break;}if(S.sel===null){toast("اختاري شارة");break;}const b=ACTIVITY_BADGES[S.sel];push(DB.activities,S.cs,{t,badge:`${b.e} ${b.t}`,d:today(),by:S.staff.name});DB.stars[S.cs]=(DB.stars[S.cs]||0)+3;save();S.sel=null;confetti();tone("win");toast("مُنحت الشارة 🏅 +3 نجوم");render();break;}
+  case "openfile":{const f=(DB.files[S.cs]||[]).find(x=>x.id===v);if(!f)break;const ov=document.createElement("div");ov.className="overlay";ov.innerHTML=`<div class="ovbox"><div class="row between" style="margin-bottom:8px"><b>${esc(f.name)}</b><button class="iconbtn" data-close="1" aria-label="إغلاق">✕</button></div>${f.type.startsWith("image/")?`<img src="${f.data}" alt="${esc(f.name)}" style="max-width:100%;max-height:75vh;border-radius:14px;display:block;margin:auto">`:`<embed src="${f.data}" type="application/pdf" style="width:100%;height:75vh;border-radius:14px"><p class="muted mini center" style="margin-top:8px">إن لم يظهر الملف هنا، افتحي الموقع من النسخة المحمّلة على الجهاز لتنزيله.</p>`}</div>`;ov.addEventListener("click",e=>{if(e.target===ov||e.target.closest("[data-close]"))ov.remove();});document.body.appendChild(ov);break;}
+  case "delfile":DB.files[S.cs]=(DB.files[S.cs]||[]).filter(f=>f.id!==v);save();toast("حُذف الملف");render();break;
   case "pickstaff":{const u=(S.role==="teacher"?TEACHERS:PARENTS).find(x=>x.id===v);S.staff=u;if(u.childId)S.cs=u.childId;go(S.role==="teacher"?"t_home":"p_home");break;}
   case "leave":S.role=null;S.staff=null;S.preview=false;go("role");break;
-  case "login":S.me=stu(v);S.mood=null;S.idx=0;speak(`أهلًا بكِ يا ${S.me.short}`);tone("tap");go("mood");break;
+  case "login":{S.me=stu(v);S.mood=null;S.idx=0;const r=b.getBoundingClientRect();Petals.shower(r.left+r.width/2,r.top,24);chime();setTimeout(()=>speak(`أهلًا وسهلًا بكِ يا ${S.me.short}! نحن سعداءُ برؤيتكِ اليوم. كيف تشعرين؟`),350);setTimeout(()=>go("mood"),900);break;}
   case "exit":try{speechSynthesis.cancel();}catch(e){}if(S.preview){S.preview=false;S.me=null;go(S.previewRet);break;}S.me=null;go("login");break;
-  case "mood":{const m=MOODS[v];S.mood=m;push(DB.moods,S.me.id,{t:m.t,e:m.e,d:today()});speak(`أنتِ ${m.t} اليوم. أهلًا بكِ يا ${S.me.short}`);tone("tap");go("hub");break;}
+  case "mood":{const m=MOODS[v];S.mood=m;push(DB.moods,S.me.id,{t:m.t,e:m.e,d:today()});speak(`أنتِ ${m.t} اليوم. أهلًا بكِ يا ${S.me.short}`);tone("tap");if(rewardOf(S.me.id))go("hub");else{setTimeout(()=>speak("اختاري مكافأتكِ لليوم"),1800);go("reward");}break;}
   case "lesson":S.lesson=lessonOf(v);S.step="read";S.qi=0;S.ti=0;S.said=new Set();S.sel=null;S.pairs=[];S.score=0;speak(S.lesson.title);go("lesson");break;
   case "step":S.step=v;S.wrong=null;if(v==="mcq")S.order=rnd(S.lesson.mcq[0].opts.map((_,i)=>i));if(v==="explore")speak("المسي الصورة لتسمعي");if(v==="mcq")speak(S.lesson.mcq[0].q);render();break;
   case "picto":{const p=S.lesson.pictos[v];S.said.add(+v);speak(p.s);tone("tap");render();break;}
@@ -536,7 +1307,28 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-act]");if(
    else if(act==="peval"){const cur=DB.principalEval[S.cs]||{t:""};DB.principalEval[S.cs]={stars:+v,t:document.getElementById("pevt")?.value.trim()??cur.t};save();tone("tap");render();}
  }});
 
-function render(){const app=document.getElementById("app");const fn=V[S.screen]||V.landing;app.innerHTML=fn();}
-render();
+/* رفع الملفات إلى صندوق الطالبة */
+const addFiles=(list)=>{const files=[...list].filter(f=>f.type.startsWith("image/")||f.type==="application/pdf");if(!files.length){toast("يُقبل الصور وملفات PDF فقط");return;}
+ const cat=val("fcat")||FILE_CATS[0];let pending=files.length;
+ files.forEach(f=>{if(f.size>3*1024*1024){toast(`«${f.name}» أكبر من ٣ م.ب`);if(--pending===0)render();return;}
+  const r=new FileReader();r.onload=()=>{DB.files[S.cs]=DB.files[S.cs]||[];DB.files[S.cs].push({id:"f"+Date.now()+Math.random().toString(36).slice(2,6),name:f.name,type:f.type,size:f.size,data:r.result,cat,by:S.staff.name,d:today()});
+   try{localStorage.setItem(KEY,JSON.stringify(DB));toast("أُرفق الملف 📎");}catch(e){DB.files[S.cs].pop();toast("مساحة التخزين على هذا الجهاز ممتلئة — احذفي ملفات قديمة");}
+   if(--pending===0)render();};r.readAsDataURL(f);});};
+document.addEventListener("change",e=>{const sp=e.target.dataset&&e.target.dataset.skillphoto;if(sp&&e.target.files[0]){const f=e.target.files[0];const rd=new FileReader();rd.onload=()=>{const img=new Image();img.onload=()=>{const k=Math.min(1,640/Math.max(img.width,img.height));const cv=document.createElement("canvas");cv.width=img.width*k;cv.height=img.height*k;cv.getContext("2d").drawImage(img,0,0,cv.width,cv.height);const data=cv.toDataURL("image/jpeg",.7);const a=ACTIVITIES.find(x=>x.id==sp);DB.files[S.me.id]=DB.files[S.me.id]||[];DB.files[S.me.id].push({id:"f"+Date.now(),name:`إنجاز ${a.title} — ${today()}.jpg`,type:"image/jpeg",size:Math.round(data.length*.75),data,cat:"صورة إنجاز",by:S.me.name,d:today()});save();award(2);confetti();tone("win");speak(`صورةٌ جميلة يا ${S.me.short}! أنتِ بطلة`);go("skills");};img.src=rd.result;};rd.readAsDataURL(f);return;}
+ const pp=e.target.dataset&&e.target.dataset.person;if(pp&&e.target.files[0]){const f=e.target.files[0];const rd=new FileReader();rd.onload=()=>{const img=new Image();img.onload=()=>{const k=Math.min(1,240/Math.max(img.width,img.height));const cv=document.createElement("canvas");cv.width=img.width*k;cv.height=img.height*k;cv.getContext("2d").drawImage(img,0,0,cv.width,cv.height);DB.people[pp]={data:cv.toDataURL("image/jpeg",.7)};save();toast("حُفظت الصورة 📷");render();};img.src=rd.result;};rd.readAsDataURL(f);return;}
+ if(e.target.id==="fileinp")addFiles(e.target.files);if(e.target.id==="voicepick"){UI.voice=e.target.value;saveUI();speak("أهلًا بكنّ في أجنحة الأمل");}});
+document.addEventListener("input",e=>{if(e.target.dataset.init){const l=document.getElementById("ipv-"+e.target.dataset.init);if(l)l.textContent=e.target.value+"٪";}const pid=e.target.dataset.plan;if(pid){const st=e.target.closest(".station")||e.target.closest(".row");const ring=st?.querySelector(".ring");if(ring){const c=2*Math.PI*30;const arc=ring.querySelectorAll("circle")[1];if(arc)arc.setAttribute("stroke-dashoffset",c*(1-e.target.value/100));const p=ring.querySelector(".pct");if(p)p.textContent=e.target.value+"٪";}}});
+document.addEventListener("dragover",e=>{const dz=e.target.closest("#dz");if(dz){e.preventDefault();dz.classList.add("over");}});
+document.addEventListener("dragleave",e=>{const dz=e.target.closest("#dz");if(dz)dz.classList.remove("over");});
+document.addEventListener("drop",e=>{const dz=e.target.closest("#dz");if(dz){e.preventDefault();dz.classList.remove("over");addFiles(e.dataTransfer.files);}});
+
+function render(){const app=document.getElementById("app");const fn=V[S.screen]||V.landing;app.innerHTML=fn();
+ const stuScreens=["mood","hub","lesson","ldone","activity","comm","mystars","journey","reward","skills","skill"];
+ if(S.me&&stuScreens.includes(S.screen)&&!document.getElementById("calmbtn")){const b=document.createElement("button");b.id="calmbtn";b.className="calmbtn";b.dataset.act="calm";b.title="ركن الهدوء";b.setAttribute("aria-label","ركن الهدوء");b.textContent="🕊️";document.body.appendChild(b);}
+ else if(!(S.me&&stuScreens.includes(S.screen))){document.getElementById("calmbtn")?.remove();}
+ if(UI.clear)stripTashkeel(app);
+ if(UI.scan&&S.me&&stuScreens.includes(S.screen))setTimeout(scanStart,50);else scanStop();}
+render();fx();
 </script>
+
 </body></html>
